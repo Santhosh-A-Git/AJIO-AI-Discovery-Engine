@@ -170,9 +170,9 @@ export default function Dashboard() {
                   <React.Fragment key={i}>
                     {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
                       if (part.startsWith('**') && part.endsWith('**')) {
-                        return <strong key={j} className="text-primary-container font-semibold">{part.slice(2, -2)}</strong>;
+                        return <div key={j} className="text-primary-container font-bold text-base mt-4 mb-1">{part.slice(2, -2).trim()}</div>;
                       }
-                      return part;
+                      return <span key={j}>{part}</span>;
                     })}
                     {i < searchResult.answer.split('\n').length - 1 && <br />}
                   </React.Fragment>
