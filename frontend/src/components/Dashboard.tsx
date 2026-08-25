@@ -280,35 +280,34 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Chart Section */}
-        <section className="glass-panel p-6 rounded-xl relative overflow-hidden mb-12">
-            <h2 className="text-xl font-headline-sm font-semibold mb-6 flex items-center gap-2">
-              Opportunity Score Ranking
-            </h2>
-            <div className="h-[400px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={clusters} layout="vertical" margin={{ top: 0, right: 30, left: 40, bottom: 0 }}>
-                  <XAxis type="number" stroke="#bbcac6" />
-                  <YAxis dataKey="cluster_name" type="category" width={150} stroke="#bbcac6" fontSize={12} />
-                  <Tooltip 
-                    cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                    contentStyle={{ backgroundColor: '#1a211f', border: '1px solid #3c4947', borderRadius: '8px' }}
-                  />
-                  <Bar dataKey="opportunity_score" radius={[0, 4, 4, 0]}>
-                    {clusters.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index === 0 ? '#14b8a6' : '#2f3634'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-        </section>
+        {/* Grid for side-by-side layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {/* Chart Section */}
+          <section className="glass-panel p-6 rounded-xl relative overflow-hidden flex flex-col">
+              <h2 className="text-xl font-headline-sm font-semibold mb-6 flex items-center gap-2">
+                Opportunity Score Ranking
+              </h2>
+              <div className="h-[400px] w-full flex-1">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={clusters} layout="vertical" margin={{ top: 0, right: 30, left: 40, bottom: 0 }}>
+                    <XAxis type="number" stroke="#bbcac6" />
+                    <YAxis dataKey="cluster_name" type="category" width={150} stroke="#bbcac6" fontSize={12} />
+                    <Tooltip 
+                      cursor={{fill: 'rgba(255,255,255,0.05)'}}
+                      contentStyle={{ backgroundColor: '#1a211f', border: '1px solid #3c4947', borderRadius: '8px' }}
+                    />
+                    <Bar dataKey="opportunity_score" radius={[0, 4, 4, 0]}>
+                      {clusters.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={index === 0 ? '#14b8a6' : '#2f3634'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+          </section>
 
-          </>
-        )}
-        
-        {activeTab === "Trends" && (
-          <section className="glass-panel p-6 rounded-xl overflow-y-auto max-h-[500px] scrollbar-hide mb-12 mt-8">
+          {/* Cluster Breakdown Section */}
+          <section className="glass-panel p-6 rounded-xl overflow-y-auto max-h-[500px] scrollbar-hide flex flex-col">
             <h2 className="text-xl font-headline-sm font-semibold mb-6">Cluster Breakdown</h2>
             <div className="flex flex-col gap-3">
               {clusters.map((cluster, i) => (
@@ -331,7 +330,9 @@ export default function Dashboard() {
               ))}
             </div>
           </section>
-        )}
+        </div>
+        </>
+      )}
 
       </main>
 
