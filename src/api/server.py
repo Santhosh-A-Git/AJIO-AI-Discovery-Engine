@@ -96,9 +96,13 @@ llm = None
 def get_rag_components():
     global vector_db_client, embedding_model, llm
     if vector_db_client is None:
+        # pyrefly: ignore [missing-import]
         import chromadb
+        # pyrefly: ignore [missing-import]
         from sentence_transformers import SentenceTransformer
+        # pyrefly: ignore [missing-import]
         from langchain_groq import ChatGroq
+        # pyrefly: ignore [missing-import]
         from dotenv import load_dotenv
         
         load_dotenv()
@@ -111,7 +115,7 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=api_key)
+        llm = ChatGroq(model_name="llama-3.1-8b-instant", groq_api_key=api_key)
         
     return vector_db_client, embedding_model, llm
 
