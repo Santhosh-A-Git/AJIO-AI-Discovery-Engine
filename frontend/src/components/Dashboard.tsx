@@ -307,7 +307,7 @@ export default function Dashboard() {
           </>
         )}
         
-        {activeTab === "Dashboard" && (
+        {activeTab === "Trends" && (
           <section className="glass-panel p-6 rounded-xl overflow-y-auto max-h-[500px] scrollbar-hide mb-12 mt-8">
             <h2 className="text-xl font-headline-sm font-semibold mb-6">Cluster Breakdown</h2>
             <div className="flex flex-col gap-3">
