@@ -153,6 +153,37 @@ export default function Dashboard() {
             </button>
           </div>
 
+          {/* Suggested Queries */}
+          <div className="mb-8">
+            <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3 ml-1">Suggested PM Queries</h4>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Why do users add fashion products to their wishlist?",
+                "What prevents wishlisted products from eventually being purchased?",
+                "What uncertainties remain after users have identified a product they like?",
+                "What causes users to postpone a purchase?",
+                "How do users compare multiple shortlisted products?",
+                "What information do users seek outside Myntra/AJIO before purchasing?",
+                "What role do fit, size, styling, price, reviews, occasion and social validation play?",
+                "When do users use the wishlist as genuine purchase intent versus simply as a bookmarking mechanism?",
+                "How do these behaviors differ across user segments?",
+                "What unmet needs emerge consistently across user conversations?"
+              ].map((query, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setSearchQuery(query);
+                    // We don't auto-trigger search to allow the user to review it first, 
+                    // but we could. For now, let's just populate the bar.
+                  }}
+                  className="text-xs bg-surface-variant/50 hover:bg-primary-container hover:text-on-primary-container text-on-surface-variant py-1.5 px-3 rounded-full transition-colors border border-outline-variant/30 text-left"
+                >
+                  {query}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* AI Search Result Panel */}
           {searchResult && (
             <div className="max-w-3xl glass-panel p-6 rounded-xl border border-primary-container/30 relative overflow-hidden">
