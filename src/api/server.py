@@ -115,7 +115,7 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="mixtral-8x7b-32768", groq_api_key=api_key)
+        llm = ChatGroq(model_name="qwen/qwen3.6-27b", groq_api_key=api_key)
         
     return vector_db_client, embedding_model, llm
 
