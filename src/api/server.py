@@ -38,10 +38,10 @@ def get_stats():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    cursor.execute("SELECT COUNT(*) as total_clusters FROM clusters")
+    cursor.execute("SELECT COUNT(DISTINCT cluster_id) as total_clusters FROM insights WHERE purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')")
     total_clusters = cursor.fetchone()['total_clusters']
     
-    cursor.execute("SELECT COUNT(*) as total_insights FROM insights")
+    cursor.execute("SELECT COUNT(*) as total_insights FROM insights WHERE purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')")
     total_insights = cursor.fetchone()['total_insights']
     
     conn.close()
@@ -56,37 +56,29 @@ def get_clusters():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # Group by cluster_name to merge duplicates (e.g. if the AI named two distinct clusters "Delivery")
     cursor.execute("""
-        SELECT 
-            GROUP_CONCAT(cluster_id) as cluster_id,
-            cluster_name, 
-            SUM(prevalence) as prevalence, 
-            AVG(intent_relevance) as intent_relevance, 
-            AVG(severity) as severity, 
-            ROUND(MAX(opportunity_score), 2) as opportunity_score 
-        FROM clusters 
-        GROUP BY cluster_name
-        ORDER BY opportunity_score DESC
+        SELECT c.cluster_id, c.cluster_name, COUNT(i.id) as prevalence, c.intent_relevance, c.severity, ROUND(c.opportunity_score, 2) as opportunity_score 
+        FROM clusters c
+        JOIN insights i ON c.cluster_id = i.cluster_id
+        WHERE i.purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')
+        GROUP BY c.cluster_id, c.cluster_name, c.intent_relevance, c.severity, c.opportunity_score
+        ORDER BY c.opportunity_score DESC
     """)
     clusters = [dict(row) for row in cursor.fetchall()]
     
     conn.close()
     return clusters
 
-@app.get("/api/insights/{cluster_ids}")
-def get_insights(cluster_ids: str):
+@app.get("/api/insights/{cluster_id}")
+def get_insights(cluster_id: int):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    ids = [int(i.strip()) for i in cluster_ids.split(',')]
-    placeholders = ','.join('?' * len(ids))
-    
-    cursor.execute(f"""
+    cursor.execute("""
         SELECT id, topic, problem_statement, intent, purchase_stage, source_review_id 
         FROM insights 
-        WHERE cluster_id IN ({placeholders})
-    """, ids)
+        WHERE cluster_id = ? AND purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')
+    """, (cluster_id,))
     
     insights = [dict(row) for row in cursor.fetchall()]
     conn.close()
@@ -144,7 +136,8 @@ def query_insights(req: QueryRequest):
     collection = client.get_collection("ajio_insights")
     results = collection.query(
         query_embeddings=[query_vector],
-        n_results=15
+        n_results=15,
+        where={"purchase_stage": {"$in": ["Pre-purchase", "Browsing", "Checkout"]}}
     )
     
     if not results['documents'] or len(results['documents'][0]) == 0:
