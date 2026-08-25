@@ -13,6 +13,25 @@ export default function Dashboard() {
   const [selectedCluster, setSelectedCluster] = useState<any>(null);
   const [insights, setInsights] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResult, setSearchResult] = useState<any>(null);
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
+    setIsSearching(true);
+    setSearchResult(null);
+    try {
+      const res = await axios.post(`${API_BASE}/query`, { query: searchQuery });
+      setSearchResult(res.data);
+    } catch (error) {
+      console.error("Search failed:", error);
+      setSearchResult({ answer: "Search failed. Please check your backend connection and ensure GROQ_API_KEY is set.", sources: [] });
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,14 +120,64 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="flex-1 md:ml-64 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
         
-        {/* Header */}
-        <header className="mb-12 flex flex-col gap-3">
-          <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
-            AJIO Product Discovery Engine
-          </h1>
-          <p className="font-body-lg text-lg text-on-surface-variant">
-            AI-powered friction analysis from multi-channel user feedback.
-          </p>
+        {/* Header & Semantic Search */}
+        <header className="mb-12 flex flex-col gap-6">
+          <div>
+            <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
+              AJIO Product Discovery Engine
+            </h1>
+            <p className="font-body-lg text-lg text-on-surface-variant mt-2">
+              AI-powered friction analysis from multi-channel user feedback.
+            </p>
+          </div>
+
+          {/* Semantic Search Bar */}
+          <div className="relative max-w-3xl">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span className="material-symbols-outlined text-on-surface-variant">search</span>
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              placeholder="Ask the AI (e.g., 'Why are users abandoning their carts?')"
+              className="w-full pl-12 pr-24 py-4 bg-white/5 border border-white/10 rounded-xl text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all"
+            />
+            <button 
+              onClick={handleSearch}
+              disabled={isSearching || !searchQuery}
+              className="absolute inset-y-2 right-2 px-6 bg-primary-container text-on-primary-container rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors disabled:opacity-50 flex items-center gap-2"
+            >
+              {isSearching ? <span className="material-symbols-outlined animate-spin text-sm">sync</span> : 'Ask AI'}
+            </button>
+          </div>
+
+          {/* AI Search Result Panel */}
+          {searchResult && (
+            <div className="max-w-3xl glass-panel p-6 rounded-xl border border-primary-container/30 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="font-headline-sm text-lg font-semibold text-primary-container flex items-center gap-2">
+                  <span className="material-symbols-outlined">auto_awesome</span> AI Synthesis
+                </h3>
+                <button onClick={() => setSearchResult(null)} className="text-on-surface-variant hover:text-on-surface">
+                  <X size={20} />
+                </button>
+              </div>
+              <p className="text-on-surface text-sm leading-relaxed mb-6">{searchResult.answer}</p>
+              
+              <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3">Sources Cited ({searchResult.sources.length})</h4>
+              <div className="flex flex-col gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
+                {searchResult.sources.map((src: any, idx: number) => (
+                  <div key={idx} className="p-3 bg-black/40 rounded-lg border border-white/5 text-xs text-on-surface-variant flex items-start gap-3">
+                    <span className="text-primary-container font-mono opacity-50">[{idx+1}]</span>
+                    <span>"{src.problem_statement}"</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </header>
 
         {/* KPI Cards */}

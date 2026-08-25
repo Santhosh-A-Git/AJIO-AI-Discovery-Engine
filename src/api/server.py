@@ -85,6 +85,93 @@ def get_insights(cluster_id: int):
         
     return insights
 
+class QueryRequest(BaseModel):
+    query: str
+
+# Global caches for RAG
+vector_db_client = None
+embedding_model = None
+llm = None
+
+def get_rag_components():
+    global vector_db_client, embedding_model, llm
+    if vector_db_client is None:
+        import chromadb
+        from sentence_transformers import SentenceTransformer
+        from langchain_groq import ChatGroq
+        from dotenv import load_dotenv
+        
+        load_dotenv()
+        db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "vector_db")
+        vector_db_client = chromadb.PersistentClient(path=db_path)
+        # Using a very fast local embedding model
+        embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
+        
+        llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=api_key)
+        
+    return vector_db_client, embedding_model, llm
+
+@app.post("/api/query")
+def query_insights(req: QueryRequest):
+    try:
+        client, encoder, chat_model = get_rag_components()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+        
+    # 1. Embed the user's query
+    query_vector = encoder.encode([req.query])[0].tolist()
+    
+    # 2. Search ChromaDB
+    collection = client.get_collection("ajio_insights")
+    results = collection.query(
+        query_embeddings=[query_vector],
+        n_results=15
+    )
+    
+    if not results['documents'] or len(results['documents'][0]) == 0:
+        return {"answer": "No relevant reviews found for your query.", "sources": []}
+        
+    # Extract the top results
+    docs = results['documents'][0]
+    metas = results['metadatas'][0]
+    
+    sources = []
+    context_text = ""
+    for idx, (doc, meta) in enumerate(zip(docs, metas)):
+        sources.append({
+            "problem_statement": doc,
+            "topic": meta.get("topic", ""),
+            "intent": meta.get("intent", "")
+        })
+        context_text += f"- {doc}\n"
+        
+    # 3. Generate Answer using LLaMA 3
+    prompt = f"""You are the AJIO Product Discovery AI. A Product Manager asked a query about user friction.
+Analyze the following exact user complaints and synthesize a concise, analytical answer. 
+Point out any specific patterns, recurring issues, or severe roadblocks mentioned in the complaints.
+Do not use markdown headers, just return a 1-2 paragraph professional response.
+
+USER QUERY: {req.query}
+
+RAW COMPLAINTS FOUND:
+{context_text}
+"""
+    
+    try:
+        response = chat_model.invoke(prompt)
+        answer = response.content
+    except Exception as e:
+        answer = f"Error generating AI synthesis: {str(e)}"
+        
+    return {
+        "answer": answer,
+        "sources": sources
+    }
+
 if __name__ == "__main__":
     # pyrefly: ignore [missing-import]
     import uvicorn
