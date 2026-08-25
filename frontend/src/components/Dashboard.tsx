@@ -165,7 +165,19 @@ export default function Dashboard() {
                   <X size={20} />
                 </button>
               </div>
-              <p className="text-on-surface text-sm leading-relaxed mb-6">{searchResult.answer}</p>
+              <div className="text-on-surface text-sm leading-relaxed mb-6 whitespace-pre-wrap">
+                {searchResult.answer.split('\n').map((line: string, i: number) => (
+                  <React.Fragment key={i}>
+                    {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return <strong key={j} className="text-primary-container font-semibold">{part.slice(2, -2)}</strong>;
+                      }
+                      return part;
+                    })}
+                    {i < searchResult.answer.split('\n').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </div>
               
               <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3">Sources Cited ({searchResult.sources.length})</h4>
               <div className="flex flex-col gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">

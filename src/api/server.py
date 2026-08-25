@@ -156,8 +156,12 @@ def query_insights(req: QueryRequest):
     # 3. Generate Answer using the LLM
     prompt = f"""You are an elite Product Management AI for AJIO.
 Analyze the following exact user complaints and synthesize a highly concise, actionable summary of user behavior.
-Format your response as 2-3 crisp bullet points. Focus purely on WHY users behave this way and the severe friction points.
-Do not write introductory or concluding paragraphs. Get straight to the insights.
+
+Format your response strictly as 2-3 insights using this exact structure for each:
+**[Insight Title]**
+[Brief explanation of WHY users behave this way and the severe friction points, directly below the title]
+
+Do not use bullet points (-). Make sure the title is bolded and the explanation is on a new line. Do not write introductory or concluding paragraphs.
 
 USER QUERY: {req.query}
 
