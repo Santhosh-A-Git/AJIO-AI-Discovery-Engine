@@ -170,9 +170,14 @@ export default function Dashboard() {
                   <React.Fragment key={i}>
                     {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
                       if (part.startsWith('**') && part.endsWith('**')) {
-                        return <div key={j} className="text-primary-container font-bold text-base mt-4 mb-1">{part.slice(2, -2).trim()}</div>;
+                        const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
+                        return (
+                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-6 mb-2 block w-full border-b border-primary/20 pb-1">
+                            {cleanTitle}
+                          </div>
+                        );
                       }
-                      return <span key={j}>{part}</span>;
+                      return <span key={j} className="block w-full">{part.trim()}</span>;
                     })}
                     {i < searchResult.answer.split('\n').length - 1 && <br />}
                   </React.Fragment>
