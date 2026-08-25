@@ -1,0 +1,18 @@
+# Python Virtual Environment
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# Vector Database (Too large for Git)
+data/vector_db/
+
+# IDE files
+.vscode/
+.idea/
+
+# Note: data/warehouse/ajio_warehouse.db is EXPLICITLY NOT IGNORED 
+# because Railway requires it to serve the pre-calculated API data.

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AJIO Product Discovery Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "inverse-primary": "#006b5f",
+                        "outline": "#859490",
+                        "on-surface-variant": "#bbcac6",
+                        "surface-variant": "#2f3634",
+                        "tertiary": "#ffb95f",
+                        "on-tertiary": "#472a00",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary-container": "#e49200",
+                        "on-secondary-fixed-variant": "#005236",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#4fdbc8",
+                        "surface-container": "#1a211f",
+                        "secondary-fixed": "#6ffbbe",
+                        "inverse-surface": "#dde4e1",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-bright": "#343b39",
+                        "secondary-fixed-dim": "#4edea3",
+                        "secondary": "#4edea3",
+                        "error-container": "#93000a",
+                        "surface-tint": "#4fdbc8",
+                        "primary-container": "#14b8a6",
+                        "on-tertiary-container": "#543300",
+                        "on-secondary": "#003824",
+                        "on-secondary-container": "#00311f",
+                        "inverse-on-surface": "#2b3230",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface": "#0e1513",
+                        "on-background": "#dde4e1",
+                        "outline-variant": "#3c4947",
+                        "surface-container-highest": "#2f3634",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-primary-fixed-variant": "#005048",
+                        "primary": "#4fdbc8",
+                        "on-primary": "#003731",
+                        "surface-container-lowest": "#090f0e",
+                        "on-surface": "#dde4e1",
+                        "background": "#0e1513",
+                        "secondary-container": "#00a572",
+                        "surface-dim": "#0e1513",
+                        "surface-container-low": "#161d1b",
+                        "surface-container-high": "#252b2a",
+                        "on-primary-container": "#00423b",
+                        "primary-fixed": "#71f8e4",
+                        "on-primary-fixed": "#00201c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max-width": "1280px",
+                        "base-unit": "4px",
+                        "stack-gap": "12px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "section-gap": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Outfit"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0a0a;
+            color: #dde4e1;
+        }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen antialiased">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="flex justify-between items-center w-full px-margin-mobile py-4 max-w-container-max-width mx-auto bg-white/5 backdrop-blur-md sticky top-0 md:hidden z-50 shadow-[0_4px_20px_rgba(20,184,166,0.15)]">
+<div class="font-display-lg-mobile text-display-lg-mobile tracking-tighter text-primary bg-clip-text">AJIO Discovery</div>
+<div class="flex gap-4">
+<button class="text-primary hover:bg-white/10 transition-all duration-300 rounded-full p-2 scale-102 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-primary hover:bg-white/10 transition-all duration-300 rounded-full p-2 scale-102 active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-white/10" data-alt="A small circular user avatar showing a modern fashion-forward profile photo in a high-tech studio setting, styled with premium deep dark aesthetics and vivid teal lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrFUT8X3Wm1XanF5HQ-445Vz-VhLaD_KMnU8iNQFeaQph677897NyQFvgTDpkhpkBLmPklvBjYanOJDEzcPE9dwS5JJ-HS97GUIXs32rz-ZL_N5dIPTD7UYFjiIHNTS9LgBrHlpdjXuT5DgP-_TOkiDN2CRyFIf-5DzaJDI6p0eg4V21QQy5HFUvcB1XlLGZZlwq4wXaQi0bzOqipPPyWsU-L3tM165vQxch576_X6_snlVs4hU0gfWQ"/>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-primary">Discovery Engine</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
+</div>
+<nav class="flex-1 px-2 space-y-2">
+<a class="bg-white/10 text-primary border-r-4 border-primary px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                Trends
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="comment">comment</span>
+                Feedback
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-label-bold hover:bg-primary-fixed transition-colors">
+                Generate Report
+            </button>
+</div>
+<div class="px-6 mt-6 flex items-center gap-3">
+<img alt="AJIO Admin" class="w-10 h-10 rounded-full border border-white/10" data-alt="A small circular user avatar showing a modern fashion-forward profile photo in a high-tech studio setting, styled with premium deep dark aesthetics and vivid teal lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwlxrQbsNVsnmknSXTnQbRLUrLi6SS1X5TD-v0BpvwhI5u5k_ax2C-dNuX1N0mDwCNAdMVYdIyVOrEaoACQRGQhkQygoGadF3MuR0S4co0oLDaq0eqHq7yWklYulABo33Zk-r289YA3Tk976J244pS_8ku4dkId22x6KOO05mg1GGTDhh7YW4J0p8EO6eo8MPX_BtrtN7iuGbMAelnCaKgKZWobzy6pn40Of2qY9oyLNHr_Vuvh7Cq8w"/>
+<div class="font-body-sm text-body-sm text-on-surface">AJIO Admin</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop w-full max-w-container-max-width mx-auto">
+<!-- Header -->
+<header class="mb-section-gap flex flex-col gap-stack-gap">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
+                AJIO Product Discovery Engine
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                AI-powered friction analysis from multi-channel user feedback.
+            </p>
+</header>
+<!-- KPI Cards -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Card 1 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-primary-container/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Total Feedback Processed</h3>
+<span class="material-symbols-outlined text-primary-container bg-primary-container/10 p-2 rounded-lg" data-icon="group">group</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface relative z-10">834</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-tertiary-container/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-tertiary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Active Problem Clusters</h3>
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 p-2 rounded-lg" data-icon="warning">warning</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface relative z-10">12</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-secondary-container/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">System Status</h3>
+<span class="material-symbols-outlined text-secondary-container bg-secondary-container/10 p-2 rounded-lg" data-icon="monitoring">monitoring</span>
+</div>
+<div class="font-display-lg text-display-lg text-secondary-container relative z-10">Online</div>
+</div>
+</section>
+</main>
+</body></html>

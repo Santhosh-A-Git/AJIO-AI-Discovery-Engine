@@ -1,0 +1,3138 @@
+[
+  {
+    "topic": "App UX",
+    "problem_statement": "No proper review system; cannot see real reviews or product images",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "One of the things that"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Takes days for the order to arrive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "One of the things that"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "More than 70% orders not delivered on time or cancelled by AJIO",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am using the app"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Received only part of the order; issue marked resolved without resolution; refund denied",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience with"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received wrong product despite ordering correct one; exchange option not functional; poor customer service",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Usually Ajio sends unsold"
+  },
+  {
+    "topic": "Missing Items",
+    "problem_statement": "Missing items when ordering multiple products; no assistance from customer care",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "One of the worst"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Order cancelled and refund initiated after 6 days; app didn't show out-of-stock at purchase time",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Very poor customer service I"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Prepaid orders on heavy offers cancelled without notice; compensation via coupon requiring higher spend",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I should say that initially"
+  },
+  {
+    "topic": "Delivery & Returns",
+    "problem_statement": "Missing items, month-long delivery delays, confusing return messages",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The app and the"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Boring interface, limited wishlist capacity, no exchange feature, extra platform fee for returns",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "The interface is bit"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Orders cancelled repeatedly without satisfactory reason",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Ajio no longer seems"
+  },
+  {
+    "topic": "Size/Inventory",
+    "problem_statement": "Delivered wrong shoe size; product out of stock for replacement",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ajio no longer seems"
+  },
+  {
+    "topic": "Promotions",
+    "problem_statement": "Promised ₹1,000 cashback never credited after 2 months; support unresponsive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Don't fall for their"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Cannot cancel order after placement",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I deeply regret shopping"
+  },
+  {
+    "topic": "Payment & Delivery",
+    "problem_statement": "No Cash on Delivery option; delivery delayed by 3 days beyond estimated date",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "I deeply regret shopping"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Product fabric is poor and price is high relative to quality",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Bad quality products with"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return requires repeatedly sending photos and is very lengthy",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Bad quality products with"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received wrong product and missing item in a 2‑pc set",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had very disappointing"
+  },
+  {
+    "topic": "Order Status",
+    "problem_statement": "Orders automatically marked as returned before delivery",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had very disappointing"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered by promised date, delayed beyond delivery window",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Pathetic company. I placed"
+  },
+  {
+    "topic": "Refund Policy",
+    "problem_statement": "Convenience fee not refunded even when order not received",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Pathetic company. I placed"
+  },
+  {
+    "topic": "Missing Items",
+    "problem_statement": "First item arrived missing component and support offered no help",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience with AJIO"
+  },
+  {
+    "topic": "Delivery Failure",
+    "problem_statement": "Second item never delivered and shown as returned by system",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience with AJIO"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Cancelled order was still delivered and return incurred extra charge",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I placed 2 orders till"
+  },
+  {
+    "topic": "Wallet",
+    "problem_statement": "Ajio wallet cash disappeared after placing an order",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I placed 2 orders till"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Only fixed menu, no live support; emails ineffective",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "there is no customer"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return blocked because product delivered without box, partner refuses",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "there is no customer"
+  },
+  {
+    "topic": "Product Mismatch",
+    "problem_statement": "Delivered wrong brand and wrong size",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My request has still"
+  },
+  {
+    "topic": "Refund/Exchange",
+    "problem_statement": "No refund or exchange offered after 15 days of requests",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My request has still"
+  },
+  {
+    "topic": "Partial Delivery",
+    "problem_statement": "Ordered three sets, received only two, charged for missing item",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "WORST EVER RETAIL APP!!! For"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support refused refund or delivery of missing item",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "WORST EVER RETAIL APP!!! For"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery delayed past window and false 'delivery attempt' claim",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute Nightmare, Terrible"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "No proactive updates; support unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute Nightmare, Terrible"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Both orders delivered completely wrong products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute nightmare—do not"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return process non‑functional; chat closes before filing complaint",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute nightmare—do not"
+  },
+  {
+    "topic": "Refunds & Returns",
+    "problem_statement": "Refunds take far too long and returns require sharing images via email when the brand tag is missing, causing inconvenience",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "A very very bad experience"
+  },
+  {
+    "topic": "Incorrect Items Delivered",
+    "problem_statement": "Customers receive incorrect items in orders",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "A very very bad experience"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Clothes are cheap, see‑through and of very poor quality",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Giving 1 star as I"
+  },
+  {
+    "topic": "Return Status Not Updating",
+    "problem_statement": "Returned items show as not picked up or pending despite being collected, causing delays",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Giving 1 star as I"
+  },
+  {
+    "topic": "Wishlist Stock Visibility",
+    "problem_statement": "Wishlist items frequently appear out of stock with no indication of when they will be restocked",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Poor wishlist experience. Many items"
+  },
+  {
+    "topic": "Order Cancellation & Pricing",
+    "problem_statement": "Orders are cancelled after confirmation with no compensation, forcing customers to repurchase at a higher price",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very bad experience. I ordered"
+  },
+  {
+    "topic": "Delivery Delays & Support",
+    "problem_statement": "Delivery partners cause long delays after the order reaches the local hub and customer support provides generic, unhelpful responses",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Warning: Do not order from"
+  },
+  {
+    "topic": "Return Tracking & Refund Delay",
+    "problem_statement": "Return status is not updated in the app despite warehouse receipt, leaving refunds pending and support unresponsive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Pathetic service and the worst"
+  },
+  {
+    "topic": "Late Order Cancellation & Stock Visibility",
+    "problem_statement": "Orders are cancelled days after placement with no prior stock indication, leading to disappointment for time‑sensitive purchases",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very poor customer service. I"
+  },
+  {
+    "topic": "Quality Control & Refund Delays",
+    "problem_statement": "Frequent issues such as missing price tags, wrong sizes, damaged items and delayed refunds require customers to repeat explanations",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst experience ever. Almost every"
+  },
+  {
+    "topic": "Lack of Reviews & Return Collection",
+    "problem_statement": "No customer review system and returns are not picked up, forcing customers to accept unwanted items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app I have ever"
+  },
+  {
+    "topic": "Wrong State Delivery & Tracking Confusion",
+    "problem_statement": "Orders are sent to the wrong state, causing delays; tracking updates are confusing and support is unhelpful",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Cancel order does not process; order remains in shipping status despite user request",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Worst app. Nothing works in"
+  },
+  {
+    "topic": "Return",
+    "problem_statement": "Received wrong product; return denied due to color difference; support unable to resolve",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst app. Nothing works in"
+  },
+  {
+    "topic": "Fit/Size",
+    "problem_statement": "Item sizes are inconsistent and not true to size",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I'm really disappointed with the"
+  },
+  {
+    "topic": "Exchange Policy",
+    "problem_statement": "Exchange option unavailable for certain PIN codes, forcing returns and affecting return rate",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I'm really disappointed with the"
+  },
+  {
+    "topic": "Payment Options",
+    "problem_statement": "Cash on Delivery option disabled and not restored after contacting support",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I used to shop a"
+  },
+  {
+    "topic": "Account Management",
+    "problem_statement": "Account blocked after deletion attempt; unable to re-register with same number",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I used to shop a"
+  },
+  {
+    "topic": "Exchange Policy",
+    "problem_statement": "Exchange not permitted at user's location, forcing return with a convenience fee",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered multiple shirts and"
+  },
+  {
+    "topic": "Fit/Size",
+    "problem_statement": "Size smaller than expected for some brands despite expectation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered multiple shirts and"
+  },
+  {
+    "topic": "Delivery Accuracy",
+    "problem_statement": "Received completely different item than ordered",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had very bad experience"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return pickup denied because agent only checked photo, not seal/tag, causing denial",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had very bad experience"
+  },
+  {
+    "topic": "Packaging/Labeling",
+    "problem_statement": "Delivered items lack brand or price tags, causing confusion and return issues",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app doesn't deserve even"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return requests repeatedly cancelled; support requires multiple photo emails, causing delays",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app doesn't deserve even"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "No option to leave detailed reviews or upload product photos, hindering informed decisions",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Seller Trust",
+    "problem_statement": "Platform lists sellers that appear non-genuine, causing trust issues",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return pickup not scheduled despite request; delay over month, money stuck",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I Ordered from Ajio and"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered; tracking shows returned to warehouse without delivery attempt, no communication",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "One month of waiting for"
+  },
+  {
+    "topic": "Delivery Accuracy",
+    "problem_statement": "Received wrong products (lotion and perfume) after order",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is literally the worst"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund not received after month; customer care unresponsive and keeps extending resolution date",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is literally the worst"
+  },
+  {
+    "topic": "Delivery/Return",
+    "problem_statement": "Delivery partner never picks up returns, no contact, cites improper address same as delivery",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst shopping app. After purchasing"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "New blacked‑out interface is worse than original white background, overall user experience very poor",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "When you have the original"
+  },
+  {
+    "topic": "Search",
+    "problem_statement": "Search returns unrelated items (e.g., searching shirts shows pants)",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "When you have the original"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Received T‑shirt larger than expected, stained, and not matching product pictures",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a T-shirt"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Extremely slow delivery compared to other online shopping apps",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a T-shirt"
+  },
+  {
+    "topic": "Product Info",
+    "problem_statement": "Missing material descriptions and no filter for material on product pages",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Lot of Options for"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Cumbersome navigation; cannot select gender directly, must drill through many sub‑categories, UI considered poor",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Lot of Options for"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "App does not allow exchange for a different colour of the delivered product",
+    "intent": "General Feedback",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The app is good. The"
+  },
+  {
+    "topic": "Feature Request",
+    "problem_statement": "Allow users to create and save their own outfits for direct ordering",
+    "intent": "General Feedback",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "The app is good. The"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Items often not as described, wrong or mismatched items, occasional defective products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very bad experience for many"
+  },
+  {
+    "topic": "Return/Refund",
+    "problem_statement": "Customers charged for returning items, perceived as unfair",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very bad experience for many"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Received cheap, low‑quality kurtas instead of ordered premium items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with AJIO! I"
+  },
+  {
+    "topic": "Return/Refund",
+    "problem_statement": "No option for return or refund on the app and lack of proper support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with AJIO! I"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Interface is not good, making navigation difficult",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "App's interface is not good."
+  },
+  {
+    "topic": "Policy",
+    "problem_statement": "Exchange/return policy changes after order, leaving customers with non‑returnable items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "App's interface is not good."
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order cancelled by platform, status incorrectly shows return initiated by user",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "This is the name sake"
+  },
+  {
+    "topic": "Fees/Charges",
+    "problem_statement": "Additional platform, convenience, and COD fees applied even after order cancellation",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "This is the name sake"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Orders either delivered very late, not at all, or cancelled by the app itself",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Slow delivery or No delivery"
+  },
+  {
+    "topic": "Return/Refund",
+    "problem_statement": "Delivered wrong product, cannot exchange or return, refund never received and no customer support response",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "this is a scam you"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund of ₹657.45 shown as initiated but not credited, no transaction/reference number provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "“My ₹657.45 refund has"
+  },
+  {
+    "topic": "Refund/Return",
+    "problem_statement": "Money not returned after return, extra deduction applied, and no customer service available",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is a fraud app."
+  },
+  {
+    "topic": "Data Privacy & Customer Service",
+    "problem_statement": "User believes app sells personal info, receives scam calls, and experiences poor helpline and return support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It's a non-trustable app."
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Courier did not deliver product after 25 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i want to give minus"
+  },
+  {
+    "topic": "Refund Method",
+    "problem_statement": "Refund issued to wallet instead of original card, forcing future purchases",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i want to give minus"
+  },
+  {
+    "topic": "Wishlist Capacity",
+    "problem_statement": "Maximum wishlist limit of 70 items is too low compared to competitors",
+    "intent": "Feature request",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Ajio, I want to ask"
+  },
+  {
+    "topic": "Return Policy Enforcement",
+    "problem_statement": "Account blocked permanently after returning items, with no alternative penalty system",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Title: AJIO Review Worst"
+  },
+  {
+    "topic": "Delivery & Returns",
+    "problem_statement": "Orders marked as out for delivery never arrive; repeated false delivery messages and unresolved return issues",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst worst app ever I"
+  },
+  {
+    "topic": "Product Authenticity & Refund Method",
+    "problem_statement": "Received counterfeit Nike shoe, support unhelpful, refund credited only to AJIO wallet",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The worst service one"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Damaged products received, refunds marked as completed but money never reaches bank",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "0 Star! Worst shopping"
+  },
+  {
+    "topic": "Referral Rewards",
+    "problem_statement": "Referral rewards not credited despite eligible orders",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "0 Star! Worst shopping"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order stuck at delivery hub for 10 days, no delivery attempt, tracking shows \"delivery failed\" and package being returned",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a pair of"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support unable to resolve delivery issue and did not provide compensation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a pair of"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Product never delivered, marked as \"returned\" without user request, refund processed without explanation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely poor experience with AJIO."
+  },
+  {
+    "topic": "Pricing/Refund",
+    "problem_statement": "Price increased after order, AJIO refused to consider price difference during refund",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely poor experience with AJIO."
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App crashes and closes automatically on iQOO Z5 despite updates, reinstall and cache clear",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "AJIO keeps crashing and automatically"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "User requests fix for device compatibility, no response",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "AJIO keeps crashing and automatically"
+  },
+  {
+    "topic": "Returns Logistics",
+    "problem_statement": "Return pickup scheduled but not executed, repeated delays in resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had a very bad"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer service provides poor communication and repeatedly extends resolution timeline",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had a very bad"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Rude delivery person, helpline unresponsive, no option to give directions, order location unknown",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute worst experience ever. The"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Helpline offers useless options and hangs up, no rating system for delivery experience",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolute worst experience ever. The"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not received, no communication, delivery date missed by 8 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have not received my"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer care executives provide no solution, perceived as scam",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have not received my"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Logistics partners cause extreme delays, order remains only \"Shipped\" after two weeks",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with the product"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support fails to address late deliveries and offers no remedy",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with the product"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order stuck at \"Out for Delivery\" status for days, no actual delivery, courier contact unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointing experience with AJIO."
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Poor coordination, unable to provide courier contact, promises not fulfilled",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointing experience with AJIO."
+  },
+  {
+    "topic": "Quality/Packaging",
+    "problem_statement": "Received wrong products, incorrect sizes, and items belonging to other customers",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I"
+  },
+  {
+    "topic": "Quality/Packaging",
+    "problem_statement": "Lack of proper quality check and packaging process leading to expensive items delivered incorrectly",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery date repeatedly extended by 2-3 days without updates, order still undelivered",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Exchange shows available but size not deliverable, forcing returns and loss of convenience charge",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have been using ajio"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "No response from customer care when issues arise",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have been using ajio"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Orders cancelled automatically after a week without notice",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Do not waste your time"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support unhelpful and provides no answers",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Do not waste your time"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Product not delivered and cannot cancel, resulting in ₹2,000 stuck",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst Experience Worst experience with"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer service unresponsive and unable to provide resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst Experience Worst experience with"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered after 14 days with no cancel option and poor courier tracking",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The order was not delivered"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Generic bot replies, no real assistance from support team",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The order was not delivered"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received wrong design and poor quality dress",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have purchased one dress"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "Return process charged extra fee, parcel not collected, and return blocked",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have purchased one dress"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order cancelled without prior notification or communication",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Very disappointing experience with AJIO"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support and order management need significant improvement",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience with AJIO"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery takes ~3 weeks, causing major delays",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst app ever! Nothing happens"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund processing takes about a month, support offers no help",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst app ever! Nothing happens"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "One‑week delivery window extended automatically without consent or notification",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am highly disappointed with"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "One earring arrived damaged and the other was a completely different item",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered 2 earrings and"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "Return pickup never occurred and status not updated despite multiple email attempts",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered 2 earrings and"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Size change request not fulfilled after 18+ days, no dispatch or delivery updates",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "one of the WORST shopping"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support repeatedly tells to wait 2‑3 days, providing generic, unhelpful responses",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "one of the WORST shopping"
+  },
+  {
+    "topic": "Return & Logistics",
+    "problem_statement": "Return pickup fails and logistics partner is blamed, leaving customer waiting",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Returning a poor-quality or"
+  },
+  {
+    "topic": "Pricing & Checkout",
+    "problem_statement": "Displayed price with coupons differs from checkout price, discount not applied",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Ajio had good products with"
+  },
+  {
+    "topic": "Exchange & Customer Service",
+    "problem_statement": "Product exchange not processed and support provides no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is extremely disappointing. My"
+  },
+  {
+    "topic": "App UX & Checkout",
+    "problem_statement": "Payment flow fails to fetch shipping page, preventing order placement",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Update: Cleared cache, data etc"
+  },
+  {
+    "topic": "Exchange/Return & Support",
+    "problem_statement": "Wrong product picked up during exchange, no refund, tickets auto‑closed, return policy expired",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very very worst app... Delivery"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return process is confusing and unresolved; support repeats questions, eroding trust",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with AJIO's return"
+  },
+  {
+    "topic": "Delivery & Logistics",
+    "problem_statement": "Missed delivery calls, repeated rescheduling, then order returned to origin due to technical error",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience with AJIO."
+  },
+  {
+    "topic": "Return & Support",
+    "problem_statement": "Return status and refund updates never provided; support unresponsive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointed with AJIO. Their"
+  },
+  {
+    "topic": "Product Quality & Exchange",
+    "problem_statement": "Damaged product not exchanged; support forces return, making refund difficult and slow",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I do not recommend ordering"
+  },
+  {
+    "topic": "Product Authenticity & Support",
+    "problem_statement": "Product missing brand label; support dismisses complaint and provides scripted, unhelpful replies, making return a nightmare",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "WARNING: Avoid AJIO. Worst"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer support is very bad, they don't care about complaints and provide no delivery partner's number.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Customer support is very bad,if"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "DELHIVERY courier partner is unresponsive and never attempts delivery, leaving users frustrated.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Customer support is very bad,if"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Received only 2 of 4 ordered items, with 2 wrong and 2 missing, and complaints remain unresolved.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have ordered 4 products"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer care shows no interest in resolving issues, marking them resolved without a solution.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have ordered 4 products"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "All three ordered products have quality issues; cloth is too transparent.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very poor app. I placed"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund amount was partially deducted without prior notice after returning products.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very poor app. I placed"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Last two orders never got delivered; delivery person never attempted delivery even after complaints.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Have had terrible experience. Last"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Raising complaints leads to order cancellation with no accountability.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Have had terrible experience. Last"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Recurring issues with refunds; app malfunctioning and refunds not processed correctly.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The app was my first"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "No customer care phone number or email; orders are cancelled arbitrarily.",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "The app was my first"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "No exchange service; users must return items and place a new order incurring extra platform fees.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "There's no exchange, the items"
+  },
+  {
+    "topic": "Return Policy",
+    "problem_statement": "Non‑refundable convenience charges are applied to every returned product.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worse return policy. When we"
+  },
+  {
+    "topic": "Payment",
+    "problem_statement": "Unexpected platform fee at checkout and limited payment options (UPI only), plus extra COD charge.",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I placed first order from"
+  },
+  {
+    "topic": "Exchange/Return",
+    "problem_statement": "Exchange process frequently fails, forcing customers to keep unwanted products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience with"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Repeated delivery date changes and false \"Delivery Attempt Failed\" status despite no attempt",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am very disappointed with"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Cannot add items to cart or place order; app hangs and reloads, support unhelpful",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I'm really disappointed with"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received wrong and low‑quality products, delivery experience worst",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is the worst app."
+  },
+  {
+    "topic": "Pricing/Fees",
+    "problem_statement": "Unexpected 100 rupee platform fee applied on returns, perceived as unfair",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is the worst app."
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery issues not resolved; customer care lacks authority to help",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Not reliable or helpful Delivery"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Orders arrive with damaged items and missing price tags",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. Almost"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "Refund for returned order not received; return processing slow; must repeat issue to support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. Almost"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "App sells counterfeit or fake products under well‑known brand names",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "Return processing takes 15‑25 days and refund not received, causing hassle",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Wishlist truncates after 100 items, causing loss of saved dresses",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Hi.. I've been using this"
+  },
+  {
+    "topic": "Delivery Reliability",
+    "problem_statement": "Sellers skip delivering some items in multi‑item orders, leading to missing products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "One of the worst shopping"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "Received wrong product; support gives generic responses and no accountability",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolutely unacceptable service. I"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Initial delivery estimate inaccurate, later delayed with no updates; customer care unresponsive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have a very bad"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Sell counterfeit or fake products under well-known brand names",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Returns",
+    "problem_statement": "Return processing takes 10–12 days after approval, causing hassle",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is one of the"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Orders are cancelled after discount is applied, forcing reorder at higher price",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "the experience on this app"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Long wait (5-6 days) before cancellation, causing disappointment",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "the experience on this app"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "No option to view or provide product reviews, ratings, or customer pictures",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Quality of the products used"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund takes too long and is partial after return, especially for low-quality products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Quality of the products used"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivered wrong product and return process delayed for almost a month",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Never again. AJIO delivered the"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support repeatedly asks to wait, forcing customers to chase for mistake",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Never again. AJIO delivered the"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Received incomplete order with three missing products but charged full amount",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "⭐☆☆☆☆ (1/5) Extremely disappointed with"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Complaint rejected without addressing provided evidence, lacking explanation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "⭐☆☆☆☆ (1/5) Extremely disappointed with"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order accepted then cancelled due to internal issues, causing inconvenience",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Very disappointing experience. I placed"
+  },
+  {
+    "topic": "Trust",
+    "problem_statement": "Poor experience erodes customer trust despite refund being provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I placed"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "Exchange requests repeatedly cancelled and delivery postponed",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "the worst ecommerce app ever"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery personnel lack knowledge on handling exchange pickups",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "the worst ecommerce app ever"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Package missing product but marked delivered, no verification before payment",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is the worst app"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support unresponsive, asks to wait 48h then provides no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is the worst app"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "Received wrong size in exchange and no exchange option available",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My exchange order arrived today,"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Item arrived without sticker or invoice, appearing used",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My exchange order arrived today,"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Elevated prices despite coupons, often higher than market",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "fraud app use traditional built"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Error \"oops something went wrong\" appears when opening a product, preventing purchase",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I've been getting the same error"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery agent took cash and ran away; complaint not registered by AJIO support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Just don't install this app,"
+  },
+  {
+    "topic": "Offers",
+    "problem_statement": "Misleading \"FIRSTORDERFREE\" offer requires higher spend and offers no guarantee of SuperCash, causing confusion",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "If there's a option of"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Received only 3 of 4 ordered shorts; issue marked resolved without delivering missing item or refund",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience with AJIO."
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Estimated delivery of 7-8 days repeatedly extended, causing severe delays",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "if i could give -ratings i"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Ordered two products but only one received; support claims full delivery and charges user for missing item",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered two products with"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received low-quality items that differ from images and descriptions; return requests were cancelled",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am extremely disappointed with my"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Order canceled as out of stock; coupon cannot be reused, resulting in loss of value",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a t shirt"
+  },
+  {
+    "topic": "Payment",
+    "problem_statement": "Payment fails with \"cart engine price calculation exception\" and offers are displayed but not applied; customer care unhelpful",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Absolutely pathetic app... worst"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered after many days; tracking stuck on \"In Transit\" with no updates or communication",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with AJIO. I"
+  },
+  {
+    "topic": "Delivery/Order Fulfillment",
+    "problem_statement": "Delivered completely different product; exchange request denied",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a product but"
+  },
+  {
+    "topic": "Refund/Finance",
+    "problem_statement": "Refund issued as AJIO Cash and increased convenience charge blocks reordering, money remains stuck",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a product but"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order delayed 22 days, delivery date keeps extending, lack of clear communication",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Hi AJIO Team, I am"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "\"Selected size is not deliverable to your pincode\" error persists across all pincodes, preventing purchase",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Dear AJIO Support Team, I"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "Received wrong size; policy states item is non‑returnable, leaving user unable to get correct product",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "No doubt the app is"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund repeatedly marked as failed after return, no explanation provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience with AJIO has"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "Return requests rejected despite wrong items and poor quality; support offers no reasonable answer",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had ordered 2 long"
+  },
+  {
+    "topic": "Delivery/Address",
+    "problem_statement": "Orders get stuck or cancelled because delivery address missing on package; AI support gives irrelevant options",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It contains many glitches with"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Platform fee is significantly higher than competing e‑commerce apps",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I am highly disappointed with"
+  },
+  {
+    "topic": "Privacy/Security",
+    "problem_statement": "Customer phone numbers are shared directly with delivery partners instead of being masked, posing security risk",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I am highly disappointed with"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Exchange flow fails: clicking Proceed returns to previous screen without submitting request",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I clicked the Proceed button"
+  },
+  {
+    "topic": "Return & Refund",
+    "problem_statement": "Return pickup flagged as unavailable and no follow‑up action from delivery or customer care.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "absolutely pathetic. Asked for a"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Irregular prices shown for the same product across orders.",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Irregular prices it shows of"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order tracking is inaccurate; orders get auto‑cancelled and status shows contradictory locations.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Irregular prices it shows of"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Orders placed at discounted prices are cancelled by AJIO without proper resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "the minute I order at"
+  },
+  {
+    "topic": "Delivery Speed",
+    "problem_statement": "Logistics are extremely slow, with deliveries taking up to 16 days and convenience fees for cancellation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The app experience is"
+  },
+  {
+    "topic": "Delivery Security",
+    "problem_statement": "Delivery person stole a product and repeatedly requested OTP without delivering the order",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad experience regarding"
+  },
+  {
+    "topic": "OTP Verification Failure",
+    "problem_statement": "Order marked as delivered without OTP collection, parcel never received",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am extremely disappointed"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received wrong product and wrong size (ordered size 11, got size 9, different model)",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst purchasing experience ever"
+  },
+  {
+    "topic": "Refund Delay",
+    "problem_statement": "Refund for a processed return has not been received despite initiation on 21 June",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointed with AJIO's"
+  },
+  {
+    "topic": "Repeated Wrong Items",
+    "problem_statement": "Multiple orders received wrong size or completely wrong product repeatedly",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "After installing ajio i"
+  },
+  {
+    "topic": "Delivery Timeframe",
+    "problem_statement": "Delivery takes 5 days, exceeding user expectation of 3 days for urgent items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Everything about the app is"
+  },
+  {
+    "topic": "Refund & Quality Issues",
+    "problem_statement": "Refunds not processed properly, items not returned, and received fake/low-quality brands",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have bought some things"
+  },
+  {
+    "topic": "Incorrect Return to Origin",
+    "problem_statement": "Order marked as \"Return to Origin\" despite correct address, customer care unresponsive, refund delayed 10–15 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "⭐ 1/5 Very disappointed"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery delayed continuously for more than 15 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It is a worst app"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "No option to cancel order; refund not received after complaint",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It is a worst app"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery not completed within promised 18 days; items delivered not worthy",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app in worst experience"
+  },
+  {
+    "topic": "Fees",
+    "problem_statement": "Convenience fees charged without clear justification",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app in worst experience"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "Exchange denied due to address not serviceable while new order allowed, forced to pay convenience fee",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Don't buy from AJIO if"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Repeated delivery delays with constantly extending delivery dates due to shipping mismanagement",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The worst shopping app"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer care unresponsive and unhelpful",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The worst shopping app"
+  },
+  {
+    "topic": "Return",
+    "problem_statement": "Wrong items received multiple times; return requests rejected; no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience, received wrong"
+  },
+  {
+    "topic": "Return",
+    "problem_statement": "Return pickup not done for over a month; refund not provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very poor experience with AJIO."
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery repeatedly postponed; complaints ignored; false promises from support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "AJIO has become the worst"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Product quality poor despite high prices",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am not happy with"
+  },
+  {
+    "topic": "Account",
+    "problem_statement": "Accounts blocked after returns without notice",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am not happy with"
+  },
+  {
+    "topic": "Return",
+    "problem_statement": "Return cancelled without valid reason; support gives automated replies, no accountability",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointed with AJIO."
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received wrong color and poor-quality product; return process frustrating",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Orders repeatedly cancelled and refunded without user consent; delivery never received; customer care unhelpful.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad app, I haven't"
+  },
+  {
+    "topic": "Missing Items",
+    "problem_statement": "Delivered fewer handbags than ordered; support directs to email and provides no resolution.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ajio is doing fraud with"
+  },
+  {
+    "topic": "Returns Process",
+    "problem_statement": "Returned product not reflected in app; support repeatedly asks for return ID and provides bot-like responses.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "fraud and worst shopping site."
+  },
+  {
+    "topic": "Referral Rewards",
+    "problem_statement": "Referral cash not credited to referrer despite friends' first purchases; app shows no error resolution.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The app procedure of the"
+  },
+  {
+    "topic": "Return Initiation",
+    "problem_statement": "App initiates returns without user approval and delivery partner fails to pick up returns for weeks.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app for shopping ,"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received incomplete and wrong items after purchase; multiple attempts to resolve ignored.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app ever i purchased"
+  },
+  {
+    "topic": "Return Cancellation",
+    "problem_statement": "Return request cancelled by the platform after user attempted to return wrong items; support delays resolution.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app ever i purchased"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Delivered jeans without tags, low-quality material; unable to return and support unreachable.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is a worst app."
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "All orders cancelled unexpectedly due to unspecified reasons, causing loss of time and effort.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very Bad Experience - Hopeless"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received used, dirty T‑shirt; return request repeatedly cancelled and return window extended by support.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "If you are planning to"
+  },
+  {
+    "topic": "Delivery Delays",
+    "problem_statement": "Delivery repeatedly delayed; order cancelled without notification; refund issued after user complaint.",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very pathetic app and service"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer support is unhelpful, issues remain unresolved, and responses are generic",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointing experience with"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Price changes to a higher amount when adding item to bag",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "very bad service. I was"
+  },
+  {
+    "topic": "Delivery & Refund",
+    "problem_statement": "Delivery extended from 7 to 31 July, seller cancelled order, refund only partial with non‑refundable convenience fee, feels like a scam",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Orderd on 14 July 2026,"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Two prepaid parcels delayed for a long time, complaints ignored, no solution provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is a terrible experience."
+  },
+  {
+    "topic": "Return Pickup",
+    "problem_statement": "Return request ignored; delivery person not picking up return parcel and no communication after request placed",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience as far has"
+  },
+  {
+    "topic": "Delivery & Return Policy",
+    "problem_statement": "Customer executives cannot help with delivery, give false dates, third‑party partners uncontrolled, return policy slow and unresponsive support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app and the customer"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Next Day Delivery promise not met; order undelivered despite multiple complaints and promises",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I placed an order on"
+  },
+  {
+    "topic": "Delivery & Hidden Fees",
+    "problem_statement": "One of two ordered products never delivered; return charge of ₹150 applied without prior notice",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ordered two products from AJIO,"
+  },
+  {
+    "topic": "Order Management & Refund",
+    "problem_statement": "Order delayed and rescheduled multiple times; cancellation takes 3 days; no status tracking; refund takes 10 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience ever. my"
+  },
+  {
+    "topic": "Cancellation & Refund",
+    "problem_statement": "Delivery dates shifted repeatedly, order cancelled without delivery, refund delayed and money stuck",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience, ordered a product"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Return requests rejected due to missing brand tags that were never provided; support gave irrelevant reply about clearing cache",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very poor customer service I"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order delayed 15 days, no return option, customer care repeats same unhelpful answers",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Their service is very poor."
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Products advertised as pure cotton are cheap and poor quality, repeated across many items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have been using the"
+  },
+  {
+    "topic": "Size",
+    "problem_statement": "Ordered XXL t-shirt delivered as size L",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have been using the"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund not received after successful pickup of returned product despite multiple contacts",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience I returned"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not shipped after 10 days, showing unrealistic 22-day delivery estimate",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I ordered an item on"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App crashes immediately after installation, cannot open",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "App is not working I"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund not received after return, no response from customer care via email",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Don't trust this app I"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund not received after order cancellation, no clear updates from support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Extremely disappointing experience with"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "First order arrived incomplete; item auto-returned without request; delivery executive rude and unprofessional",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience My"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received products of cheap quality that do not match app images or descriptions",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Zero stars from my"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund not received after 3 days, customer service unresponsive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Zero stars from my"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery delayed 2–3 days, delivery executive unreachable, required multiple follow-ups",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "Worst shopping experience ever! My"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Shoes sole detached after 2–3 wears, indicating extremely poor product quality",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst shopping experience ever! My"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App is very slow compared to others and asks for too many details, making shopping harder",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "app works too slow than"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered promptly and stock not marked as out of stock, leading to potential cancellation threat",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Please get my order"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Items repeatedly delivered later than promised delivery day, causing disappointment",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointed. I order items"
+  },
+  {
+    "topic": "Rewards",
+    "problem_statement": "Referral reward not credited despite promised timeline and multiple follow‑ups",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "my referral reward is"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "OTP received for only one parcel but both parcels marked delivered; no corrective action taken",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had ordered 2 products"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Boots received are of poor quality, not matching expectations",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "bad experience... completely scammers i"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund amount promised to bank not reflected; instead credited to Ajio wallet with no support response",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "bad experience... completely scammers i"
+  },
+  {
+    "topic": "Payment Options",
+    "problem_statement": "Cash on Delivery (COD) option disabled, forcing users to share bank details",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Why is cod disabled and"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Missing brand tag on product causes quality‑check failure, preventing successful return",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "the worst shopping app to"
+  },
+  {
+    "topic": "Security",
+    "problem_statement": "User received a scam call impersonating customer care, requesting additional payment and promising refund",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "seems your systems are hacked."
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Return refused because product appearance differs from online listing, leading to distrust",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app is scamming people"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Parcel missing with no trace; delivery partner unresponsive to calls and messages",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have never had as"
+  },
+  {
+    "topic": "Referral Rewards",
+    "problem_statement": "Referral amount not credited despite referrals completing orders; customer support unresponsive and low quality",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have referred 14 people"
+  },
+  {
+    "topic": "Promotions",
+    "problem_statement": "Promised free gift vouchers worth ₹1495 not received after checkout; generic response from support",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "I placed an order because"
+  },
+  {
+    "topic": "Account Management",
+    "problem_statement": "Account blocked without notice or explanation; forced to create new account with different mobile number",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am extremely disappointed"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order marked as delivered but not received; money lost and trust eroded",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "last time my item's are"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order cancelled after dispatch due to price increase; perceived fraud and unprofessional support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a Louis Phillipe"
+  },
+  {
+    "topic": "Delivery Fees",
+    "problem_statement": "Delivery fee repeatedly increased (29→49→59 Rs); orders cancelled arbitrarily; no customer support",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Worst experience with this"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "No ability to attach real product images in reviews; unclear breakdown of super cash deductions per product",
+    "intent": "General Feedback",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "AJIO not provide facility"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "Wrong size delivered with no exchange option for the pincode; support calls dropped after long wait",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "After delivering wrong size"
+  },
+  {
+    "topic": "Refund Process",
+    "problem_statement": "Refund not credited after return processed; multiple support contacts yielded no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am very disappointed"
+  },
+  {
+    "topic": "App Performance",
+    "problem_statement": "Search is slow and every click triggers ads, degrading usability",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "App experience, not great, search"
+  },
+  {
+    "topic": "Return & Refund",
+    "problem_statement": "Returned product due to low quality, but received a different product and faced repeated return attempts with no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst worst worst worst service"
+  },
+  {
+    "topic": "Return Pickup",
+    "problem_statement": "Return pickup has not happened for 10 days; promised dates keep changing",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Unprofessional Customer care and delivery"
+  },
+  {
+    "topic": "Return Tracking",
+    "problem_statement": "Item was picked up but status is not updated in the app and no confirmation from courier, causing suspicion of a fake pickup",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "AJIO should learn from Amazon."
+  },
+  {
+    "topic": "Refund Delay",
+    "problem_statement": "Refund for returned items not received after 10 days despite a promised 7‑day credit",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "For past few orders i"
+  },
+  {
+    "topic": "Delivery Timeliness",
+    "problem_statement": "Delivery dates extended from 2‑3 days to 1‑2 weeks, extra fees charged, and returns not picked up by courier",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "NOT DELIVERING ONTIME. At the"
+  },
+  {
+    "topic": "Fees",
+    "problem_statement": "Delivery charges and platform fees are excessively high compared to other e‑commerce platforms, discouraging purchases",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Dear Ajio Team,I am"
+  },
+  {
+    "topic": "Non-delivery & Refund",
+    "problem_statement": "No items delivered and no refund issued; customer service provides generic replies with no solutions",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience of shopping in"
+  },
+  {
+    "topic": "Stock Availability",
+    "problem_statement": "Popular products stay out of stock for long periods and are not restocked promptly",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Many great products stay out"
+  },
+  {
+    "topic": "Order Cancellation & Refund",
+    "problem_statement": "Order delayed then canceled; refund takes 5‑7 days, resulting in 10‑12 days total waiting time",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience from ordering twice"
+  },
+  {
+    "topic": "Delivery Quality",
+    "problem_statement": "Delivered an empty box for a watch; customer care did not respond or provide assistance",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I've recently ordered a watch"
+  },
+  {
+    "topic": "Product Quality/Returns",
+    "problem_statement": "Delivered a used old shirt instead of ordered kurta set and return request was denied",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad experience for"
+  },
+  {
+    "topic": "Returns/Customer Service",
+    "problem_statement": "Return products not picked up and refunds not processed despite multiple calls",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very poor service they"
+  },
+  {
+    "topic": "Refunds/Order Accuracy",
+    "problem_statement": "Wrong item sent, charged convenience fee for return, refund delayed over 15 days after item received by company",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "not happy with the"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Orders delayed by a week beyond promised date, cancellations required, refund still pending",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst retail app i"
+  },
+  {
+    "topic": "Order Accuracy/Customer Service",
+    "problem_statement": "Received only one item instead of two, complaint rejected, no resolution after 15 days of calls",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "You sent 1 wrong"
+  },
+  {
+    "topic": "Product Mismatch/Customer Service",
+    "problem_statement": "Cancelled order due to colour mismatch; delivery person said brand didn't match; long support process and poor call quality",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Very disappointing,I cancelled the"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Estimated delivery date missed; shoes not delivered on promised day, logistics inefficient",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered shoes from"
+  },
+  {
+    "topic": "Order Fulfillment/Product Accuracy",
+    "problem_statement": "Ordered three items but received one mismatched product; repeated incidents of missing/wrong items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It's a genuine when"
+  },
+  {
+    "topic": "Delivery/Product Listing",
+    "problem_statement": "False delivery attempt marked as unavailable; inaccurate product listing; significant delay with Xpressbees",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Fake Delivery Attempt Absolute worst"
+  },
+  {
+    "topic": "Returns/Customer Service",
+    "problem_statement": "Received only one of two denim pants; return requests rejected twice; only AI bots available for support",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is a scam shopping"
+  },
+  {
+    "topic": "Return/Refund",
+    "problem_statement": "App does not accept returns even when product is unsatisfactory, leading to a loop with grievance office",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "please dont purchase from this"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Prepaid order auto-cancelled and wrong product shipped",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "pathetic experience. Booked warli print"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund initiated for 420 instead of full 443 amount",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "pathetic experience. Booked warli print"
+  },
+  {
+    "topic": "Fit/Size",
+    "problem_statement": "Shoe pair is very tight and exchange/return not offered",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i ordered a shoe pair"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer support calls unanswered and chat very slow",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i ordered a shoe pair"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refunds are difficult to obtain",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "they don't refund easily .so"
+  },
+  {
+    "topic": "Payment/Delivery",
+    "problem_statement": "Prepaid order not delivered and no COD option",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "they don't refund easily .so"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund process requires many contacts and is uncertain",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ajio delivery is OK. But"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund pending for long time with unhelpful support and lack of transparency",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience. I have"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Only one of two ordered kurtis received, wrong product, complaints declined, money taken by delivery partner",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst experience ever . I"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery date keeps extending without reason, causing confusion",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "terrible and pathetic experience, shows"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund status shows refunded but amount not received, customer care not responding",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I have been amazing experience"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Two clothing items defective (tear, stain) despite being expensive",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "About a week ago, I"
+  },
+  {
+    "topic": "Return/Exchange",
+    "problem_statement": "Company refused return or exchange for defective items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "About a week ago, I"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery not on time; product not delivered yet",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "not able to give a"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Prices are too high compared to perceived value",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "not able to give a"
+  },
+  {
+    "topic": "Fit",
+    "problem_statement": "Ordered size didn't fit, need return",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I placed an order on"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "No pickup for return and no response, money stuck",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I placed an order on"
+  },
+  {
+    "topic": "Delivery Partner",
+    "problem_statement": "Delivery partner never calls, claims you were unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am very unhappy with"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order auto-cancelled without user confirmation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I am very unhappy with"
+  },
+  {
+    "topic": "Delivery Partner",
+    "problem_statement": "Xpressbees causing repeated delays with no valid reasons",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolutely the worst shopping experience"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "Customer service unhelpful and tracking updates unreliable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Absolutely the worst shopping experience"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Application is very slow, affecting order experience",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "This application have very slow"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not received after 10 days despite prepaid",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This application have very slow"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Item not delivered even after 2 weeks, then cancelled",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "ordered only once from this"
+  },
+  {
+    "topic": "App Trust",
+    "problem_statement": "App perceived as misleading compared to competitors",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "ordered only once from this"
+  },
+  {
+    "topic": "Delivery Partner",
+    "problem_statement": "Shadowfax causing repeated delivery postponements for several days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "products are awesome with Ajio"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Return/Replace flow UI breaks with large font sizes, hindering accessibility",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Return/Replace flow doesn't work"
+  },
+  {
+    "topic": "Return Process",
+    "problem_statement": "Checkbox and Continue button not enabled, preventing return completion",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Return/Replace flow doesn't work"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Goods not delivered on time, repeated failures",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Cannot deliver goods in time"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Order auto-cancelled after 5 days with no reason and promised coupon not delivered",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience with Ajio's"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Customer support is irresponsible, makes false promises and fails to deliver promised coupon",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "My experience with Ajio's"
+  },
+  {
+    "topic": "Referral Program",
+    "problem_statement": "Referral rewards never credited despite fulfilling all conditions",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Looks like the referral"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support was unhelpful regarding referral issues",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Looks like the referral"
+  },
+  {
+    "topic": "Refunds",
+    "problem_statement": "Refund not received after 30 days with no updates, support gives empty promises",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I ordered a hoodie from"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received cheap quality product not matching photos, false advertising",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst experience with Ajio."
+  },
+  {
+    "topic": "Returns",
+    "problem_statement": "Convenience fees deducted for returning faulty product, demanding full refund without deductions",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst experience with Ajio."
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Received incomplete and wrong products, no acknowledgment from representatives",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app is no longer"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Complaints closed without resolution despite multiple contacts",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app is no longer"
+  },
+  {
+    "topic": "Inventory Management",
+    "problem_statement": "Product becomes unavailable, a different item is delivered and must be returned, app shows unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This app has the biggest"
+  },
+  {
+    "topic": "Exchange & Return",
+    "problem_statement": "Exchange takes too long, broken products delivered, image sharing via email is inconvenient, policies disappointing",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "A very very bad"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Orders cancelled citing seller's end, reordering leads to higher prices",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "they cancelled my 2"
+  },
+  {
+    "topic": "Refunds",
+    "problem_statement": "Refund pending with support extending resolution dates, no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "⭐☆☆☆☆ (1 Star) Very disappointing"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App frequently fails to load, shows errors, making shopping frustrating",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Very disappointing experience with"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Received empty packages with all T‑shirts missing; complaint rejected despite proof",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Received empty packages with all"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund not received after a month despite order cancellation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is the worst shopping"
+  },
+  {
+    "topic": "Size",
+    "problem_statement": "All ordered t‑shirts were too small and larger sizes were unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "This is the worst shopping"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Ordered shoe not delivered for a week; packages stuck in storage with no pickup agent",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "pathetic app, pathetic delivery"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Orders not delivered on time; courier partner ExpressBees provides poor communication and unreachable support; AJIO chat does not register complaints",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "⭐ 1 Star Very disappointed"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery cancelled on due date with message about unavoidable reasons; inventory management perceived as poor",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "this ecommerce site has good"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received wrong product instead of ordered item",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst app ever. Ordered"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "Products received in bad quality",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i want to say that"
+  },
+  {
+    "topic": "Returns",
+    "problem_statement": "Technical issues and poor customer care when trying to return products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i want to say that"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Gold coin order not delivered after 15 days; customer care unresponsive, money held",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very poor service I ordered"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support unable to resolve queries; return pick‑up not happening after multiple complaints; no compensation offered",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Hi team, first of all"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Cart does not allow calculation of selected items only, unlike competitors",
+    "intent": "Feature Request",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I faced the problem with"
+  },
+  {
+    "topic": "Return/Refund",
+    "problem_statement": "taking 5 days to return an order",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "it's the worst e-commerce platform."
+  },
+  {
+    "topic": "Product Images",
+    "problem_statement": "product images are enhanced and misleading",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "it's the worst e-commerce platform."
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "one product delayed 15-17 days then cancelled after promised date",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "I had the worst experience"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "customer care replied after 5 days with no resolution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I had the worst experience"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "very slow loading and app laggy",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Very slow loading and"
+  },
+  {
+    "topic": "Promotions",
+    "problem_statement": "coupons and Ajio cash cannot be used",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Very slow loading and"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "refund not credited after 20 days despite initiation",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i have ordered 5 products"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "support redirects to bank and offers no help",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "i have ordered 5 products"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "delivery partner never contacts, order not delivered despite payment",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "This app getting worse"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "sent night pant instead of ordered top",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "worest app i ordered"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "refund not transferred to account, delayed beyond promised date",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worest app i ordered"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "delivered items had wrong colour, size, and completely different product",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "not a good experience"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "refund investigation pending for over 15 days, only one refund processed",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "not a good experience"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "pencil priced at ₹54 and sharpener at ₹100 perceived as overpriced",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "wrost shopping app I"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "refund of 1800 rupees not received after return despite multiple emails",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app ever ! I"
+  },
+  {
+    "topic": "Quality",
+    "problem_statement": "clothing quality described as terrible",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is literally one"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "products consistently delayed, never delivered on time",
+    "intent": "Frustration",
+    "purchase_stage": "Delivery",
+    "source_review_id": "This is literally one"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund amount not transferred to bank after 10 days post-return",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Customer service is too bad,"
+  },
+  {
+    "topic": "Promotions",
+    "problem_statement": "Offers not visible or applied on cart despite inquiries; perceived discrepancy in offer availability",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I don't see offers running"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Had to self-pickup orders 5 km away; one order never arrived",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I used Ajio for"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund not received after 14 days despite return process completed",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "I used Ajio for"
+  },
+  {
+    "topic": "Promotions",
+    "problem_statement": "Promotions appear misleading; discounts later cancelled without explanation",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Very disappointing experience"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Full amount not refunded on cancelled orders; convenience fees deducted",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Very disappointing experience"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App is slow, images fail to load, navigation is disastrous",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "haven't seen a pathetic"
+  },
+  {
+    "topic": "Filtering",
+    "problem_statement": "Filter function does not work; shows unrelated female clothes",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "haven't seen a pathetic"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Orders are cancelled automatically or items missing after purchase",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "ordered many dresses through"
+  },
+  {
+    "topic": "Returns",
+    "problem_statement": "Received wrong product; return request cancelled automatically; no pickup for return",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "ordered many dresses through"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "No response on refund and pickup for wrong product; complaints ignored",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very very worst experience"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App layout confusing; cannot list kurtis and kurtas separately",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Terrible app!! Myntra is"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order delayed beyond promised date; status stuck on 'Shipped' with no updates",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Third-class app with third-class"
+  },
+  {
+    "topic": "Order Cancellation & Refund",
+    "problem_statement": "Order was cancelled by AJIO without user request, extra platform fee charged and not refunded, product not received",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "worst app ever , they"
+  },
+  {
+    "topic": "Product Accuracy",
+    "problem_statement": "Received wrong product repeatedly, items do not match description",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "this app is a fraud..they"
+  },
+  {
+    "topic": "Returns & Refunds",
+    "problem_statement": "Customer service refuses returns despite evidence, causing prolonged harassment and loss of money",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "this app is a fraud..they"
+  },
+  {
+    "topic": "Order Cancellation & Refund",
+    "problem_statement": "Orders are cancelled citing logistics reasons and refunds take up to 7 days, leading to poor customer service",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "Worst experience ever most"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order not delivered despite being placed, causing waste of time and money",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The very worst app I"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Support contact attempts unsuccessful, no assistance provided",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The very worst app I"
+  },
+  {
+    "topic": "Product Accuracy",
+    "problem_statement": "Received wrong color and size shoe (ordered size 7 red, got size 10 black)",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad experience I ordered"
+  },
+  {
+    "topic": "Returns & Refunds",
+    "problem_statement": "Return request handled poorly, refund timeline unclear, return policy considered bad",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad experience I ordered"
+  },
+  {
+    "topic": "Customer Support",
+    "problem_statement": "Call support never connects to a real agent, zero customer service response",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "very bad shoping application... zero"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Orders are frequently delayed; customers need to order 15‑16 days in advance",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "this is the worst app"
+  },
+  {
+    "topic": "Order Cancellation & Refund",
+    "problem_statement": "Prepaid orders were cancelled after a week and refunds were never received",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "The app cancelled 2"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery timelines are inaccurate; need more precise ETA information",
+    "intent": "General Feedback",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "It has a great selection"
+  },
+  {
+    "topic": "Returns & Refunds",
+    "problem_statement": "Return policy is very poor and customer care provides no helpful solution",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app for customer"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received used product (4 out of product used)",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app for customer"
+  },
+  {
+    "topic": "Order Management",
+    "problem_statement": "Unable to cancel order stuck with delivery partner; automated support unhelpful",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "can't cancel order even"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "App experiences lag despite high-speed network",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "very bad experience with"
+  },
+  {
+    "topic": "Return & Pickup",
+    "problem_statement": "Return pickup not coordinated; requests canceled without consent",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "they irritate and harass"
+  },
+  {
+    "topic": "Size Accuracy",
+    "problem_statement": "Ordered size M but received XXL",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "they irritate and harass"
+  },
+  {
+    "topic": "Delivery & Order Tracking",
+    "problem_statement": "Prepaid order marked delivered without OTP; delivery agent not verified; complaints not resolved",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "pathetic experience,I placed a prepaid"
+  },
+  {
+    "topic": "Order Accuracy",
+    "problem_statement": "Received duplicate items instead of ordered distinct products",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app ..I ordered two"
+  },
+  {
+    "topic": "Exchange",
+    "problem_statement": "Unable to exchange product after receiving wrong items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst app ..I ordered two"
+  },
+  {
+    "topic": "Order Fulfillment",
+    "problem_statement": "Receiving duplicate items, perceived as fraudulent",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "it was good and providing"
+  },
+  {
+    "topic": "App UX",
+    "problem_statement": "Scrolling causes page to jump up unexpectedly",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "The UI functionality of this"
+  },
+  {
+    "topic": "Search Accuracy",
+    "problem_statement": "Applying brand filter returns unrelated men's products for women's query",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "The UI functionality of this"
+  },
+  {
+    "topic": "Order Delivery",
+    "problem_statement": "Order delayed for 10 days; cancel option unavailable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst app I ordered the"
+  },
+  {
+    "topic": "Return Pickup",
+    "problem_statement": "Return pickup repeatedly canceled without consent, causing delays",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst return pickup experience"
+  },
+  {
+    "topic": "Pricing Display",
+    "problem_statement": "Offer price shown in list view but not available on product page, causing confusion",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I have really good experience"
+  },
+  {
+    "topic": "Pricing",
+    "problem_statement": "Platform fee is too high and delivery timeline unrealistic",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "Would like to ask why"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Prepaid order automatically cancelled and refund not received",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst experience,I have prepaid for"
+  },
+  {
+    "topic": "Payment Methods",
+    "problem_statement": "Cash on Delivery option blocked for user with no progress",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "I have been ordering from"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Delivery delayed far beyond promised date and cancellation not processed",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "The worst delivery experience. I've"
+  },
+  {
+    "topic": "Returns",
+    "problem_statement": "Return pickup not executed due to internal communication failure, refund pending",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Worst shopping experience of"
+  },
+  {
+    "topic": "Customer Service",
+    "problem_statement": "Customer care unresponsive, return and refund processing slow",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "This is a very"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Received incomplete product set, missing items",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst company with worst"
+  },
+  {
+    "topic": "Product Quality",
+    "problem_statement": "Wrong product delivered, damaged and appears counterfeit, lacking quality check",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Pathetic experience with AJIO. They"
+  },
+  {
+    "topic": "Payment Methods",
+    "problem_statement": "All payment methods including COD fail, preventing purchase",
+    "intent": "Frustration",
+    "purchase_stage": "Pre-purchase",
+    "source_review_id": "What a useless app. All"
+  },
+  {
+    "topic": "Order Cancellation",
+    "problem_statement": "Order cancelled after several days without explanation, causing loss",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "do not use this app"
+  },
+  {
+    "topic": "Refund",
+    "problem_statement": "Refund not received after returning order, delay unacceptable",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Hello AJIO Support, I am"
+  },
+  {
+    "topic": "Wrong Product & Return Process",
+    "problem_statement": "Delivered wrong brand, return pickup takes ~3 weeks with no refund assurance",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Pathetic Service. They delivered the"
+  },
+  {
+    "topic": "Delivery",
+    "problem_statement": "Order delayed multiple times, still not received after 15 days",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "worst delivery service among all"
+  },
+  {
+    "topic": "Return Policy & Trust",
+    "problem_statement": "Returns not accepted, perceived fraud with cheap products after purchase",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Please don't install this app."
+  },
+  {
+    "topic": "Delivery & Fees",
+    "problem_statement": "Order marked “Delivery Unsuccessful” without any attempt, convenience fee deducted from refund",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "PATHETIC EXPERIENCE!!!! My prepaid order"
+  },
+  {
+    "topic": "Pricing & Extra Charges",
+    "problem_statement": "Price changes after adding items to cart and wallet balance restrictions force extra payment",
+    "intent": "Frustration",
+    "purchase_stage": "Checkout",
+    "source_review_id": "PATHETIC EXPERIENCE!!!! My prepaid order"
+  },
+  {
+    "topic": "Customer Support & Refund",
+    "problem_statement": "Cannot cancel order or get refund for 10 days; support promises never kept",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "one of the worst customer"
+  },
+  {
+    "topic": "Delivery Partner & COD",
+    "problem_statement": "Long delivery times (10+ days) unless COD used; need better delivery partner",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "COD is highly recommended otherwise"
+  },
+  {
+    "topic": "Seller Verification & Return Timing",
+    "problem_statement": "Wrong items sent, return scheduled on last possible day, missing product tags, refund uncertainty",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ajio is a such fraud"
+  },
+  {
+    "topic": "Delivery Partner & Support",
+    "problem_statement": "Delivery worst with 'shadow fax' partner; customer care unhelpful and tells to wait",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "it's a great platform for"
+  },
+  {
+    "topic": "Discount Loss & Trust",
+    "problem_statement": "Order cancelled as delivery unsuccessful, price later rose causing loss of ₹3,595 discount",
+    "intent": "Frustration",
+    "purchase_stage": "Post-purchase",
+    "source_review_id": "Ordered Nike Air Max SC"
+  }
+]
