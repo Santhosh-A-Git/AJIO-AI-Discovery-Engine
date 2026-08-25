@@ -165,6 +165,8 @@ Format your response strictly as 2-3 insights using this exact structure for eac
 
 
 Do not use bullet points (-). You MUST place a line break between the bold title and the explanation. Separate each insight with a blank line. Do not write introductory or concluding paragraphs.
+Respond DIRECTLY with the final insights. Do NOT include a <think> block. Do NOT include your reasoning process.
+
 USER QUERY: {req.query}
 
 RAW COMPLAINTS FOUND:
@@ -175,9 +177,13 @@ RAW COMPLAINTS FOUND:
         response = chat_model.invoke(prompt)
         answer = response.content
         
-        # Filter out <think> blocks if the model emits reasoning tokens
-        import re
-        answer = re.sub(r'<think>.*?</think>', '', answer, flags=re.DOTALL).strip()
+        # Robustly filter out reasoning blocks
+        if "</think>" in answer:
+            answer = answer.split("</think>")[-1].strip()
+        elif "<think>" in answer:
+            answer = answer.split("<think>")[0].strip()
+            if not answer:
+                answer = "The AI model encountered an error while synthesizing. Please click 'Ask AI' again to retry."
         
     except Exception as e:
         answer = f"Error generating AI synthesis: {str(e)}"
