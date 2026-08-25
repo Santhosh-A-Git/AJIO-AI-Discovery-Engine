@@ -17,6 +17,7 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState("Dashboard");
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
@@ -89,11 +90,11 @@ export default function Dashboard() {
           <p className="font-body-sm text-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
         </div>
         <nav className="flex-1 px-2 space-y-2">
-          <a className="bg-white/10 text-primary border-r-4 border-primary px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold" href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Dashboard"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Dashboard" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">dashboard</span>
             Dashboard
           </a>
-          <a className="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold" href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Trends"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Trends" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">trending_up</span>
             Trends
           </a>
@@ -120,8 +121,10 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="flex-1 md:ml-64 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
         
-        {/* Header & Semantic Search */}
-        <header className="mb-12 flex flex-col gap-6">
+        {activeTab === "Dashboard" && (
+          <>
+            {/* Header & Semantic Search */}
+            <header className="mb-12 flex flex-col gap-6">
           <div>
             <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
               AJIO Product Discovery Engine
@@ -228,8 +231,24 @@ export default function Dashboard() {
           )}
         </header>
 
-        {/* KPI Cards */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          </>
+        )}
+        
+        {activeTab === "Trends" && (
+          <>
+            <header className="mb-12 flex flex-col gap-6">
+              <div>
+                <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
+                  Platform Trends
+                </h1>
+                <p className="font-body-lg text-lg text-on-surface-variant mt-2">
+                  High-level performance and opportunity metrics.
+                </p>
+              </div>
+            </header>
+
+            {/* KPI Cards */}
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Card 1 */}
           <div className="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-primary-container/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -261,11 +280,8 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Chart & List Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Chart Section */}
-          <div className="col-span-1 lg:col-span-2 glass-panel p-6 rounded-xl relative overflow-hidden">
+        {/* Chart Section */}
+        <section className="glass-panel p-6 rounded-xl relative overflow-hidden mb-12">
             <h2 className="text-xl font-headline-sm font-semibold mb-6 flex items-center gap-2">
               Opportunity Score Ranking
             </h2>
@@ -286,10 +302,13 @@ export default function Dashboard() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-          </div>
+        </section>
 
-          {/* List Section */}
-          <div className="col-span-1 glass-panel p-6 rounded-xl overflow-y-auto max-h-[500px] scrollbar-hide">
+          </>
+        )}
+        
+        {activeTab === "Dashboard" && (
+          <section className="glass-panel p-6 rounded-xl overflow-y-auto max-h-[500px] scrollbar-hide mb-12 mt-8">
             <h2 className="text-xl font-headline-sm font-semibold mb-6">Cluster Breakdown</h2>
             <div className="flex flex-col gap-3">
               {clusters.map((cluster, i) => (
@@ -311,9 +330,8 @@ export default function Dashboard() {
                 </div>
               ))}
             </div>
-          </div>
-
-        </section>
+          </section>
+        )}
 
       </main>
 
