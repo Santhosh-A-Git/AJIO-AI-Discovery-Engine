@@ -5,7 +5,7 @@ import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { X, ChevronRight } from "lucide-react";
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ total_clusters: 0, total_insights_processed: 0 });
