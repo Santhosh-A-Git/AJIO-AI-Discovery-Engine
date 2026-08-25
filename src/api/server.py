@@ -56,9 +56,17 @@ def get_clusters():
     conn = get_db_connection()
     cursor = conn.cursor()
     
+    # Group by cluster_name to merge duplicates (e.g. if the AI named two distinct clusters "Delivery")
     cursor.execute("""
-        SELECT cluster_id, cluster_name, prevalence, intent_relevance, severity, ROUND(opportunity_score, 2) as opportunity_score 
+        SELECT 
+            GROUP_CONCAT(cluster_id) as cluster_id,
+            cluster_name, 
+            SUM(prevalence) as prevalence, 
+            AVG(intent_relevance) as intent_relevance, 
+            AVG(severity) as severity, 
+            ROUND(MAX(opportunity_score), 2) as opportunity_score 
         FROM clusters 
+        GROUP BY cluster_name
         ORDER BY opportunity_score DESC
     """)
     clusters = [dict(row) for row in cursor.fetchall()]
@@ -66,16 +74,19 @@ def get_clusters():
     conn.close()
     return clusters
 
-@app.get("/api/insights/{cluster_id}")
-def get_insights(cluster_id: int):
+@app.get("/api/insights/{cluster_ids}")
+def get_insights(cluster_ids: str):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    cursor.execute("""
+    ids = [int(i.strip()) for i in cluster_ids.split(',')]
+    placeholders = ','.join('?' * len(ids))
+    
+    cursor.execute(f"""
         SELECT id, topic, problem_statement, intent, purchase_stage, source_review_id 
         FROM insights 
-        WHERE cluster_id = ?
-    """, (cluster_id,))
+        WHERE cluster_id IN ({placeholders})
+    """, ids)
     
     insights = [dict(row) for row in cursor.fetchall()]
     conn.close()
