@@ -153,11 +153,11 @@ def query_insights(req: QueryRequest):
         })
         context_text += f"- {doc}\n"
         
-    # 3. Generate Answer using LLaMA 3
-    prompt = f"""You are the AJIO Product Discovery AI. A Product Manager asked a query about user friction.
-Analyze the following exact user complaints and synthesize a concise, analytical answer. 
-Point out any specific patterns, recurring issues, or severe roadblocks mentioned in the complaints.
-Do not use markdown headers, just return a 1-2 paragraph professional response.
+    # 3. Generate Answer using the LLM
+    prompt = f"""You are an elite Product Management AI for AJIO.
+Analyze the following exact user complaints and synthesize a highly concise, actionable summary of user behavior.
+Format your response as 2-3 crisp bullet points. Focus purely on WHY users behave this way and the severe friction points.
+Do not write introductory or concluding paragraphs. Get straight to the insights.
 
 USER QUERY: {req.query}
 
@@ -168,6 +168,11 @@ RAW COMPLAINTS FOUND:
     try:
         response = chat_model.invoke(prompt)
         answer = response.content
+        
+        # Filter out <think> blocks if the model emits reasoning tokens
+        import re
+        answer = re.sub(r'<think>.*?</think>', '', answer, flags=re.DOTALL).strip()
+        
     except Exception as e:
         answer = f"Error generating AI synthesis: {str(e)}"
         
