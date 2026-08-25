@@ -157,12 +157,14 @@ def query_insights(req: QueryRequest):
     prompt = f"""You are an elite Product Management AI for AJIO.
 Analyze the following exact user complaints and synthesize a highly concise, actionable summary of user behavior.
 
-Format your response strictly as 2-3 insights using this exact structure for each:
+Format your response strictly as 2-3 insights using this exact structure for each insight. You MUST include line breaks exactly as shown:
+
 **[Insight Title]**
+
 [Brief explanation of WHY users behave this way and the severe friction points, directly below the title]
 
-Do not use bullet points (-). Make sure the title is bolded and the explanation is on a new line. Do not write introductory or concluding paragraphs.
 
+Do not use bullet points (-). You MUST place a line break between the bold title and the explanation. Separate each insight with a blank line. Do not write introductory or concluding paragraphs.
 USER QUERY: {req.query}
 
 RAW COMPLAINTS FOUND:
