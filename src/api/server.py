@@ -118,7 +118,7 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="llama-3.1-8b-instant", groq_api_key=api_key)
+        llm = ChatGroq(model_name="openai/gpt-oss-20b", max_tokens=256, groq_api_key=api_key)
         
     return vector_db_client, embedding_model, llm
 
