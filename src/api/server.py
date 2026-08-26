@@ -118,7 +118,7 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="openai/gpt-oss-20b", max_tokens=256, groq_api_key=api_key)
+        llm = ChatGroq(model_name="groq/compound-mini", max_tokens=256, groq_api_key=api_key)
         
     return vector_db_client, embedding_model, llm
 
@@ -161,15 +161,13 @@ def query_insights(req: QueryRequest):
     prompt = f"""You are an elite Product Management AI for AJIO.
 Analyze the following exact user complaints and synthesize a highly concise, actionable summary of user behavior.
 
-Format your response strictly as 2-3 insights using this exact structure for each insight. You MUST include line breaks exactly as shown:
+Format your response strictly as 2-3 insights using this exact structure for each insight, exactly on ONE line:
 
-**[Insight Title]**
+**[Insight Title]** [Brief explanation of WHY users behave this way and the severe friction points]
 
-[Brief explanation of WHY users behave this way and the severe friction points, directly below the title]
+Do not use bullet points (-). Write each insight on a single new line. Do not write introductory or concluding paragraphs.
+Respond DIRECTLY with the final insights.
 
-
-Do not use bullet points (-). You MUST place a line break between the bold title and the explanation. Separate each insight with a blank line. Do not write introductory or concluding paragraphs.
-Respond DIRECTLY with the final insights. Do NOT include a <think> block. Do NOT include your reasoning process.
 
 USER QUERY: {req.query}
 
