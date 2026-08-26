@@ -185,8 +185,8 @@ export default function Dashboard() {
             Feedback
           </a>
           <div className="pt-4 px-2">
-            <button onClick={generatePDFReport} className="w-full glass-panel text-primary py-3 rounded-lg font-label-bold text-xs uppercase font-bold hover:text-primary-fixed hover:border-primary-container transition-all flex items-center justify-center gap-2">
-              <Download size={16} />
+            <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <span className="material-symbols-outlined text-sm">download</span>
               Generate Report
             </button>
           </div>
@@ -241,7 +241,7 @@ export default function Dashboard() {
                 "What uncertainties remain after users have identified a product they like?",
                 "What causes users to postpone a purchase?",
                 "How do users compare multiple shortlisted products?",
-                "What information do users seek outside AJIO before purchasing?",
+                "What information do users seek outside Myntra/AJIO before purchasing?",
                 "What role do fit, size, styling, price, reviews, occasion and social validation play?",
                 "When do users use the wishlist as genuine purchase intent versus simply as a bookmarking mechanism?",
                 "How do these behaviors differ across user segments?",
@@ -281,7 +281,7 @@ export default function Dashboard() {
                       if (part.startsWith('**') && part.endsWith('**')) {
                         const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
                         return (
-                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-4 mb-1 block w-full border-b border-primary/20 pb-1">
+                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-2 block w-full border-b border-primary/20 pb-0.5">
                             {cleanTitle}
                           </div>
                         );
