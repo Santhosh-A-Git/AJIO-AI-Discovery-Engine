@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "AJIO Product Discovery Engine",
-  description: "AI-powered friction analysis from multi-channel user feedback",
+  title: "AJIO Discovery Engine - Discover the Unmet",
+  description: "AI-powered product discovery and friction analysis.",
 };
 
 export default function RootLayout({

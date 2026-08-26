@@ -71,7 +71,7 @@ export default function Dashboard() {
     // Title
     doc.setFontSize(22);
     doc.setTextColor(20, 184, 166); // primary color
-    doc.text("AJIO Product Discovery Engine", 14, 20);
+    doc.text("AJIO Discovery Engine - Discover the Unmet", 14, 20);
     
     // Subtitle
     doc.setFontSize(14);
@@ -202,7 +202,7 @@ export default function Dashboard() {
             <header className="mb-12 flex flex-col gap-6">
           <div>
             <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
-              AJIO Product Discovery Engine
+              AJIO Discovery Engine - Discover the Unmet
             </h1>
             <p className="font-body-lg text-lg text-on-surface-variant mt-2">
               AI-powered friction analysis from multi-channel user feedback.
