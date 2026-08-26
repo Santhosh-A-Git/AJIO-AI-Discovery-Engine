@@ -187,7 +187,7 @@ export default function Dashboard() {
           <div className="pt-4 px-2">
             <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 shadow-sm">
               <span className="material-symbols-outlined text-sm">download</span>
-              Generate Report
+              GENERATE REPORT
             </button>
           </div>
         </nav>
@@ -205,7 +205,7 @@ export default function Dashboard() {
               Discover The Unmet
             </h1>
             <p className="font-body-lg text-lg text-on-surface-variant mt-2">
-              AI-Powered Friction Analysis From Multi-Channel User Feedback.
+              AI-Powered Friction Analysis From Multi-Channel User Feedback
             </p>
           </div>
 
@@ -241,7 +241,7 @@ export default function Dashboard() {
                 "What uncertainties remain after users have identified a product they like?",
                 "What causes users to postpone a purchase?",
                 "How do users compare multiple shortlisted products?",
-                "What information do users seek outside Myntra/AJIO before purchasing?",
+                "What information do users seek outside AJIO before purchasing?",
                 "What role do fit, size, styling, price, reviews, occasion and social validation play?",
                 "When do users use the wishlist as genuine purchase intent versus simply as a bookmarking mechanism?",
                 "How do these behaviors differ across user segments?",
