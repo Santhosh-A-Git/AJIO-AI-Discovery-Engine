@@ -33,6 +33,18 @@ def get_db_connection():
 def health_check():
     return {"status": "ok", "message": "AJIO Product Discovery API is running!"}
 
+@app.get("/api/feedback")
+def get_feedback():
+    dataset_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "cleansed", "clean_dataset.json")
+    if not os.path.exists(dataset_path):
+        return []
+    import json
+    with open(dataset_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    # Filter for reviews that actually have some text and return the latest 100
+    reviews = [r for r in data if len(r.get('text', '')) > 20]
+    return reviews[:100]
+
 @app.get("/api/stats")
 def get_stats():
     conn = get_db_connection()

@@ -14,6 +14,7 @@ export default function Dashboard() {
   const [clusters, setClusters] = useState<any[]>([]);
   const [selectedCluster, setSelectedCluster] = useState<any>(null);
   const [insights, setInsights] = useState<any[]>([]);
+  const [feedbacks, setFeedbacks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,12 +40,14 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [statsRes, clustersRes] = await Promise.all([
+        const [statsRes, clustersRes, feedbacksRes] = await Promise.all([
           axios.get(`${API_BASE}/stats`),
-          axios.get(`${API_BASE}/clusters`)
+          axios.get(`${API_BASE}/clusters`),
+          axios.get(`${API_BASE}/feedback`)
         ]);
         setStats(statsRes.data);
         setClusters(clustersRes.data);
+        setFeedbacks(feedbacksRes.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -462,10 +465,25 @@ export default function Dashboard() {
       )}
 
       {activeTab === "Feedback" && (
-        <div className="animate-fade-in-up flex flex-col items-center justify-center h-full min-h-[60vh] text-center">
-           <span className="material-symbols-outlined text-6xl text-primary/30 mb-4">forum</span>
-           <h2 className="text-2xl font-headline-sm text-on-surface mb-2">Live Feedback Stream</h2>
-           <p className="text-on-surface-variant max-w-md">The live feedback pipeline is currently processing data in the background. Raw App Store and Play Store reviews will appear here once the ingestion task completes.</p>
+        <div className="animate-fade-in-up">
+           <h2 className="font-headline-md text-2xl font-bold text-on-surface mb-6">Live Feedback Stream</h2>
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+             {feedbacks.map((f, i) => (
+               <div key={i} className="glass-panel p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                 <div className="flex justify-between items-start mb-3">
+                   <span className="text-xs font-mono text-primary-container px-2 py-1 bg-primary/10 rounded">{f.source || 'APP_STORE'}</span>
+                   <span className="text-xs text-on-surface-variant opacity-60">{f.timestamp ? new Date(f.timestamp).toLocaleDateString() : 'Recent'}</span>
+                 </div>
+                 <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-6">{f.text}</p>
+                 {f.author && <div className="mt-4 text-xs font-label-bold text-on-surface opacity-50">— {f.author}</div>}
+               </div>
+             ))}
+           </div>
+           {feedbacks.length === 0 && (
+             <div className="text-center py-20 text-on-surface-variant">
+               No raw reviews found. Ensure the ingestion pipeline has completed.
+             </div>
+           )}
         </div>
       )}
 
