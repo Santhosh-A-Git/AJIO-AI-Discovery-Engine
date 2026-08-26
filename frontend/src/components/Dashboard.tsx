@@ -158,13 +158,13 @@ export default function Dashboard() {
       </nav>
 
       {/* SideNavBar (Desktop) */}
-      <aside className="hidden md:flex flex-col h-screen w-[340px] fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
+      <aside className="hidden md:flex flex-col h-screen w-80 fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
         <div className="px-6 mb-6 flex items-center gap-3">
           <div className="w-10 h-10 rounded-full border border-white/10 bg-primary/20 flex items-center justify-center text-primary font-bold">A</div>
           <div className="font-body-sm text-sm text-on-surface">AJIO Admin</div>
         </div>
         <div className="px-6 mb-8">
-          <h1 className="font-headline-md text-2xl font-semibold text-primary">AJIO Discovery Engine</h1>
+          <h1 className="font-headline-md text-2xl font-semibold text-primary truncate">AJIO Discovery Engine</h1>
           <p className="font-body-sm text-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
         </div>
         <nav className="flex-1 px-2 space-y-2">
@@ -184,17 +184,15 @@ export default function Dashboard() {
             <span className="material-symbols-outlined">comment</span>
             Feedback
           </a>
-          <div className="px-4 py-2 mt-4">
-            <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-xs uppercase font-bold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
-              <Download size={16} />
-              Generate Report
-            </button>
-          </div>
+          <button onClick={generatePDFReport} className="cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10 w-full text-left bg-transparent border-none">
+            <Download size={20} className="ml-[2px]" />
+            Generate Report
+          </button>
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-[340px] p-6 md:p-10 w-full max-w-container-max-width mx-auto">
+      <main className="flex-1 md:ml-80 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
         
         {activeTab === "Dashboard" && (
           <>
@@ -205,7 +203,7 @@ export default function Dashboard() {
               Discover The Unmet
             </h1>
             <p className="font-body-lg text-lg text-on-surface-variant mt-2">
-              AI-Powered Friction Analysis From Multi-Channel User Feedback.
+              AI-Powered Friction Analysis From Multi-Channel User Feedback
             </p>
           </div>
 
@@ -275,21 +273,25 @@ export default function Dashboard() {
                 </button>
               </div>
               <div className="text-on-surface text-sm leading-relaxed mb-6 whitespace-pre-wrap">
-                {searchResult.answer.split('\n').map((line: string, i: number) => (
-                  <React.Fragment key={i}>
-                    {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
-                        return (
-                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-4 mb-0 block w-full border-b border-primary/20 pb-1">
-                            {cleanTitle}
-                          </div>
-                        );
-                      }
-                      return <span key={j} className={part.trim() ? "block w-full pt-1" : ""}>{part.trim()}</span>;
-                    })}
-                  </React.Fragment>
-                ))}
+                {searchResult.answer.split('\n').map((line: string, i: number) => {
+                  const isEmpty = !line.trim();
+                  if (isEmpty) return null;
+                  return (
+                    <React.Fragment key={i}>
+                      {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                          const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
+                          return (
+                            <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-4 mb-1 block w-full border-b border-primary/20 pb-1">
+                              {cleanTitle}
+                            </div>
+                          );
+                        }
+                        return part.trim() ? <span key={j} className="block w-full mt-1 mb-2">{part.trim()}</span> : null;
+                      })}
+                    </React.Fragment>
+                  );
+                })}
               </div>
               
               <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3">Sources Cited ({searchResult.sources.length})</h4>
