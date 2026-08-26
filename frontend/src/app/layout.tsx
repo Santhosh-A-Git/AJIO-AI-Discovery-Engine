@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "AJIO Discovery Engine - Discover the Unmet",
+  title: "Discover The Unmet",
   description: "AI-powered product discovery and friction analysis.",
 };
 

@@ -71,7 +71,7 @@ export default function Dashboard() {
     // Title
     doc.setFontSize(22);
     doc.setTextColor(20, 184, 166); // primary color
-    doc.text("AJIO Discovery Engine - Discover the Unmet", 14, 20);
+    doc.text("Discover The Unmet", 14, 20);
     
     // Subtitle
     doc.setFontSize(14);
@@ -160,7 +160,7 @@ export default function Dashboard() {
       {/* SideNavBar (Desktop) */}
       <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
         <div className="px-6 mb-8">
-          <h1 className="font-headline-md text-2xl font-semibold text-primary">Discovery Engine</h1>
+          <h1 className="font-headline-md text-2xl font-semibold text-primary">AJIO Discovery Engine</h1>
           <p className="font-body-sm text-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
         </div>
         <nav className="flex-1 px-2 space-y-2">
@@ -202,7 +202,7 @@ export default function Dashboard() {
             <header className="mb-12 flex flex-col gap-6">
           <div>
             <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
-              AJIO Discovery Engine - Discover the Unmet
+              Discover The Unmet
             </h1>
             <p className="font-body-lg text-lg text-on-surface-variant mt-2">
               AI-powered friction analysis from multi-channel user feedback.
