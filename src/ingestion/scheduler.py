@@ -53,8 +53,8 @@ if __name__ == "__main__":
     print("Running initial ingestion immediately...")
     run_all_jobs()
     
-    print("Scheduling ingestion pipeline to run every 6 hours...")
-    schedule.every(6).hours.do(run_all_jobs)
+    print("Scheduling ingestion pipeline to run every day at 10:00 PM (22:00)...")
+    schedule.every().day.at("22:00").do(run_all_jobs)
     
     while True:
         schedule.run_pending()
