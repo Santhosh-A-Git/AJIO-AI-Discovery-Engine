@@ -158,9 +158,13 @@ export default function Dashboard() {
       </nav>
 
       {/* SideNavBar (Desktop) */}
-      <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
+      <aside className="hidden md:flex flex-col h-screen w-80 fixed left-0 top-0 bg-surface border-r border-white/10 z-40 py-6">
+        <div className="px-6 mb-6 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full border border-white/10 bg-primary/20 flex items-center justify-center text-primary font-bold">A</div>
+          <div className="font-body-sm text-sm text-on-surface">AJIO Admin</div>
+        </div>
         <div className="px-6 mb-8">
-          <h1 className="font-headline-md text-2xl font-semibold text-primary">AJIO Discovery Engine</h1>
+          <h1 className="font-headline-md text-2xl font-semibold text-primary truncate">AJIO Discovery Engine</h1>
           <p className="font-body-sm text-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
         </div>
         <nav className="flex-1 px-2 space-y-2">
@@ -187,14 +191,10 @@ export default function Dashboard() {
             Generate Report
           </button>
         </div>
-        <div className="px-6 mt-6 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full border border-white/10 bg-primary/20 flex items-center justify-center text-primary font-bold">A</div>
-          <div className="font-body-sm text-sm text-on-surface">AJIO Admin</div>
-        </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
+      <main className="flex-1 md:ml-80 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
         
         {activeTab === "Dashboard" && (
           <>
