@@ -185,7 +185,7 @@ export default function Dashboard() {
             Feedback
           </a>
           <div className="pt-4 px-2">
-            <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-xs uppercase font-bold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+            <button onClick={generatePDFReport} className="w-full glass-panel text-primary py-3 rounded-lg font-label-bold text-xs uppercase font-bold hover:text-primary-fixed hover:border-primary-container transition-all flex items-center justify-center gap-2">
               <Download size={16} />
               Generate Report
             </button>
@@ -241,7 +241,7 @@ export default function Dashboard() {
                 "What uncertainties remain after users have identified a product they like?",
                 "What causes users to postpone a purchase?",
                 "How do users compare multiple shortlisted products?",
-                "What information do users seek outside Myntra/AJIO before purchasing?",
+                "What information do users seek outside AJIO before purchasing?",
                 "What role do fit, size, styling, price, reviews, occasion and social validation play?",
                 "When do users use the wishlist as genuine purchase intent versus simply as a bookmarking mechanism?",
                 "How do these behaviors differ across user segments?",
