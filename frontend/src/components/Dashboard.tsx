@@ -281,9 +281,9 @@ export default function Dashboard() {
                       if (part.startsWith('**') && part.endsWith('**')) {
                         const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
                         return (
-                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-2 block w-full border-b border-primary/20 pb-0.5">
-                            {cleanTitle}
-                          </div>
+                          <span key={j} className="text-primary font-extrabold text-[15px] tracking-wide mr-2">
+                            {cleanTitle}:
+                          </span>
                         );
                       }
                       return <span key={j}>{part}</span>;
