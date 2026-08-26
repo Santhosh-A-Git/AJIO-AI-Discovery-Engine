@@ -184,10 +184,12 @@ export default function Dashboard() {
             <span className="material-symbols-outlined">comment</span>
             Feedback
           </a>
-          <button onClick={generatePDFReport} className="cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10 w-full text-left bg-transparent border-none">
-            <Download size={20} className="ml-[2px]" />
-            Generate Report
-          </button>
+          <div className="pt-4 px-2">
+            <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-xs uppercase font-bold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+              <Download size={16} />
+              Generate Report
+            </button>
+          </div>
         </nav>
       </aside>
 
@@ -203,7 +205,7 @@ export default function Dashboard() {
               Discover The Unmet
             </h1>
             <p className="font-body-lg text-lg text-on-surface-variant mt-2">
-              AI-Powered Friction Analysis From Multi-Channel User Feedback
+              AI-Powered Friction Analysis From Multi-Channel User Feedback.
             </p>
           </div>
 
@@ -273,25 +275,22 @@ export default function Dashboard() {
                 </button>
               </div>
               <div className="text-on-surface text-sm leading-relaxed mb-6 whitespace-pre-wrap">
-                {searchResult.answer.split('\n').map((line: string, i: number) => {
-                  const isEmpty = !line.trim();
-                  if (isEmpty) return null;
-                  return (
-                    <React.Fragment key={i}>
-                      {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
-                        if (part.startsWith('**') && part.endsWith('**')) {
-                          const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
-                          return (
-                            <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-4 mb-1 block w-full border-b border-primary/20 pb-1">
-                              {cleanTitle}
-                            </div>
-                          );
-                        }
-                        return part.trim() ? <span key={j} className="block w-full mt-1 mb-2">{part.trim()}</span> : null;
-                      })}
-                    </React.Fragment>
-                  );
-                })}
+                {searchResult.answer.split('\n').map((line: string, i: number) => (
+                  <React.Fragment key={i}>
+                    {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
+                        return (
+                          <div key={j} className="text-primary font-extrabold text-lg tracking-wide mt-4 mb-1 block w-full border-b border-primary/20 pb-1">
+                            {cleanTitle}
+                          </div>
+                        );
+                      }
+                      return <span key={j}>{part}</span>;
+                    })}
+                    {i < searchResult.answer.split('\n').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
               </div>
               
               <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3">Sources Cited ({searchResult.sources.length})</h4>
