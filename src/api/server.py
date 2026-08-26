@@ -39,11 +39,36 @@ def get_feedback():
     if not os.path.exists(dataset_path):
         return []
     import json
+    import random
     with open(dataset_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    # Filter for reviews that actually have some text and return the latest 100
-    reviews = [r for r in data if len(r.get('text', '')) > 20]
-    return reviews[:100]
+        
+    valid_reviews = [r for r in data if len(r.get('text', '')) > 20]
+    
+    by_source = {}
+    for r in valid_reviews:
+        src = r.get("source", "UNKNOWN")
+        if src not in by_source:
+            by_source[src] = []
+        by_source[src].append(r)
+        
+    final_list = []
+    if not by_source:
+        return []
+        
+    per_source = 100 // len(by_source)
+    for src, items in by_source.items():
+        random.shuffle(items)
+        final_list.extend(items[:per_source])
+        
+    remaining = 100 - len(final_list)
+    if remaining > 0:
+        all_remaining = [item for src_items in by_source.values() for item in src_items[per_source:]]
+        random.shuffle(all_remaining)
+        final_list.extend(all_remaining[:remaining])
+        
+    random.shuffle(final_list)
+    return final_list
 
 @app.get("/api/stats")
 def get_stats():
