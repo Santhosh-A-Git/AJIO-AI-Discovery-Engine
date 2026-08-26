@@ -155,7 +155,8 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="qwen/qwen3.8-27b", groq_api_key=api_key, model_kwargs={"response_format": {"type": "json_object"}})
+        # LLM is now dynamically instantiated per request for fallback support
+        llm = None
         
     return vector_db_client, embedding_model, llm
 
@@ -229,8 +230,24 @@ RAW COMPLAINTS FOUND:
 """
     
     try:
-        response = chat_model.invoke(prompt)
-        answer = response.content
+        api_key = os.getenv("GROQ_API_KEY")
+        from langchain_groq import ChatGroq
+        
+        fallback_models = ["qwen/qwen3.8-27b", "openai/gpt-oss-20b", "allam-2-7b"]
+        answer = None
+        
+        for model_name in fallback_models:
+            try:
+                temp_model = ChatGroq(model_name=model_name, groq_api_key=api_key, model_kwargs={"response_format": {"type": "json_object"}})
+                response = temp_model.invoke(prompt)
+                answer = response.content
+                break # Success!
+            except Exception as model_err:
+                print(f"Model {model_name} failed: {model_err}")
+                continue
+                
+        if not answer:
+            raise Exception("All fallback LLM models failed or were rate limited.")
         
         # Robustly filter out reasoning blocks if model didn't obey json strictness fully
         if "</think>" in answer:
