@@ -107,9 +107,35 @@ export default function Dashboard() {
       doc.text(splitQuery, 14, yPos);
       yPos += (splitQuery.length * 6) + 4;
       
-      const splitAnswer = doc.splitTextToSize(searchResult.answer, 180);
-      doc.text(splitAnswer, 14, yPos);
-      yPos += (splitAnswer.length * 6) + 10;
+      if (searchResult.structured_insights) {
+        searchResult.structured_insights.forEach((insight: any) => {
+          const insightText = `**${insight.headline}:** ${insight.explanation}`;
+          const splitInsight = doc.splitTextToSize(insightText, 180);
+          doc.text(splitInsight, 14, yPos);
+          yPos += (splitInsight.length * 6) + 4;
+          
+          if (insight.evidence) {
+            const evText = `[Evidence Breakdown]
+Theme: ${insight.evidence.theme} | Strength: ${insight.evidence.evidence_strength}
+Source: ${insight.evidence.source}
+Clue: ${insight.evidence.user_segment_clue}
+Intent: ${insight.evidence.wishlist_intent}
+Why Saved: ${insight.evidence.why_saved}
+Blocker: ${insight.evidence.conversion_blocker}
+Uncertainty: ${insight.evidence.uncertainty}
+Workaround: ${insight.evidence.workaround}
+External: ${insight.evidence.external_platform_used}
+Status: ${insight.evidence.purchase_status}`;
+            const splitEv = doc.splitTextToSize(evText, 170);
+            doc.text(splitEv, 18, yPos);
+            yPos += (splitEv.length * 5) + 6;
+          }
+        });
+      } else if (searchResult.answer) {
+        const splitAnswer = doc.splitTextToSize(searchResult.answer, 180);
+        doc.text(splitAnswer, 14, yPos);
+        yPos += (splitAnswer.length * 6) + 10;
+      }
     }
     
     // Add page if needed before table
@@ -277,23 +303,88 @@ export default function Dashboard() {
                   <X size={20} />
                 </button>
               </div>
-              <div className="text-on-surface text-sm leading-relaxed mb-6 whitespace-pre-wrap">
-                {searchResult.answer.split('\n').map((line: string, i: number) => (
-                  <React.Fragment key={i}>
-                    {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
-                        return (
-                          <span key={j} className="text-primary font-extrabold text-[15px] tracking-wide mr-2">
-                            {cleanTitle}:
-                          </span>
-                        );
-                      }
-                      return <span key={j}>{part}</span>;
-                    })}
-                    {i < searchResult.answer.split('\n').length - 1 && <br />}
-                  </React.Fragment>
-                ))}
+              <div className="text-on-surface text-sm leading-relaxed mb-6">
+                {searchResult.structured_insights ? (
+                  <div className="flex flex-col gap-6">
+                    {searchResult.structured_insights.map((insight: any, i: number) => (
+                      <div key={i} className="flex flex-col gap-3">
+                        <p className="whitespace-pre-wrap">
+                          <span className="text-primary font-extrabold text-[15px] tracking-wide mr-2">{insight.headline}:</span>
+                          <span>{insight.explanation}</span>
+                        </p>
+                        
+                        {insight.evidence && (
+                          <div className="bg-black/30 rounded-lg p-4 border border-white/5 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-2 animate-fade-in-up">
+                            <div className="col-span-1 md:col-span-2 border-b border-white/5 pb-2 mb-1 flex items-center justify-between">
+                              <span className="font-label-bold text-on-surface-variant uppercase tracking-wider">Evidence Breakdown</span>
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${insight.evidence.evidence_strength === 'High' ? 'bg-error/20 text-error' : 'bg-primary/20 text-primary'}`}>{insight.evidence.evidence_strength} Evidence</span>
+                            </div>
+                            
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Source</span>
+                              <span className="font-medium">{insight.evidence.source}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Theme</span>
+                              <span className="font-medium">{insight.evidence.theme}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">User Segment Clue</span>
+                              <span className="font-medium">{insight.evidence.user_segment_clue}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Wishlist Intent</span>
+                              <span className="font-medium">{insight.evidence.wishlist_intent}</span>
+                            </div>
+                            <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
+                              <span className="text-on-surface-variant opacity-60">Why Saved</span>
+                              <span className="font-medium">{insight.evidence.why_saved}</span>
+                            </div>
+                            <div className="flex flex-col gap-1 col-span-1 md:col-span-2 text-error">
+                              <span className="text-error opacity-80">Conversion Blocker</span>
+                              <span className="font-bold">{insight.evidence.conversion_blocker}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Uncertainty</span>
+                              <span className="font-medium">{insight.evidence.uncertainty}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Workaround</span>
+                              <span className="font-medium">{insight.evidence.workaround}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">External Platform</span>
+                              <span className="font-medium">{insight.evidence.external_platform_used}</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-on-surface-variant opacity-60">Purchase Status</span>
+                              <span className="font-medium">{insight.evidence.purchase_status}</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="whitespace-pre-wrap">
+                    {searchResult.answer?.split('\n').map((line: string, i: number) => (
+                      <React.Fragment key={i}>
+                        {line.split(/(\*\*.*?\*\*)/).map((part: string, j: number) => {
+                          if (part.startsWith('**') && part.endsWith('**')) {
+                            const cleanTitle = part.replace(/\*\*/g, '').trim().replace(/:$/, '');
+                            return (
+                              <span key={j} className="text-primary font-extrabold text-[15px] tracking-wide mr-2">
+                                {cleanTitle}:
+                              </span>
+                            );
+                          }
+                          return <span key={j}>{part}</span>;
+                        })}
+                        {i < searchResult.answer.split('\n').length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
               </div>
               
               <h4 className="text-xs font-label-bold text-on-surface-variant uppercase mb-3">Sources Cited ({searchResult.sources.length})</h4>

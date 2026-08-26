@@ -155,7 +155,7 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        llm = ChatGroq(model_name="qwen/qwen3.8-27b", groq_api_key=api_key)
+        llm = ChatGroq(model_name="qwen/qwen3.8-27b", groq_api_key=api_key, model_kwargs={"response_format": {"type": "json_object"}})
         
     return vector_db_client, embedding_model, llm
 
@@ -196,15 +196,31 @@ def query_insights(req: QueryRequest):
         
     # 3. Generate Answer using the LLM
     prompt = f"""You are an elite Product Management AI for AJIO.
-Analyze the following exact user complaints and synthesize a highly concise, actionable summary of user behavior.
+Analyze the following exact user complaints and synthesize a highly actionable summary of user behavior regarding wishlist to purchase friction.
 
-Format your response strictly as 2-3 insights using this exact structure for each insight, exactly on ONE line:
-
-**[Insight Title]** [Brief explanation of WHY users behave this way and the severe friction points]
-
-Do not use bullet points (-). Write each insight on a single new line. Do not write introductory or concluding paragraphs.
-Respond DIRECTLY with the final insights.
-
+Extract exactly 1 to 2 distinct insights.
+You must respond STRICTLY in JSON format matching this exact schema:
+{{
+  "insights": [
+    {{
+      "headline": "A short, punchy 3-5 word title for the insight",
+      "explanation": "A concise, single-sentence explanation of WHY users behave this way and the severe friction points",
+      "evidence": {{
+        "source": "The origin of the friction (e.g., App Store, Google News, etc.) based on the context",
+        "user_segment_clue": "e.g., Price-sensitive, High intent, Trend-seeker",
+        "wishlist_intent": "e.g., Price tracking, Bookmarking, Waiting for review",
+        "why_saved": "Why did the user save this item to their wishlist?",
+        "conversion_blocker": "What is the exact friction stopping them from purchasing?",
+        "uncertainty": "What is the user unsure about? (e.g., Size, Quality, Delivery)",
+        "workaround": "What did the user do instead? (e.g., Bought elsewhere, abandoned)",
+        "external_platform_used": "Any competitors or platforms mentioned (e.g., Myntra, Instagram, none)",
+        "purchase_status": "e.g., Abandoned, Delayed, Bought Elsewhere",
+        "evidence_strength": "High/Medium/Low based on the number of complaints",
+        "theme": "A 2-3 word high-level theme"
+      }}
+    }}
+  ]
+}}
 
 USER QUERY: {req.query}
 
@@ -216,21 +232,31 @@ RAW COMPLAINTS FOUND:
         response = chat_model.invoke(prompt)
         answer = response.content
         
-        # Robustly filter out reasoning blocks
+        # Robustly filter out reasoning blocks if model didn't obey json strictness fully
         if "</think>" in answer:
             answer = answer.split("</think>")[-1].strip()
         elif "<think>" in answer:
             answer = answer.split("<think>")[0].strip()
             if not answer:
-                answer = "The AI model encountered an error while synthesizing. Please click 'Ask AI' again to retry."
+                # the content is inside the think block or empty
+                pass
+
+        # Ensure we return valid JSON to frontend
+        import json
+        import re
         
+        # Try to parse the JSON
+        try:
+            # Strip markdown json blocks if present
+            clean_json = re.sub(r'```json\n|\n```|```', '', answer).strip()
+            answer_json = json.loads(clean_json)
+            return {"structured_insights": answer_json.get("insights", []), "sources": sources}
+        except json.JSONDecodeError:
+            # Fallback if parsing completely fails
+            return {"answer": answer, "sources": sources}
+            
     except Exception as e:
-        answer = f"Error generating AI synthesis: {str(e)}"
-        
-    return {
-        "answer": answer,
-        "sources": sources
-    }
+        return {"answer": f"Error generating AI synthesis: {str(e)}", "sources": []}
 
 if __name__ == "__main__":
     # pyrefly: ignore [missing-import]
