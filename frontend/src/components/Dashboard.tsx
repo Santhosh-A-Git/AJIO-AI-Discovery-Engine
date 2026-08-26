@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import { X, ChevronRight } from "lucide-react";
+import { X, ChevronRight, Download } from "lucide-react";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
 
@@ -63,6 +65,78 @@ export default function Dashboard() {
     }
   };
 
+  const generatePDFReport = () => {
+    const doc = new jsPDF();
+    
+    // Title
+    doc.setFontSize(22);
+    doc.setTextColor(20, 184, 166); // primary color
+    doc.text("AJIO Product Discovery Engine", 14, 20);
+    
+    // Subtitle
+    doc.setFontSize(14);
+    doc.setTextColor(100);
+    doc.text("AI-Powered Friction Analysis Report", 14, 30);
+    
+    // Timestamp
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 38);
+    
+    // Stats Section
+    doc.setFontSize(14);
+    doc.setTextColor(0);
+    doc.text("Platform Trends:", 14, 50);
+    doc.setFontSize(11);
+    doc.text(`Total Feedback Processed: ${stats.total_insights_processed}`, 14, 58);
+    doc.text(`Active Problem Clusters: ${stats.total_clusters}`, 14, 64);
+    
+    let yPos = 80;
+    
+    // Search Query Section
+    if (searchQuery && searchResult) {
+      doc.setFontSize(14);
+      doc.text("Latest AI Query & Synthesis:", 14, yPos);
+      yPos += 8;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(50);
+      const splitQuery = doc.splitTextToSize(`Query: "${searchQuery}"`, 180);
+      doc.text(splitQuery, 14, yPos);
+      yPos += (splitQuery.length * 6) + 4;
+      
+      const splitAnswer = doc.splitTextToSize(searchResult.answer, 180);
+      doc.text(splitAnswer, 14, yPos);
+      yPos += (splitAnswer.length * 6) + 10;
+    }
+    
+    // Add page if needed before table
+    if (yPos > 250) {
+      doc.addPage();
+      yPos = 20;
+    }
+    
+    // Cluster Table
+    doc.setFontSize(14);
+    doc.setTextColor(0);
+    doc.text("Opportunity Score Ranking (Cluster Breakdown):", 14, yPos);
+    
+    const tableData = clusters.map(c => [
+      c.cluster_name,
+      c.prevalence.toString(),
+      c.opportunity_score.toFixed(1)
+    ]);
+    
+    autoTable(doc, {
+      startY: yPos + 6,
+      head: [['Cluster Name', 'Volume', 'Opportunity Score']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: { fillColor: [20, 184, 166] }
+    });
+    
+    doc.save("AJIO_Discovery_Report.pdf");
+  };
+
   if (loading) {
     return <div className="flex h-screen items-center justify-center bg-background text-on-surface">Loading Discovery Engine...</div>;
   }
@@ -98,17 +172,18 @@ export default function Dashboard() {
             <span className="material-symbols-outlined">trending_up</span>
             Trends
           </a>
-          <a className="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold" href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Inventory"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Inventory" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">inventory_2</span>
             Inventory
           </a>
-          <a className="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:backdrop-blur-xl hover:bg-white/10 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold" href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Feedback"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Feedback" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">comment</span>
             Feedback
           </a>
         </nav>
         <div className="px-4 mt-auto">
-          <button className="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-xs uppercase font-bold hover:bg-primary-fixed transition-colors">
+          <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded font-label-bold text-xs uppercase font-bold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+            <Download size={16} />
             Generate Report
           </button>
         </div>
@@ -150,7 +225,7 @@ export default function Dashboard() {
             <button 
               onClick={handleSearch}
               disabled={isSearching || !searchQuery}
-              className="absolute inset-y-2 right-2 px-6 bg-primary-container text-on-primary-container rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors disabled:opacity-50 flex items-center gap-2"
+              className={`absolute inset-y-2 right-2 px-6 bg-primary-container text-on-primary-container rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors disabled:opacity-50 flex items-center gap-2 ${isSearching ? 'animate-glow-pulse' : ''}`}
             >
               {isSearching ? <span className="material-symbols-outlined animate-spin text-sm">sync</span> : 'Ask AI'}
             </button>
@@ -332,6 +407,66 @@ export default function Dashboard() {
           </section>
         </div>
         </>
+      )}
+
+      {activeTab === "Inventory" && (
+        <div className="animate-fade-in-up">
+          <header className="mb-12 flex flex-col gap-6">
+            <div>
+              <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
+                Friction-Prone Products Catalog
+              </h1>
+              <p className="font-body-lg text-lg text-on-surface-variant mt-2">
+                Products frequently abandoned in wishlists and their associated friction points.
+              </p>
+            </div>
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {[
+              { name: "Levi's 501 Original Fit Jeans", img: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80", score: 92.5, friction: "Missing Size Chart", cluster: "Size & Fit Uncertainty" },
+              { name: "Puma RS-X Sneakers", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&q=80", score: 89.0, friction: "Constantly OOS", cluster: "Restock Blindness" },
+              { name: "GAP Logo Hoodie", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80", score: 85.5, friction: "Awaiting Price Drop", cluster: "Price Volatility & Coupons" },
+              { name: "Biba Embroidered Kurta", img: "https://images.unsplash.com/photo-1603344710174-8dbb242e97a3?w=500&q=80", score: 82.0, friction: "No Customer Review Photos", cluster: "Missing Social Validation" },
+              { name: "Nike Air Max 270", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80", score: 80.5, friction: "Wishlist Capacity Bug", cluster: "Wishlist Capacity Limits" },
+              { name: "H&M Oversized T-Shirt", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80", score: 78.0, friction: "Vague Fabric Description", cluster: "Missing Social Validation" }
+            ].map((item, idx) => (
+              <div key={idx} className="glass-panel rounded-xl overflow-hidden group hover:border-primary-container/50 transition-all flex flex-col">
+                <div className="h-48 w-full overflow-hidden relative">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all z-10"></div>
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <span className="text-xs font-bold text-white">Score: {item.score}</span>
+                  </div>
+                </div>
+                <div className="p-5 flex flex-col gap-3">
+                  <h3 className="font-headline-sm text-lg font-semibold text-on-surface">{item.name}</h3>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs text-on-surface-variant">Top Friction Point:</span>
+                    <span className="text-sm font-medium text-tertiary-container flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm">warning</span> {item.friction}
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-1 mt-2">
+                    <span className="text-xs text-on-surface-variant">Associated AI Cluster:</span>
+                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-primary-fixed w-fit">
+                      {item.cluster}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "Feedback" && (
+        <div className="animate-fade-in-up flex flex-col items-center justify-center h-full min-h-[60vh] text-center">
+           <span className="material-symbols-outlined text-6xl text-primary/30 mb-4">forum</span>
+           <h2 className="text-2xl font-headline-sm text-on-surface mb-2">Live Feedback Stream</h2>
+           <p className="text-on-surface-variant max-w-md">The live feedback pipeline is currently processing data in the background. Raw App Store and Play Store reviews will appear here once the ingestion task completes.</p>
+        </div>
       )}
 
       </main>
