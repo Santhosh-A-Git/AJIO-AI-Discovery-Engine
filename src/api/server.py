@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 # pyrefly: ignore [missing-import]
 from typing import List, Optional
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,6 +36,15 @@ def get_db_connection():
 @app.get("/")
 def health_check():
     return {"status": "ok", "message": "AJIO Product Discovery API is running!"}
+
+@app.get("/api/sources")
+def get_sources():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT DISTINCT source FROM insights WHERE duplicate_status = 'UNIQUE' AND source IS NOT NULL")
+    sources = [row['source'] for row in cursor.fetchall() if row['source']]
+    conn.close()
+    return sources
 
 @app.get("/api/feedback")
 def get_feedback(relevance: Optional[str] = None, source_type: Optional[str] = None):

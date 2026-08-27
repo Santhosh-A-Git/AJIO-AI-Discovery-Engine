@@ -7,12 +7,37 @@ from sklearn.cluster import HDBSCAN
 import numpy as np
 
 def extract_keywords(insights):
-    """Simple heuristic to name a cluster based on the most common theme in the cluster."""
-    themes = [insight['theme'] for insight in insights if 'theme' in insight and insight['theme']]
-    if themes:
-        most_common = collections.Counter(themes).most_common(1)[0][0]
-        return most_common
-    return "Emergent Opportunity"
+    """Use AI to intelligently name a cluster based on its most prominent emergent theme."""
+    import os
+    # pyrefly: ignore [missing-import]
+    from langchain_groq import ChatGroq
+    # pyrefly: ignore [missing-import]
+    from dotenv import load_dotenv
+    load_dotenv()
+    
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return "Emergent Opportunity"
+        
+    # Sample up to 10 insights to avoid max token limits
+    sample_texts = [ins['observed_problem_summary'] for ins in insights[:10]]
+    combined_text = "\n- ".join(sample_texts)
+    
+    prompt = f"""You are a senior Product Manager. Review the following friction points collected from users and provide a SINGLE, very short (2 to 4 words max) precise name for this specific cluster of problems. Do not provide any explanation, just the exact name.
+    
+Frictions:
+- {combined_text}
+
+Name:"""
+
+    try:
+        model = ChatGroq(model_name="qwen/qwen3.8-27b", groq_api_key=api_key, temperature=0.1)
+        response = model.invoke(prompt)
+        name = response.content.strip().replace('"', '').replace('**', '')
+        return name
+    except Exception as e:
+        print(f"Error naming cluster: {e}")
+        return "Emergent Opportunity"
 
 def run_clustering():
     vector_db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "vector_db")
@@ -36,7 +61,7 @@ def run_clustering():
     filtered_documents = []
     
     for emb, meta, doc in zip(data['embeddings'], data['metadatas'], data['documents']):
-        if meta.get('relevance_status') == 'RELEVANT':
+        if meta.get('relevance_status') in ['RELEVANT', 'POSSIBLY_RELEVANT']:
             filtered_embeddings.append(emb)
             filtered_metadatas.append(meta)
             filtered_documents.append(doc)
@@ -51,16 +76,16 @@ def run_clustering():
     
     print(f"Loaded {len(embeddings)} RELEVANT vectors for clustering.")
     
-    if len(embeddings) < 5:
-        print("Not enough data to cluster.")
+    if len(embeddings) < 6:
+        print("Not enough data to form 6 clusters.")
         return None
         
-    print("Running HDBSCAN clustering engine...")
-    from sklearn.cluster import HDBSCAN
-    clusterer = HDBSCAN(min_cluster_size=5, min_samples=2, metric='euclidean')
+    print("Running KMeans clustering engine to discover exactly 6 emergent themes...")
+    from sklearn.cluster import KMeans
+    clusterer = KMeans(n_clusters=6, random_state=42)
     labels = clusterer.fit_predict(embeddings)
     
-    print(f"Discovered {len(set(labels)) - (1 if -1 in labels else 0)} unique problem clusters.")
+    print(f"Discovered 6 unique problem clusters.")
     
     # Group insights by cluster
     clustered_data = collections.defaultdict(list)

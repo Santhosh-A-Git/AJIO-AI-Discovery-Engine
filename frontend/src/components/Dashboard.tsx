@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [selectedCluster, setSelectedCluster] = useState<any>(null);
   const [insights, setInsights] = useState<any[]>([]);
   const [feedbacks, setFeedbacks] = useState<any[]>([]);
+  const [sourcesList, setSourcesList] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,14 +41,16 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [statsRes, clustersRes, feedbacksRes] = await Promise.all([
+        const [statsRes, clustersRes, feedbacksRes, sourcesRes] = await Promise.all([
           axios.get(`${API_BASE}/stats`),
           axios.get(`${API_BASE}/clusters`),
-          axios.get(`${API_BASE}/feedback`)
+          axios.get(`${API_BASE}/feedback`),
+          axios.get(`${API_BASE}/sources`)
         ]);
         setStats(statsRes.data);
         setClusters(clustersRes.data);
         setFeedbacks(feedbacksRes.data);
+        setSourcesList(sourcesRes.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -544,10 +547,9 @@ Status: ${insight.evidence.purchase_status}`;
                  }}
                >
                  <option>All Sources</option>
-                 <option>Google Play</option>
-                 <option>Twitter</option>
-                 <option>App Store</option>
-                 <option>Reddit</option>
+                 {sourcesList.map(src => (
+                   <option key={src} value={src}>{src}</option>
+                 ))}
                </select>
              </div>
            </div>
