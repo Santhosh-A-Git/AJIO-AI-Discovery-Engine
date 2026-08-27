@@ -154,7 +154,7 @@ Status: ${insight.evidence.purchase_status}`;
     const tableData = clusters.map(c => [
       c.cluster_name,
       c.prevalence.toString(),
-      c.opportunity_score.toFixed(1)
+      (c.opportunity_score || 0).toFixed(1)
     ]);
     
     autoTable(doc, {
@@ -506,7 +506,7 @@ Status: ${insight.evidence.purchase_status}`;
                       <span>Sev: <b className="text-on-surface">{cluster.severity_norm?.toFixed(0)}</b></span>
                       <span>Src: <b className="text-on-surface">{cluster.cross_source_norm?.toFixed(0)}</b></span>
                       <span>Seg: <b className="text-on-surface">{cluster.segment_concentration_norm?.toFixed(0)}</b></span>
-                      <span className="ml-auto">Score: <b className="text-primary text-sm">{cluster.opportunity_score.toFixed(1)}</b></span>
+                      <span className="ml-auto">Score: <b className="text-primary text-sm">{(cluster.opportunity_score || 0).toFixed(1)}</b></span>
                     </div>
                   </div>
                 </div>
