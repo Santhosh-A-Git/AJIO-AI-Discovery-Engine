@@ -23,60 +23,80 @@ def build_vector_db():
         print("Error: Insights file is empty.")
         return
         
-    # Setup Vector DB directory
     vector_db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "vector_db")
     os.makedirs(vector_db_dir, exist_ok=True)
     
     print(f"Initializing ChromaDB at {vector_db_dir}...")
     client = PersistentClient(path=vector_db_dir)
     
-    # We use a custom embedding function so we can use sentence-transformers locally
     print("Loading HuggingFace embedding model (all-MiniLM-L6-v2)...")
     model = SentenceTransformer('all-MiniLM-L6-v2')
     
-    # Create or get collection
     collection = client.get_or_create_collection(name="ajio_insights")
     
-    print(f"Embedding and storing {len(insights)} insights into ChromaDB...")
+    # We clear it to avoid mixing old and new schema
+    try:
+        client.delete_collection("ajio_insights")
+        collection = client.create_collection(name="ajio_insights")
+    except Exception:
+        pass
     
-    # Batch add to Chroma
     documents = []
     metadatas = []
     ids = []
-    embeddings = []
     
     seen_hashes = set()
     
-    for i, insight in enumerate(insights):
-        # We embed the problem statement directly as it holds the most semantic meaning for clustering
-        text_to_embed = insight.get('problem_statement', '')
+    # Pre-filter irrelevant records from the core clustering engine
+    relevant_insights = [ins for ins in insights if ins.get('relevance_status') in ['RELEVANT', 'POSSIBLY_RELEVANT']]
+    print(f"Embedding {len(relevant_insights)} relevant insights out of {len(insights)} total records...")
+    
+    for i, insight in enumerate(relevant_insights):
+        # Embed the core observable problem for semantic clustering
+        text_to_embed = insight.get('observed_problem_summary') or insight.get('original_text') or "Unknown problem"
         
-        import hashlib
-        unique_hash = hashlib.md5(text_to_embed.encode('utf-8')).hexdigest()
-        
-        if unique_hash in seen_hashes:
+        # Deduplication via source + source_id fingerprint
+        fingerprint_key = f"{insight.get('source', '')}_{insight.get('source_id', '')}"
+        if not insight.get('source_id'):
+            import hashlib
+            fingerprint_key = hashlib.sha256(text_to_embed.encode('utf-8')).hexdigest()
+            
+        if fingerprint_key in seen_hashes:
             continue
-        seen_hashes.add(unique_hash)
+        seen_hashes.add(fingerprint_key)
         
-        # We store the rest as metadata
-        metadata = {
-            "topic": insight.get('topic', ''),
-            "intent": insight.get('intent', ''),
-            "purchase_stage": insight.get('purchase_stage', ''),
-            "source_review_id": str(insight.get('source_review_id', ''))
-        }
-        
+        # Safely convert metadata to strings for ChromaDB compatibility
+        metadata = {}
+        for key in ["source", "source_type", "source_url", "source_id", "timestamp", "original_text", 
+                    "relevance_status", "relevance_reason", "relevance_confidence",
+                    "observed_problem_summary", "theme", "user_segment_clue", "wishlist_intent",
+                    "why_saved", "conversion_blocker", "uncertainty", "workaround", 
+                    "external_platform_used", "purchase_status", "evidence_strength"]:
+            val = insight.get(key)
+            if val is None:
+                metadata[key] = ""
+            elif isinstance(val, (int, float, bool, str)):
+                metadata[key] = val
+            else:
+                metadata[key] = str(val)
+                
+        # Support fields
+        for key in ["theme_support", "user_segment_clue_support", "wishlist_intent_support", 
+                    "why_saved_support", "conversion_blocker_support", "uncertainty_support",
+                    "workaround_support", "external_platform_used_support", "purchase_status_support"]:
+            metadata[key] = str(insight.get(key, 'unknown'))
+            
         documents.append(text_to_embed)
         metadatas.append(metadata)
-        import hashlib
-        unique_hash = hashlib.md5(text_to_embed.encode('utf-8')).hexdigest()
-        ids.append(f"insight_{unique_hash}")
+        ids.append(f"insight_{fingerprint_key}")
         
-    # Generate embeddings natively
+    if not documents:
+        print("No valid documents to embed.")
+        return
+        
     embeddings_list = model.encode(documents, show_progress_bar=True)
     embeddings = embeddings_list.tolist()
     
-    # Upsert to ChromaDB
     collection.upsert(
         documents=documents,
         embeddings=embeddings,
@@ -84,8 +104,7 @@ def build_vector_db():
         ids=ids
     )
     
-    print(f"Successfully vectorized and stored {len(insights)} insights in ChromaDB!")
-    print(f"Vector Database ready at: {vector_db_dir}")
+    print(f"Successfully vectorized and stored {len(documents)} relevant insights in ChromaDB!")
 
 if __name__ == "__main__":
     build_vector_db()

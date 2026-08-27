@@ -1,0 +1,50 @@
+Wishlist items frequently appear out of stock with no indication of when they will be restocked
+Maximum wishlist limit of 70 items is too low compared to competitors
+Wishlist truncates after 100 items, causing loss of saved dresses
+Popular products stay out of stock for long periods and are not restocked promptly
+No notification for back‑in‑stock items; sizes L and M often unavailable; app shows glitches
+Products appear out of stock instantly when trying to buy, preventing purchase
+out‑of‑stock products not restocked promptly, leading to ordering wrong size
+Wishlist shows only half of saved items, older items disappear
+Wishlist has a hidden limit; items disappear without warning
+I curate outfits in my wishlist, but after 70 items, my older saved dresses just vanish without warning.
+The wishlist truncates items. I lost a whole curated list of wedding outfits because of a hidden cap.
+Why is there a limit on how many items I can save? I use the wishlist as a moodboard and things keep disappearing.
+I was about to purchase items I saved last week, but they are completely gone from the wishlist.
+The wishlist forces me to delete items before I can add new ones. This is incredibly frustrating.
+I can't organize my wishlist into boards, so when it fills up, it just deletes my oldest items.
+Hidden limits on the wishlist caused me to lose track of gifts I was planning to buy.
+The app crashed and wiped half of my wishlisted items, leaving only the most recently added ones.
+I have to move items to cart just to save them permanently because the wishlist is unreliable.
+Arbitrary wishlist truncation creates anxiety around losing my curated selections.
+The lack of transparent wishlist limits disrupts my planned purchasing behavior.
+Inconsistent sizing between brands makes me hesitant to move this from wishlist to cart.
+I left the item in my wishlist because I'm between sizes and the size guide is generic, not brand-specific.
+Users abandon wishlisted items because they can't gauge if a specific brand will fit them.
+I moved the item to my cart, but the coupon didn't apply, so I moved it back to my wishlist.
+The price of my wishlisted items fluctuates wildly, making me afraid to buy today in case it drops tomorrow.
+I only use the wishlist to track price drops, but I never get notified when a sale happens.
+Complex coupon rules at checkout force me to abandon the cart and leave the items in my wishlist.
+The app doesn't show me if an item in my wishlist is currently on sale or eligible for a coupon.
+Users park items in the wishlist waiting for price drops, but abandon when coupon rules fail.
+I want to buy, but I feel like I'll get a better deal if I wait, so it stays in the wishlist.
+Price volatility makes me hesitant to convert my wishlist into an actual order.
+I use the wishlist purely as a price-tracking tool, not a purchase intent tool.
+I was ready to buy, but the price increased while the item was in my wishlist, so I gave up.
+I hesitate to buy wishlisted items because there aren't enough real-life customer photos.
+I keep items in my wishlist hoping that someone will eventually leave a detailed review.
+I abandon wishlisted items if I can't find validation from other buyers.
+My wishlisted items go Out Of Stock (OOS) without warning, and there's no 'notify me' feature.
+I opened my wishlist to finally buy the shoes, and they were OOS. I'm so frustrated.
+I leave items in my wishlist hoping they will restock, but I never get any alerts.
+There's no way to know when my wishlisted size will be back in stock.
+OOS items clutter my wishlist, making it hard to focus on what's actually available.
+I check my wishlist daily just to see if the OOS items are back, which is a terrible UX.
+Wishlisted items frequently go out of stock with no restock indication.
+The inability to backorder wishlisted items results in lost sales.
+I want to pre-order or get notified, but instead, the item just sits OOS indefinitely.
+Received T‑shirt larger than expected, stained, and not matching product pictures
+Ordered XXL t-shirt delivered as size L
+All ordered t‑shirts were too small and larger sizes were unavailable
+Ordered size M but received XXL
+Ordered size L but received shorts of size in and another item of size XXL

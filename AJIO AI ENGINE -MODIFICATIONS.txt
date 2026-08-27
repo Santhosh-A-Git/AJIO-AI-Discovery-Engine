@@ -1,0 +1,210 @@
+1. Preserve Existing Strengths
+•	Keep the existing multi-stage AI/ML pipeline: ingestion → AI analysis → semantic embeddings → clustering → quantification → API → dashboard.
+•	Keep semantic clustering and emergent problem discovery. Do not replace semantic clustering with simple keyword grouping.
+•	Keep the Ask AI / semantic evidence-query experience.
+•	Preserve the current dashboard visual quality, responsiveness, dark theme, cards, charts, evidence panels, and general UX.
+•	Preserve evidence drill-down capability from opportunity/cluster to supporting evidence.
+•	Preserve report generation, improving accuracy and wording rather than removing it.
+•	Preserve the current deployment architecture unless a necessary technical change is required.
+•	Preserve functioning ingestion connectors; classify their source types correctly instead of unnecessarily removing them.
+2. Align the Engine to the Business Question
+The central discovery question is: “Why do users who save/wishlist fashion products fail to convert that expressed interest into a purchase within 30 days?”
+The engine must discover the underlying user problem. It must not assume that price, fit, reviews, delivery, or any other factor is the answer.
+3. Implement a Relevance-First Pipeline
+RAW CONVERSATION
+        ↓
+NORMALIZATION
+        ↓
+DEDUPLICATION
+        ↓
+SOURCE-TYPE CLASSIFICATION
+        ↓
+WISHLIST / PURCHASE RELEVANCE CLASSIFICATION
+        ↓
+Relevant | Possibly Relevant | Not Relevant
+        ↓
+STRUCTURED EVIDENCE EXTRACTION
+        ↓
+EVIDENCE VALIDATION
+        ↓
+EMBEDDINGS
+        ↓
+SEMANTIC CLUSTERING
+        ↓
+SEGMENT + SOURCE ANALYSIS
+        ↓
+QUANTIFICATION
+        ↓
+OPPORTUNITY COMPARISON
+Do not perform deep structured analysis on obviously irrelevant records. Keep excluded records in the raw/audit dataset, marked as excluded.
+4. Relevance Classifier
+Add a dedicated classifier with three statuses:
+•	RELEVANT: Directly connected to wishlist/save behavior, shortlisting, purchase postponement, purchase decision uncertainty, comparison, purchase/non-purchase after saving, external information seeking, or gifting/social/bookmarking behavior related to saved products.
+•	POSSIBLY_RELEVANT: Useful online fashion-shopping decision behavior without a direct wishlist-to-purchase connection.
+•	NOT_RELEVANT: Does not provide useful evidence for the target discovery question.
+Store relevance_status, relevance_reason, and relevance_confidence. Never silently discard records without preserving the audit trail.
+5. Distinguish Source Types
+•	USER_GENERATED: Google Play, App Store, Reddit, YouTube comments, public fashion/shopping communities, public social posts, product reviews and Q&A.
+•	BRAND_GENERATED: AJIO official replies, customer-support responses, AJIO marketing content.
+•	SECONDARY_CONTEXT: news articles, reports, editorial articles.
+User-generated evidence should be the primary evidence base for user-problem discovery. Do not mix brand-generated replies into user-prevalence calculations.
+6. Make the 11-Field Evidence Schema Canonical
+source
+source_type
+source_url
+source_id
+timestamp
+user_segment_clue
+wishlist_intent
+why_saved
+conversion_blocker
+uncertainty
+workaround
+external_platform_used
+purchase_status
+evidence_strength
+theme
+Existing fields such as topic, problem_statement, and purchase_stage may remain, but they must not replace the canonical research schema.
+7. Wishlist Intent
+SELF_PURCHASE
+DEFERRED_PURCHASE
+COMPARISON
+BOOKMARKING
+EXPLORATION
+GIFTING
+SHARING
+RECOMMENDATION_DRIVEN
+UNKNOWN
+OTHER
+Allow emergent intent categories. Distinguish genuine purchase intent from bookmarking, exploration, comparison, gifting, sharing, and recommendation-driven saving.
+8. Why Saved
+Capture the explicit reason for saving. Examples include liked product, purchase later, waiting for sale, comparison, reminder, gifting, recommendation, sharing, inspiration, or avoiding loss of the item.
+Do not infer a reason without evidence. If unsupported, use UNKNOWN.
+9. Conversion Blocker
+PRICE_VALUE
+FIT_SIZE
+QUALITY
+REVIEWS_SOCIAL_PROOF
+STYLING
+OCCASION
+COMPARISON
+AVAILABILITY
+DELIVERY
+RETURNS_EXCHANGE
+BUDGET_TIMING
+DECISION_OVERLOAD
+TRUST
+LACK_OF_URGENCY
+OTHER
+UNKNOWN
+Use this as an initial taxonomy only. Allow emergent categories. Do not make PRICE_VALUE the default or presumed winner.
+10. Uncertainty
+Capture what the user still does not know or does not feel confident about, such as sizing accuracy, fit for body type, product quality, authenticity, seller legitimacy, appearance, styling, price/value, occasion suitability, alternative comparison, or review trust.
+If uncertainty is not identifiable from evidence, use UNKNOWN. Never manufacture uncertainty.
+11. Workarounds and External Information Seeking
+Persist workaround and external_platform_used. Capture sources such as Google, Instagram, YouTube, Reddit, Myntra, Amazon, Flipkart, friends/family, influencers, or other sources when explicitly mentioned.
+Also capture what uncertainty or problem caused the user to seek that external information.
+12. Purchase Status
+PURCHASED
+NOT_PURCHASED
+DELAYED
+ABANDONED
+REMOVED
+UNKNOWN
+Do not infer purchase from positive sentiment or liking the item.
+13. Evidence Strength
+•	HIGH — Direct statement by the user.
+•	MEDIUM — Strong contextual evidence but not explicitly stated.
+•	LOW — AI inference or weakly supported interpretation.
+Every evidence-strength label must be auditable. Where practical, explain why it is high/medium/low.
+14. Preserve Original Evidence and Provenance
+Every AI-generated insight must be traceable to the underlying source record. Preserve source platform, source URL, source ID, and original text or permitted excerpt.
+Never use AI-generated paraphrases as if they were the original source citation. The UI should let a PM move from opportunity → theme → supporting observations → original evidence → source.
+15. Deduplicate Evidence
+At minimum, identical source + source_id records must count as one unique observation. Add semantic near-duplicate detection where practical.
+Prevent duplicates from inflating volume, prevalence, opportunity scores, or source counts.
+Expose clear data counts such as Raw Records, Unique Records, Relevant Observations, Possibly Relevant, Excluded, and Opportunity Clusters.
+16. Replace Generic Purchase Intent with Wishlist Conversion Relevance
+Do not rely primarily on generic keyword logic such as purchase, buy, checkout, order, refund, or money. Instead, create a wishlist_conversion_relevance signal based on the structured evidence and the journey: SAVE/WISHLIST → CONSIDERATION → DECISION → PURCHASE / DELAY / ABANDONMENT.
+17. Opportunity Quantification and Comparison
+Quantify where justified. Clearly define every denominator.
+•	Evidence prevalence / count
+•	Evidence share among relevant observations
+•	Wishlist conversion relevance
+•	Evidence strength
+•	Severity where supported
+•	Segment concentration
+•	Cross-source consistency
+•	Workaround prevalence
+The opportunity score must be transparent, configurable, and explainable. Do not claim causal conversion impact unless causal evidence exists. Prefer wording such as “Potential relevance to wishlist conversion.”
+18. Cross-Source Validation
+For important themes, calculate the number of unique independent sources in which the theme appears and display that in the opportunity view. A theme recurring across multiple independent user-generated sources should receive stronger confidence than a theme found in only one source, all else equal.
+19. Segment Analysis
+Make user_segment_clue a first-class analytical field. Where sufficient evidence exists, show theme-by-segment, blocker-by-segment, intent-by-segment, and workaround-by-segment patterns. Never fabricate demographics.
+20. Emergent Theme Discovery
+Continue using semantic clustering. Do not constrain the engine to the initial taxonomy. Allow recurring evidence to create a new theme, but require supporting evidence, inspectability, and meaningful volume before treating it as a major opportunity.
+21. Evidence-Safe Language
+•	Replace “AI proved” with “The current analyzed dataset indicates…”
+•	Replace overly causal headlines such as “Fit Ambiguity Halts Conversion” with “Fit Uncertainty Emerges as a Potential Conversion Barrier.”
+•	Use “Evidence suggests…” when appropriate.
+•	Do not claim that an observational public-feedback analysis has established causation.
+22. Dashboard Changes
+•	Keep the current visual design and interaction quality.
+•	Rename “Live Feedback Stream” to “Evidence Explorer” or “User Feedback Evidence” unless it is genuinely real-time.
+•	Keep the strong NEXTLEAP-aligned suggested PM queries.
+•	Change the generic Ask AI placeholder to a wishlist-conversion research example.
+•	Add evidence/relevance/source-type filters to the Feedback/Evidence view.
+•	For each opportunity, display evidence volume, evidence share, wishlist relevance, source diversity, segment clues, common workarounds, purchase-status distribution, evidence strength, supporting evidence, and important unknowns.
+23. Inventory Tab
+The current product catalog contains hard-coded example product records. Do not present synthetic examples as real discoveries.
+Preferred action: either make the tab genuinely data-driven from the evidence dataset or remove it from the final discovery experience. Do not prioritize this tab over evidence rigor.
+24. Ask AI
+Preserve the semantic-query capability, but constrain answers to retrieved evidence. Require supporting citations/observation references, explicit uncertainty when evidence is insufficient, and a strict distinction between fact and inference.
+25. Report Generation
+Make the generated report use the same canonical evidence dataset as the dashboard. It should report research scope, sources, counts, relevance filtering, intents, blockers, uncertainties, workarounds, cross-source themes, segment patterns, opportunity comparisons, evidence examples, and important unknowns.
+Never present an AI hypothesis as a validated user problem.
+26. Acceptance Test Cases
+1.	Generic AJIO complaint: “AJIO customer support took three days to respond.” → NOT_RELEVANT unless a direct wishlist/purchase connection exists.
+2.	Wishlist price delay: “I saved this dress but I am waiting for the price to drop.” → RELEVANT; deferred purchase; price/timing blocker; evidence strength HIGH; do not infer value dissatisfaction.
+3.	Fit uncertainty: “I like the dress but do not know which size will fit me.” → RELEVANT; fit/size blocker; fit/size uncertainty; HIGH evidence.
+4.	Bookmarking: “I save clothes I like so I can find them later.” → BOOKMARKING; do not label automatically as high purchase intent.
+5.	Recommendation-driven saving: “My friend sent me this kurta, so I saved it.” → RECOMMENDATION_DRIVEN or SHARING; purchase status UNKNOWN unless stated.
+6.	External validation: “Before I buy I check YouTube videos to see how the dress actually looks.” → external platform YouTube; workaround external validation; uncertainty only where supported.
+7.	Brand reply: “We are sorry for the inconvenience. Our team will contact you.” → BRAND_GENERATED; exclude from user-prevalence calculations.
+8.	Duplicate records with identical source ID → one unique observation.
+27. Documentation Consistency
+After implementation, ensure README.md, context.md, architecture.md, implementation-plan.md, edge-case.md, and the codebase describe the same actual system. Do not document fields or processing stages that the implementation does not perform.
+28. Final Stage-1 Boundary
+Build ONLY the AI Discovery Engine required for NEXTLEAP Part 1.
+•	Do not build the final customer-facing solution.
+•	Do not build the final AJIO feature.
+•	Do not build the final MVP for the graduation project.
+•	Do not create the final success metrics or risk strategy for the solution.
+•	Do not create the final 10-slide presentation as part of this modification.
+The output of Stage 1 must stop at: Evidence → Patterns → Opportunity Areas → Research Hypotheses.
+29. Antigravity Execution Protocol
+9.	First inspect the current repository and identify which requested capabilities already exist.
+10.	Produce an implementation plan before modifying files.
+11.	Implement incrementally and preserve working components.
+12.	Run backend tests and frontend build/lint checks after changes.
+13.	Run discovery-pipeline tests and the acceptance tests above.
+14.	Validate the canonical evidence schema and provenance fields.
+15.	Verify that dashboard numbers match the canonical dataset.
+16.	Verify that generated reports use the same dataset.
+17.	Verify that the deployed application still works after changes.
+18.	At the end, provide: files changed; components preserved; new relevance pipeline; new evidence schema; new opportunity methodology; UI changes; data-quality safeguards; tests performed; remaining limitations.
+30. Final Non-Negotiable Principle
+DO NOT ASK: “What feature should we build?”
+ASK: “What is preventing wishlist intent from becoming purchase?”
+
+DO NOT START WITH: “Price is the problem.”
+START WITH: “What patterns does the evidence reveal?”
+
+DO NOT PRESENT: “AI proved the problem.”
+PRESENT: “Evidence indicates a potential opportunity.”
+
+DO NOT SHOW: AI-generated source citations.
+SHOW: Original user evidence + provenance.
+
+DO NOT OPTIMIZE FOR: the most common complaint.
+OPTIMIZE FOR: the strongest evidence-backed opportunity relevant to the stated business outcome.

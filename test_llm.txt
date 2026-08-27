@@ -1,0 +1,3 @@
+**Unexpected Cost Shock** Users abandon carts when mandatory shipping fees or GST calculations appear only at the final stage, creating a psychological price spike that violates pre-purchase expectation management.
+
+**Forced Account Friction** The requirement to register a new account or re-enter detailed address information rather than allowing instant guest checkout introduces high cognitive load and perceived risk, breaking the "one-click" purchase momentum.

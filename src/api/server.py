@@ -75,10 +75,10 @@ def get_stats():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    cursor.execute("SELECT COUNT(DISTINCT cluster_id) as total_clusters FROM insights WHERE purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')")
+    cursor.execute("SELECT COUNT(DISTINCT cluster_id) as total_clusters FROM insights")
     total_clusters = cursor.fetchone()['total_clusters']
     
-    cursor.execute("SELECT COUNT(*) as total_insights FROM insights WHERE purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')")
+    cursor.execute("SELECT COUNT(*) as total_insights FROM insights")
     total_insights = cursor.fetchone()['total_insights']
     
     conn.close()
@@ -94,12 +94,11 @@ def get_clusters():
     cursor = conn.cursor()
     
     cursor.execute("""
-        SELECT c.cluster_id, c.cluster_name, COUNT(i.id) as prevalence, c.intent_relevance, c.severity, ROUND(c.opportunity_score, 2) as opportunity_score 
-        FROM clusters c
-        JOIN insights i ON c.cluster_id = i.cluster_id
-        WHERE i.purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')
-        GROUP BY c.cluster_id, c.cluster_name, c.intent_relevance, c.severity, c.opportunity_score
-        ORDER BY c.opportunity_score DESC
+        SELECT cluster_id, cluster_name, prevalence, prevalence_norm, intent_relevance_norm, 
+        severity_norm, cross_source_norm, segment_concentration_norm, evidence_strength_norm, 
+        ROUND(opportunity_score, 2) as opportunity_score 
+        FROM clusters
+        ORDER BY opportunity_score DESC
     """)
     clusters = [dict(row) for row in cursor.fetchall()]
     
@@ -112,9 +111,9 @@ def get_insights(cluster_id: int):
     cursor = conn.cursor()
     
     cursor.execute("""
-        SELECT id, topic, problem_statement, intent, purchase_stage, source_review_id 
+        SELECT * 
         FROM insights 
-        WHERE cluster_id = ? AND purchase_stage IN ('Pre-purchase', 'Browsing', 'Checkout')
+        WHERE cluster_id = ?
     """, (cluster_id,))
     
     insights = [dict(row) for row in cursor.fetchall()]
@@ -174,8 +173,7 @@ def query_insights(req: QueryRequest):
     collection = client.get_collection("ajio_insights")
     results = collection.query(
         query_embeddings=[query_vector],
-        n_results=15,
-        where={"purchase_stage": {"$in": ["Pre-purchase", "Browsing", "Checkout"]}}
+        n_results=15
     )
     
     if not results['documents'] or len(results['documents'][0]) == 0:
@@ -190,8 +188,8 @@ def query_insights(req: QueryRequest):
     for idx, (doc, meta) in enumerate(zip(docs, metas)):
         sources.append({
             "problem_statement": doc,
-            "topic": meta.get("topic", ""),
-            "intent": meta.get("intent", "")
+            "topic": meta.get("theme", ""),
+            "intent": meta.get("wishlist_intent", "")
         })
         context_text += f"- {doc}\n"
         
@@ -231,6 +229,7 @@ RAW COMPLAINTS FOUND:
     
     try:
         api_key = os.getenv("GROQ_API_KEY")
+        # pyrefly: ignore [missing-import]
         from langchain_groq import ChatGroq
         
         fallback_models = ["qwen/qwen3.8-27b", "openai/gpt-oss-20b", "allam-2-7b"]

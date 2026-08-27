@@ -7,12 +7,12 @@ from sklearn.cluster import HDBSCAN
 import numpy as np
 
 def extract_keywords(insights):
-    """Simple heuristic to name a cluster based on the most common topic in the cluster."""
-    topics = [insight['topic'] for insight in insights if 'topic' in insight]
-    if topics:
-        most_common = collections.Counter(topics).most_common(1)[0][0]
+    """Simple heuristic to name a cluster based on the most common theme in the cluster."""
+    themes = [insight['theme'] for insight in insights if 'theme' in insight and insight['theme']]
+    if themes:
+        most_common = collections.Counter(themes).most_common(1)[0][0]
         return most_common
-    return "Unknown Problem"
+    return "Emergent Opportunity"
 
 def run_clustering():
     vector_db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "vector_db")
@@ -27,19 +27,22 @@ def run_clustering():
     # Fetch all data
     data = collection.get(include=['embeddings', 'metadatas', 'documents'])
     
+    if not data['embeddings']:
+        print("No embeddings found in ChromaDB.")
+        return None
+        
     embeddings = np.array(data['embeddings'])
     documents = data['documents']
     metadatas = data['metadatas']
     
     print(f"Loaded {len(embeddings)} vectors for clustering.")
     
-    if len(embeddings) < 10:
+    if len(embeddings) < 5:
         print("Not enough data to cluster.")
         return None
         
     print("Running HDBSCAN clustering engine...")
-    # HDBSCAN parameters optimized for ~800 dense vectors
-    clusterer = HDBSCAN(min_cluster_size=5, min_samples=2, metric='euclidean')
+    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
     labels = clusterer.fit_predict(embeddings)
     
     print(f"Discovered {len(set(labels)) - (1 if -1 in labels else 0)} unique problem clusters.")
@@ -50,12 +53,38 @@ def run_clustering():
         if label == -1:
             continue # Skip noise points (outliers)
             
+        meta = metadatas[i]
+        
         insight = {
-            'problem_statement': documents[i],
-            'topic': metadatas[i].get('topic', ''),
-            'intent': metadatas[i].get('intent', ''),
-            'purchase_stage': metadatas[i].get('purchase_stage', ''),
-            'source_review_id': metadatas[i].get('source_review_id', '')
+            'observed_problem_summary': documents[i],
+            'source': meta.get('source', ''),
+            'source_type': meta.get('source_type', ''),
+            'source_url': meta.get('source_url', ''),
+            'source_id': meta.get('source_id', ''),
+            'timestamp': meta.get('timestamp', ''),
+            'original_text': meta.get('original_text', ''),
+            'relevance_status': meta.get('relevance_status', ''),
+            'relevance_reason': meta.get('relevance_reason', ''),
+            'relevance_confidence': meta.get('relevance_confidence', 0),
+            'theme': meta.get('theme', ''),
+            'user_segment_clue': meta.get('user_segment_clue', ''),
+            'wishlist_intent': meta.get('wishlist_intent', ''),
+            'why_saved': meta.get('why_saved', ''),
+            'conversion_blocker': meta.get('conversion_blocker', ''),
+            'uncertainty': meta.get('uncertainty', ''),
+            'workaround': meta.get('workaround', ''),
+            'external_platform_used': meta.get('external_platform_used', ''),
+            'purchase_status': meta.get('purchase_status', ''),
+            'evidence_strength': meta.get('evidence_strength', ''),
+            'theme_support': meta.get('theme_support', ''),
+            'user_segment_clue_support': meta.get('user_segment_clue_support', ''),
+            'wishlist_intent_support': meta.get('wishlist_intent_support', ''),
+            'why_saved_support': meta.get('why_saved_support', ''),
+            'conversion_blocker_support': meta.get('conversion_blocker_support', ''),
+            'uncertainty_support': meta.get('uncertainty_support', ''),
+            'workaround_support': meta.get('workaround_support', ''),
+            'external_platform_used_support': meta.get('external_platform_used_support', ''),
+            'purchase_status_support': meta.get('purchase_status_support', '')
         }
         clustered_data[label].append(insight)
         

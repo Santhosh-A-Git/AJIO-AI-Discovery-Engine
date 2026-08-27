@@ -3,15 +3,21 @@ import json
 import time
 import requests
 import re
+import hashlib
 from datetime import datetime
 # pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 load_dotenv()
 
-def chunk_data(data, chunk_size=10):
+def chunk_data(data, chunk_size=5):
     for i in range(0, len(data), chunk_size):
         yield data[i:i + chunk_size]
+
+def get_fingerprint(source, text, date_str):
+    # Deterministic deduplication fingerprint if source_id is missing
+    raw_str = f"{source}_{text}_{date_str}".encode('utf-8')
+    return hashlib.sha256(raw_str).hexdigest()
 
 def analyze_dataset():
     groq_api_key = os.getenv("GROQ_API_KEY")
@@ -32,10 +38,10 @@ def analyze_dataset():
     print(f"Selected {len(detailed_reviews)} reviews for deep AI analysis.")
 
     all_insights = []
-    # Batch size 10 to keep tokens low. Skip the first 40 batches (already processed).
-    chunks = list(chunk_data(detailed_reviews, chunk_size=10))[40:]
+    # Batch size 5 to keep tokens low, allowing room for massive JSON outputs
+    chunks = list(chunk_data(detailed_reviews, chunk_size=5))[40:42] # Testing a small chunk first
     
-    print(f"Processing {len(chunks)} batches through Groq API...")
+    print(f"Processing {len(chunks)} batches through Groq API Cascade...")
     
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
@@ -43,21 +49,42 @@ def analyze_dataset():
         "Content-Type": "application/json"
     }
 
-    prompt_template = """You are an expert Product Manager analyzing a batch of raw user reviews for the AJIO app.
-Your goal is to extract deep, actionable insights and identify user friction points.
+    prompt_template = """You are an elite Product Manager analyzing raw user feedback for AJIO.
+Your goal is to extract evidence specifically concerning why users who save/wishlist fashion products fail to convert that interest into a purchase.
 
-Extract up to 1-2 key insights per review if they mention a clear problem or feature request. 
-If a review is generic (e.g. "nice app"), skip it.
+First, determine if the review is RELEVANT, POSSIBLY_RELEVANT, or NOT_RELEVANT to the Wishlist-to-Purchase journey.
+If it is NOT_RELEVANT, you still output the object but leave the analytical fields blank.
+If RELEVANT or POSSIBLY_RELEVANT, extract the exact canonical evidence. Do NOT hallucinate. 
+For every extracted field, output a paired `_support` field containing "supported", "unsupported", or "unknown" relative to the original evidence.
 
 Output strictly in JSON format matching this schema:
 {{
   "insights": [
     {{
-      "topic": "Main category (e.g., Size, Fit, Quality, Delivery, App UX)",
-      "problem_statement": "Exact user friction described",
-      "intent": "e.g., High Purchase Intent, Frustration, General Feedback",
-      "purchase_stage": "e.g., Pre-purchase, Checkout, Post-purchase",
-      "source_review_id": "The first 5 words of the review text"
+      "original_id_ref": "The ID of the review provided in the input prompt",
+      "relevance_status": "RELEVANT | POSSIBLY_RELEVANT | NOT_RELEVANT",
+      "relevance_reason": "Why is this relevant or not?",
+      "relevance_confidence": 0.9,
+      "observed_problem_summary": "Traceable summary/justification of the exact friction",
+      "theme": "Emergent semantic cluster label (e.g. Price, Fit, Delivery, Capacity)",
+      "theme_support": "supported|unsupported|unknown",
+      "user_segment_clue": "e.g. Price-sensitive, High intent, Trend-seeker",
+      "user_segment_clue_support": "supported|unsupported|unknown",
+      "wishlist_intent": "SELF_PURCHASE | DEFERRED_PURCHASE | COMPARISON | BOOKMARKING | EXPLORATION | GIFTING | SHARING | RECOMMENDATION_DRIVEN | UNKNOWN | OTHER",
+      "wishlist_intent_support": "supported|unsupported|unknown",
+      "why_saved": "Why did the user save this?",
+      "why_saved_support": "supported|unsupported|unknown",
+      "conversion_blocker": "PRICE_VALUE | FIT_SIZE | QUALITY | REVIEWS_SOCIAL_PROOF | STYLING | OCCASION | COMPARISON | AVAILABILITY | DELIVERY | RETURNS_EXCHANGE | BUDGET_TIMING | DECISION_OVERLOAD | TRUST | LACK_OF_URGENCY | UNKNOWN | OTHER",
+      "conversion_blocker_support": "supported|unsupported|unknown",
+      "uncertainty": "What is the user unsure about?",
+      "uncertainty_support": "supported|unsupported|unknown",
+      "workaround": "What did they do instead? (e.g. abandon, external check)",
+      "workaround_support": "supported|unsupported|unknown",
+      "external_platform_used": "Any competitors/platforms mentioned",
+      "external_platform_used_support": "supported|unsupported|unknown",
+      "purchase_status": "PURCHASED | NOT_PURCHASED | DELAYED | ABANDONED | REMOVED | UNKNOWN",
+      "purchase_status_support": "supported|unsupported|unknown",
+      "evidence_strength": "HIGH | MEDIUM | LOW (High=Direct statement, Low=AI inference)"
     }}
   ]
 }}
@@ -69,63 +96,74 @@ Batch of Reviews:
     reports_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "reports")
     os.makedirs(reports_dir, exist_ok=True)
     output_file = os.path.join(reports_dir, f"ai_insights_FULL_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+    
+    fallback_models = ["qwen/qwen3.8-27b", "openai/gpt-oss-20b", "allam-2-7b"]
 
     for i, chunk in enumerate(chunks):
         print(f"Processing Batch {i+1}/{len(chunks)}...")
         reviews_str = ""
+        # Store metadata mapping to rejoin after LLM output
+        meta_map = {}
         for idx, r in enumerate(chunk):
-            reviews_str += f"Review {idx+1} [Source: {r['source']}]: {r['text']}\n"
-            
-        payload = {
-            "model": "openai/gpt-oss-120b",
-            "messages": [
-                {"role": "system", "content": "You are a product manager. Always output valid JSON."},
-                {"role": "user", "content": prompt_template.format(reviews_batch=reviews_str)}
-            ],
-            "response_format": {"type": "json_object"},
-            "temperature": 0.1
-        }
+            r_id = f"REV_{idx}"
+            source_id = r.get('id') or get_fingerprint(r.get('source', 'unknown'), r.get('text', ''), r.get('date', ''))
+            meta_map[r_id] = {
+                "source": r.get('source'),
+                "source_type": "USER_GENERATED" if r.get('source') in ['google_play', 'twitter'] else "SECONDARY_CONTEXT",
+                "source_url": r.get('url', ''),
+                "source_id": source_id,
+                "timestamp": r.get('date', ''),
+                "original_text": r.get('text', '')
+            }
+            reviews_str += f"[{r_id}] Source: {r.get('source')}\nText: {r.get('text')}\n\n"
             
         success = False
-        retries = 0
-        while not success and retries < 3:
+        
+        for model_name in fallback_models:
+            if success:
+                break
+                
+            payload = {
+                "model": model_name,
+                "messages": [
+                    {"role": "system", "content": "You are a product manager. Always output valid JSON."},
+                    {"role": "user", "content": prompt_template.format(reviews_batch=reviews_str)}
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.1
+            }
+            
             try:
                 response = requests.post(url, headers=headers, json=payload)
                 if response.status_code == 200:
                     result_json = json.loads(response.json()['choices'][0]['message']['content'])
                     insights = result_json.get('insights', [])
-                    all_insights.extend(insights)
-                    print(f" -> Extracted {len(insights)} insights.")
+                    
+                    # Re-attach original provenance metadata
+                    for ins in insights:
+                        r_id = ins.get('original_id_ref')
+                        if r_id in meta_map:
+                            ins.update(meta_map[r_id])
+                            all_insights.append(ins)
+                            
+                    print(f" -> {model_name} extracted {len(insights)} insights.")
                     success = True
+                elif response.status_code == 429:
+                    print(f" -> {model_name} rate limited. Falling back...")
                 else:
-                    error_text = response.text
-                    print(f" -> Error {response.status_code}: {error_text}")
-                    if response.status_code == 429:
-                        # Try to extract the sleep time from the error message, default 60s
-                        sleep_time = 60
-                        match = re.search(r'try again in (\d+\.?\d*)s', error_text)
-                        if match:
-                            sleep_time = float(match.group(1)) + 5 # Add 5s buffer
-                        print(f" -> Rate limit hit! Sleeping for {sleep_time} seconds...")
-                        time.sleep(sleep_time)
-                        retries += 1
-                    elif response.status_code == 400:
-                        print(" -> Bad Request. Skipping batch.")
-                        break # Skip this batch
-                    else:
-                        time.sleep(10)
-                        retries += 1
+                    print(f" -> {model_name} failed ({response.status_code}): {response.text}")
             except Exception as e:
-                print(f" -> Request failed: {e}")
-                time.sleep(10)
-                retries += 1
+                print(f" -> {model_name} request failed: {e}")
                 
+        if not success:
+            print(f" -> ALL FALLBACK MODELS FAILED for batch {i+1}. Sleeping 60s...")
+            time.sleep(60)
+            
         # Save incrementally
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(all_insights, f, indent=2, ensure_ascii=False)
             
-        # Base sleep between requests to respect 8000 TPM limit
-        time.sleep(45)
+        time.sleep(2) # Minor delay to avoid hammering API
         
     print(f"\n--- AI Analysis Complete ---")
     print(f"Successfully generated {len(all_insights)} structured insights.")

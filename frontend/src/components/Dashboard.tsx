@@ -205,10 +205,6 @@ Status: ${insight.evidence.purchase_status}`;
             <span className="material-symbols-outlined">trending_up</span>
             Trends
           </a>
-          <a onClick={(e) => { e.preventDefault(); setActiveTab("Inventory"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Inventory" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
-            <span className="material-symbols-outlined">inventory_2</span>
-            Inventory
-          </a>
           <a onClick={(e) => { e.preventDefault(); setActiveTab("Feedback"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Feedback" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">comment</span>
             Feedback
@@ -248,7 +244,7 @@ Status: ${insight.evidence.purchase_status}`;
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              placeholder="Ask the AI (e.g., 'Why are users abandoning their carts?')"
+              placeholder="What prevents wishlisted products from eventually being purchased?"
               className="w-full pl-12 pr-24 py-4 bg-white/5 border border-white/10 rounded-xl text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all"
             />
             <button 
@@ -485,16 +481,26 @@ Status: ${insight.evidence.purchase_status}`;
                   onClick={() => openCluster(cluster)}
                   className="group p-4 rounded-xl bg-black/40 border border-white/5 hover:border-primary-container/50 cursor-pointer transition-all flex items-center justify-between"
                 >
-                  <div>
-                    <h3 className="font-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
-                      {cluster.cluster_name}
-                    </h3>
-                    <p className="text-xs text-on-surface-variant mt-1">
-                      Volume: <span className="text-on-surface font-medium">{cluster.prevalence}</span> &nbsp;&bull;&nbsp; 
-                      Score: <span className="text-primary font-medium">{cluster.opportunity_score.toFixed(1)}</span>
-                    </p>
+                  <div className="w-full">
+                    <div className="flex justify-between items-center w-full">
+                      <h3 className="font-body-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-2">
+                        {cluster.cluster_name}
+                        {cluster.prevalence < 3 && (
+                           <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-error/20 text-error border border-error/30 uppercase tracking-widest whitespace-nowrap">Directional / Low Evidence</span>
+                        )}
+                      </h3>
+                      <ChevronRight className="text-on-surface-variant group-hover:text-primary transition-colors" size={20} />
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-xs text-on-surface-variant">
+                      <span>Vol: <b className="text-on-surface">{cluster.prevalence}</b></span>
+                      <span>Rel: <b className="text-on-surface">{cluster.intent_relevance_norm?.toFixed(0)}</b></span>
+                      <span>Str: <b className="text-on-surface">{cluster.evidence_strength_norm?.toFixed(0)}</b></span>
+                      <span>Sev: <b className="text-on-surface">{cluster.severity_norm?.toFixed(0)}</b></span>
+                      <span>Src: <b className="text-on-surface">{cluster.cross_source_norm?.toFixed(0)}</b></span>
+                      <span>Seg: <b className="text-on-surface">{cluster.segment_concentration_norm?.toFixed(0)}</b></span>
+                      <span className="ml-auto">Score: <b className="text-primary text-sm">{cluster.opportunity_score.toFixed(1)}</b></span>
+                    </div>
                   </div>
-                  <ChevronRight className="text-on-surface-variant group-hover:text-primary transition-colors" size={20} />
                 </div>
               ))}
             </div>
@@ -503,76 +509,44 @@ Status: ${insight.evidence.purchase_status}`;
         </>
       )}
 
-      {activeTab === "Inventory" && (
-        <div className="animate-fade-in-up">
-          <header className="mb-12 flex flex-col gap-6">
-            <div>
-              <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
-                Friction-Prone Products Catalog
-              </h1>
-              <p className="font-body-lg text-lg text-on-surface-variant mt-2">
-                Products frequently abandoned in wishlists and their associated friction points.
-              </p>
-            </div>
-          </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {[
-              { name: "Levi's 501 Original Fit Jeans", img: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80", score: 92.5, friction: "Missing Size Chart", cluster: "Size & Fit Uncertainty" },
-              { name: "Puma RS-X Sneakers", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&q=80", score: 89.0, friction: "Constantly OOS", cluster: "Restock Blindness" },
-              { name: "GAP Logo Hoodie", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80", score: 85.5, friction: "Awaiting Price Drop", cluster: "Price Volatility & Coupons" },
-              { name: "Biba Embroidered Kurta", img: "https://images.unsplash.com/photo-1603344710174-8dbb242e97a3?w=500&q=80", score: 82.0, friction: "No Customer Review Photos", cluster: "Missing Social Validation" },
-              { name: "Nike Air Max 270", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80", score: 80.5, friction: "Wishlist Capacity Bug", cluster: "Wishlist Capacity Limits" },
-              { name: "H&M Oversized T-Shirt", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80", score: 78.0, friction: "Vague Fabric Description", cluster: "Missing Social Validation" }
-            ].map((item, idx) => (
-              <div key={idx} className="glass-panel rounded-xl overflow-hidden group hover:border-primary-container/50 transition-all flex flex-col">
-                <div className="h-48 w-full overflow-hidden relative">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all z-10"></div>
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-white">Score: {item.score}</span>
-                  </div>
-                </div>
-                <div className="p-5 flex flex-col gap-3">
-                  <h3 className="font-headline-sm text-lg font-semibold text-on-surface">{item.name}</h3>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-xs text-on-surface-variant">Top Friction Point:</span>
-                    <span className="text-sm font-medium text-tertiary-container flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">warning</span> {item.friction}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1 mt-2">
-                    <span className="text-xs text-on-surface-variant">Associated AI Cluster:</span>
-                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-primary-fixed w-fit">
-                      {item.cluster}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {activeTab === "Feedback" && (
         <div className="animate-fade-in-up">
-           <h2 className="font-headline-md text-2xl font-bold text-on-surface mb-6">Live Feedback Stream</h2>
+           <div className="flex justify-between items-center mb-6">
+             <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
+             <div className="flex gap-2">
+               <select className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10">
+                 <option>All Relevance</option>
+                 <option>Relevant Only</option>
+               </select>
+               <select className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10">
+                 <option>All Sources</option>
+                 <option>Google Play</option>
+                 <option>Twitter</option>
+               </select>
+             </div>
+           </div>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
              {feedbacks.map((f, i) => (
-               <div key={i} className="glass-panel p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                 <div className="flex justify-between items-start mb-3">
-                   <span className="text-xs font-mono text-primary-container px-2 py-1 bg-primary/10 rounded">{f.source || 'APP_STORE'}</span>
-                   <span className="text-xs text-on-surface-variant opacity-60">{f.timestamp ? new Date(f.timestamp).toLocaleDateString() : 'Recent'}</span>
+               <div key={i} className="glass-panel p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors flex flex-col justify-between">
+                 <div>
+                   <div className="flex justify-between items-start mb-3">
+                     <span className="text-[10px] font-bold text-primary-container px-2 py-1 bg-primary/10 rounded border border-primary/20 uppercase tracking-widest">{f.source || 'USER_GENERATED'}</span>
+                     <span className="text-xs text-on-surface-variant opacity-60">{f.date || f.timestamp ? new Date(f.date || f.timestamp).toLocaleDateString() : 'Recent'}</span>
+                   </div>
+                   <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-6">{f.text}</p>
                  </div>
-                 <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-6">{f.text}</p>
-                 {f.author && <div className="mt-4 text-xs font-label-bold text-on-surface opacity-50">— {f.author}</div>}
+                 <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center">
+                   <span className="text-[10px] font-mono text-tertiary-container">{f.id ? `ID: ${f.id.substring(0,8)}...` : 'ID: UNKNOWN'}</span>
+                   {f.url && <a href={f.url} target="_blank" rel="noreferrer" className="text-[10px] text-primary underline">Source Link</a>}
+                 </div>
                </div>
              ))}
            </div>
            {feedbacks.length === 0 && (
              <div className="text-center py-20 text-on-surface-variant">
-               No raw reviews found. Ensure the ingestion pipeline has completed.
+               No raw evidence found. Ensure the ingestion pipeline has completed.
              </div>
            )}
         </div>
@@ -600,13 +574,26 @@ Status: ${insight.evidence.purchase_status}`;
               ) : (
                 insights.map((ins, i) => (
                   <div key={i} className="p-5 rounded-xl bg-white/5 border border-white/5">
-                    <p className="text-on-surface leading-relaxed text-sm">"{ins.problem_statement}"</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-container/10 text-primary border border-primary-container/20">
-                        {ins.topic}
+                    <div className="flex justify-between items-start mb-2">
+                       <span className="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded border border-primary/20 uppercase tracking-widest">{ins.source}</span>
+                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-widest ${ins.evidence_strength === 'HIGH' ? 'bg-error/20 text-error border-error/30' : 'bg-tertiary/20 text-tertiary border-tertiary/30'}`}>{ins.evidence_strength} Evidence</span>
+                    </div>
+                    <p className="text-on-surface leading-relaxed text-sm mb-3">"{ins.original_text}"</p>
+                    
+                    <div className="bg-black/30 p-3 rounded mt-2 border border-white/5">
+                      <p className="text-xs text-on-surface-variant mb-1"><span className="text-primary opacity-80 font-semibold mr-1">Observed Friction:</span> {ins.observed_problem_summary}</p>
+                      <p className="text-xs text-on-surface-variant mb-1"><span className="text-primary opacity-80 font-semibold mr-1">Relevance:</span> {ins.relevance_status}</p>
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-primary-container/10 text-primary border border-primary-container/20">
+                        Intent: {ins.wishlist_intent}
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-tertiary-container/10 text-tertiary border border-tertiary-container/20">
-                        {ins.intent}
+                      <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-error/10 text-error border border-error/20">
+                        Blocker: {ins.conversion_blocker}
+                      </span>
+                      <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-tertiary-container/10 text-tertiary border border-tertiary-container/20">
+                        Status: {ins.purchase_status}
                       </span>
                     </div>
                   </div>
