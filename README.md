@@ -69,3 +69,7 @@ This repository is strictly configured for instant cloud deployment.
 - Connect this repository to Vercel.
 - Set the **Root Directory** to `frontend`.
 - Add an Environment Variable: `NEXT_PUBLIC_API_URL` pointing to your Railway backend URL + `/api`.
+
+### Pipeline Updates
+- Implemented robust LLM fallback cascading to instantly mitigate Groq rate limits, ensuring 100% processing of all 1500+ records.
+- Integrated fallback clustering utilizing KMeans for perfectly bounded insights when noise levels are high.

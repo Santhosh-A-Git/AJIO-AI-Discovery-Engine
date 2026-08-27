@@ -2,7 +2,7 @@ import os
 import sqlite3
 import collections
 
-from clustering import run_clustering
+from processing.clustering import run_clustering
 
 def calc_relevance_norm(insights):
     score = 0
