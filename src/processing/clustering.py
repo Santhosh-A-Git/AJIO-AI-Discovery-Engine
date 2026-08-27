@@ -42,7 +42,7 @@ def run_clustering():
         return None
         
     print("Running HDBSCAN clustering engine...")
-    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
+    clusterer = HDBSCAN(min_cluster_size=5, min_samples=2, metric='euclidean')
     labels = clusterer.fit_predict(embeddings)
     
     print(f"Discovered {len(set(labels)) - (1 if -1 in labels else 0)} unique problem clusters.")
