@@ -27,7 +27,7 @@ def run_clustering():
     # Fetch all data
     data = collection.get(include=['embeddings', 'metadatas', 'documents'])
     
-    if not data['embeddings']:
+    if not len(data['embeddings']):
         print("No embeddings found in ChromaDB.")
         return None
         
