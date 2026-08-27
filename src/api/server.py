@@ -8,6 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 # pyrefly: ignore [missing-import]
 from typing import List, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(title="AJIO Product Discovery API", version="1.0.0")
 
