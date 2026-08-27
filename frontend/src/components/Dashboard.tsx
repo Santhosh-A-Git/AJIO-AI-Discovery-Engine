@@ -10,7 +10,7 @@ import autoTable from 'jspdf-autotable';
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({ total_clusters: 0, total_insights_processed: 0 });
+  const [stats, setStats] = useState<any>({});
   const [clusters, setClusters] = useState<any[]>([]);
   const [selectedCluster, setSelectedCluster] = useState<any>(null);
   const [insights, setInsights] = useState<any[]>([]);
