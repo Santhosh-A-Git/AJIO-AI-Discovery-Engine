@@ -50,7 +50,7 @@ def run_real_pipeline():
             meta_map[r_id] = {
                 'source': r.get('source', 'unknown'),
                 'author_type': r.get('author_type', 'USER'),
-                'original_text': r.get('original_text', ''),
+                'original_text': r.get('text', ''),
                 'source_type': 'USER_GENERATED',
                 'timestamp': r.get('timestamp', ''),
                 'source_url': r.get('source_url', '')
@@ -60,8 +60,8 @@ def run_real_pipeline():
         try:
             groq_key = os.getenv("GROQ_API_KEY")
             
-            # We explicitly want to use models that have high rate limits.
-            batch_result = analyze_batch(batch, meta_map, ["qwen/qwen3.8-27b"], groq_key)
+            # Use GPT-OSS 120b and 20b as primary models, Qwen as a backup.
+            batch_result = analyze_batch(batch, meta_map, ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"], groq_key)
             
             if batch_result:
                 all_extracted_insights.extend(batch_result)
@@ -89,13 +89,13 @@ def run_real_pipeline():
                 i += batch_size
                 batch_num += 1
             else:
-                # Due to mock fallback, batch_result should never be empty, but just in case
-                i += batch_size
-                batch_num += 1
+                print(" -> Unknown failure (empty batch_result). Retrying...")
+                time.sleep(30)
+                # i is NOT incremented, loop retries same batch
         except Exception as e:
-            print(f" -> Error on batch: {e}. Moving on...")
-            i += batch_size
-            batch_num += 1
+            print(f" -> Critical Error on batch: {e}. Sleeping 60s and retrying...")
+            time.sleep(60)
+            # i is NOT incremented, loop retries same batch
             
     print(f"Successfully extracted {len(all_extracted_insights)} canonical insights natively via AI.")
     

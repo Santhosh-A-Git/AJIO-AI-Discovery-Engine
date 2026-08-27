@@ -201,76 +201,47 @@ Batch of Reviews:
         text = meta_map[r_id]['original_text']
         reviews_str += f"[{r_id}] Source: {source_platform}\nAuthor: {author}\nText: {text}\n\n"
         
-    for model_name in fallback_models:
-        payload = {
-            "model": model_name,
-            "messages": [
-                {"role": "system", "content": "You are a product manager. Always output valid JSON."},
-                {"role": "user", "content": prompt_template.format(reviews_batch=reviews_str)}
-            ],
-            "response_format": {"type": "json_object"},
-            "temperature": 0.1
-        }
-        
-        try:
-            response = requests.post(url, headers=headers, json=payload, timeout=2)
-            if response.status_code == 200:
-                result_json = json.loads(response.json()['choices'][0]['message']['content'])
-                insights = result_json.get('insights', [])
+    # Loop infinitely until one model succeeds or we hard-fail on something non-retryable
+    # We will iterate through fallback models, and if all hit rate limits, we sleep and try again.
+    while True:
+        for model_name in fallback_models:
+            payload = {
+                "model": model_name,
+                "messages": [
+                    {"role": "system", "content": "You are a product manager. Always output valid JSON."},
+                    {"role": "user", "content": prompt_template.format(reviews_batch=reviews_str)}
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.1
+            }
+            
+            try:
+                # Use a very generous timeout of 60 seconds to ensure models finish generation
+                response = requests.post(url, headers=headers, json=payload, timeout=60)
+                if response.status_code == 200:
+                    result_json = json.loads(response.json()['choices'][0]['message']['content'])
+                    insights = result_json.get('insights', [])
+                    
+                    # Re-attach original provenance metadata
+                    for ins in insights:
+                        r_id = ins.get('original_id_ref')
+                        if r_id in meta_map:
+                            ins.update(meta_map[r_id])
+                    print(f" -> {model_name} extracted {len(insights)} insights.")
+                    return insights
+                elif response.status_code == 429:
+                    print(f" -> {model_name} rate limited (429). Trying next model...")
+                else:
+                    print(f" -> {model_name} failed ({response.status_code}): {response.text}")
+            except requests.exceptions.Timeout:
+                print(f" -> {model_name} request timed out. Generating this batch might be slow. Trying next model...")
+            except Exception as e:
+                print(f" -> {model_name} request failed: {e}")
                 
-                # Re-attach original provenance metadata
-                for ins in insights:
-                    r_id = ins.get('original_id_ref')
-                    if r_id in meta_map:
-                        ins.update(meta_map[r_id])
-                print(f" -> {model_name} extracted {len(insights)} insights.")
-                return insights
-            elif response.status_code == 429:
-                print(f" -> {model_name} rate limited. Falling back...")
-            else:
-                print(f" -> {model_name} failed ({response.status_code}): {response.text}")
-        except Exception as e:
-            print(f" -> {model_name} request failed: {e}")
-            
-    # MOCK FALLBACK: If all models fail (e.g. rate limit exhausted), return mock data
-    # so the pipeline can gracefully finish instead of hanging or losing data.
-    print(f" -> ALL MODELS FAILED for batch. Using mock fallback to prevent data loss.")
-    mock_insights = []
-    for r_id in meta_map:
-        mock_insights.append({
-            "original_id_ref": r_id,
-            "relevance_status": "RELEVANT",
-            "relevance_reason": "Mocked fallback due to API failure",
-            "relevance_confidence": 0.8,
-            "observed_problem_summary": "User faced issues with the product",
-            "theme": "API Rate Limit Fallback",
-            "theme_support": "SUPPORTED",
-            "user_segment_clue": "Unknown",
-            "user_segment_clue_support": "UNKNOWN",
-            "wishlist_intent": "UNKNOWN",
-            "wishlist_intent_support": "UNKNOWN",
-            "why_saved": "Unknown",
-            "why_saved_support": "UNKNOWN",
-            "conversion_blocker": "OTHER",
-            "conversion_blocker_support": "SUPPORTED",
-            "uncertainty": "Unknown",
-            "uncertainty_support": "UNKNOWN",
-            "workaround": "Unknown",
-            "workaround_support": "UNKNOWN",
-            "external_platform_used": "None",
-            "external_platform_used_support": "UNKNOWN",
-            "purchase_status": "UNKNOWN",
-            "purchase_status_support": "UNKNOWN",
-            "evidence_strength": "LOW",
-            "evidence_strength_reason": "Mock data fallback"
-        })
-        
-    for ins in mock_insights:
-        r_id = ins.get('original_id_ref')
-        if r_id in meta_map:
-            ins.update(meta_map[r_id])
-            
-    return mock_insights
+        # If we exhausted all fallback models (usually due to a global Groq rate limit)
+        # We MUST NOT use mock data. We MUST wait and try again.
+        print(f" -> ALL MODELS EXHAUSTED for this batch. Sleeping 65 seconds to clear Groq rate limits, then retrying same batch...")
+        time.sleep(65)
 
 def analyze_dataset(max_records=None, start_index=0, batch_size=5, resume=True):
     groq_api_key = os.getenv("GROQ_API_KEY")
