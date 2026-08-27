@@ -6,34 +6,34 @@ Built for the **NextLeap Product Management Graduation Project**.
 
 ## 🧠 Architecture Overview
 
-The system operates across a seamless 5-phase data pipeline:
+The system operates across a seamless 6-phase pipeline utilizing a **Relevance-First Architecture**:
 
-1. **Scheduled Ingestion Engine:** Automatically scrapes real, unfiltered user reviews from the Google Play Store and various social channels every day at 10:00 PM.
-2. **AI Extraction & Filtration:** Uses Large Language Models to distill raw, noisy complaints into structured, actionable problem statements, forcefully rejecting trivial feedback and isolating true Pre-Purchase intent.
-3. **Semantic Vectorization:** Converts the distilled AI insights into dense numerical vectors using `all-MiniLM-L6-v2` and stores them in a local **ChromaDB** vector database.
-4. **Machine Learning Clustering (HDBSCAN):** Groups semantically identical problems together dynamically and calculates a weighted **Opportunity Score** (`Prevalence` × `Intent Relevance` × `Severity`). The finalized clusters are stored in an **SQLite Data Warehouse**.
-5. **Explainable AI Dashboard:** A highly aesthetic **Next.js 16** frontend connects to a **FastAPI** backend to expose these clustered trends and allow PMs to query the AI Engine directly for deep synthesis.
+1. **Scheduled Ingestion Engine:** Scrapes real, unfiltered user reviews across multiple sources (Google Play, Twitter, Reddit, etc.) with deterministic source deduplication.
+2. **Relevance Classifier (LLM Gate):** Aggressively filters raw data, discarding "Brand-Generated" or "Irrelevant" data before extraction, ensuring only genuine user friction is processed.
+3. **Canonical Evidence Extraction:** For relevant records, the AI extracts a rigorous 11-field **Canonical Evidence Record** (Theme, Intent, Blocker, Segment Clue, etc.) alongside field-level validity tracking (Support Status).
+4. **Semantic Vectorization:** Converts the AI-distilled `observed_problem_summary` into dense numerical vectors using `all-MiniLM-L6-v2` and stores the 11-field schema as metadata in a local **ChromaDB** database.
+5. **Machine Learning Clustering (HDBSCAN):** Groups semantically identical problems dynamically. A custom algorithm ranks each cluster using a normalized **6-Component Opportunity Score**.
+6. **Explainable AI Dashboard:** A highly aesthetic **Next.js 16** frontend and **FastAPI** backend exposes these clustered trends, integrating dynamic filters and low-evidence flags.
 
-## 📊 The Results & Core Thesis
+## 📊 6-Component Opportunity Score
 
-By filtering exclusively for **Pre-Purchase / Wishlist friction**, the ML pipeline grouped the highest-signal data points into **8 highly-specific Opportunity Themes**.
-
-**Top Discovered Friction Point:**
-🚨 **Wishlist Capacity Limits (Score: 92.5)**
-The highest-ROI bottleneck preventing conversions is an artificial 70-item cap on user wishlists. Users use the wishlist as a curation tool; when older items are silently deleted to make room for new ones, high-intent purchase opportunities are permanently lost.
-
-**Other Major Bottlenecks:**
-- **Comparison Friction (Score: 87.5):** Users abandon wishlists because they cannot confidently compare shortlisted items side-by-side.
-- **Unexpected Cost Shock (Score: 86.4):** Users abandon carts when mandatory fees are hidden until the final checkout step.
+Clusters are no longer arbitrarily ranked. They are quantified using a transparent, weighted formula (Normalized 0-100):
+- **Prevalence (25%)**: Absolute volume of evidence.
+- **Wishlist-Conversion Relevance (25%)**: Weighting of high-intent behaviors (e.g., *Comparison* vs *Bookmarking*).
+- **Evidence Strength (15%)**: Ratio of correctly supported field validations by the LLM.
+- **Severity (15%)**: Qualitative friction impact (e.g., *Trust & Price* vs *Styling*).
+- **Cross-Source Consistency (10%)**: Number of unique independent source categories reporting the issue.
+- **Segment Concentration (10%)**: How strongly the friction targets a specific user segment.
 
 ## 🛡️ Enterprise-Grade Reliability
 
-- **Explainable AI:** The AI Engine is strictly bounded by RAG (Retrieval-Augmented Generation). It does not hallucinate. Every synthesis generates an **11-Parameter Evidence Breakdown** (User Segment Clue, Conversion Blocker, Purchase Status, etc.) proving exactly how the LLM derived its insight from the raw data.
-- **Failover Architecture:** The backend features a dynamic LLM cascade (`qwen/qwen3.8-27b` → `openai/gpt-oss-20b` → `allam-2-7b`). If an AI provider experiences rate limits or goes down, the system instantly fails over to a backup model, guaranteeing 100% uptime during evaluation.
+- **Golden Test Suite (CI/CD Ready):** Powered by an assertion-based structured validation suite (pytest) containing 15 diverse wishlist-to-purchase scenarios. This ensures the LLM's categorical extraction exactly matches behavioral intent constraints without byte-for-byte fragility.
+- **Explainable AI:** Every synthesis generates an 11-Parameter Evidence Breakdown proving exactly how the LLM derived its insight from the raw data.
+- **LLM Failover Cascade:** The backend dynamically falls back across tiered models (`qwen/qwen3.8-27b` → `openai/gpt-oss-20b` → `allam-2-7b`) seamlessly avoiding rate-limit interruptions.
 
 ## 💻 Tech Stack
 
-- **Backend:** Python, FastAPI, SQLite, ChromaDB, Sentence-Transformers, HDBSCAN, Langchain, Groq API.
+- **Backend:** Python, FastAPI, SQLite, ChromaDB, Sentence-Transformers, HDBSCAN, Langchain, Groq API, Pytest.
 - **Frontend:** React, Next.js 16 (App Router), Tailwind CSS v4, Recharts, jsPDF.
 
 ## 🚀 Running Locally
