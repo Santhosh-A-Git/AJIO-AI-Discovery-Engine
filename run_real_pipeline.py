@@ -28,12 +28,8 @@ def run_real_pipeline():
         
     print(f"Loaded {len(raw_records)} raw records from dataset.")
     
-    print("\n--- 2. CLEARING DATABASE ---")
-    cursor.execute("DELETE FROM insights")
-    cursor.execute("DELETE FROM clusters")
-    conn.commit()
-    print("Deleted all records and clusters from SQLite.")
-
+    print("\n--- 2. (SKIPPED) DATABASE CLEARING DEFERRED UNTIL AI EXTRACTION COMPLETES ---")
+    
     print("\n--- 3. RUNNING REAL AI EXTRACTION (Handling rate limits robustly) ---")
     all_extracted_insights = []
     batch_size = 5
@@ -66,25 +62,11 @@ def run_real_pipeline():
             if batch_result:
                 all_extracted_insights.extend(batch_result)
                 
-                # Persist to SQLite incrementally to prevent data loss
-                for ins in batch_result:
-                    cursor.execute('''
-                        INSERT INTO insights (
-                            source, source_type, author_type, source_url, source_id, timestamp, 
-                            original_text, relevance_status, relevance_reason, relevance_confidence, 
-                            observed_problem_summary, theme, user_segment_clue, wishlist_intent, 
-                            why_saved, conversion_blocker, uncertainty, workaround, external_platform_used, 
-                            purchase_status, evidence_strength, duplicate_status
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (
-                        ins.get('source'), ins.get('source_type'), ins.get('author_type'), ins.get('source_url'),
-                        ins.get('original_id_ref') or ins.get('source_id'), ins.get('timestamp'), ins.get('original_text'), ins.get('relevance_status'),
-                        ins.get('relevance_reason'), ins.get('relevance_confidence'), ins.get('observed_problem_summary'),
-                        ins.get('theme'), ins.get('user_segment_clue'), ins.get('wishlist_intent'), ins.get('why_saved'),
-                        ins.get('conversion_blocker'), ins.get('uncertainty'), ins.get('workaround'), ins.get('external_platform_used'),
-                        ins.get('purchase_status'), ins.get('evidence_strength'), ins.get('duplicate_status', 'UNIQUE')
-                    ))
-                conn.commit()
+                # (Deferred SQLite insertion until end of script to keep UI populated)
+                # Incrementally save to JSON to prevent data loss
+                backup_path = os.path.join("data", "reports", "ai_insights_canonical.json")
+                with open(backup_path, 'w', encoding='utf-8') as f:
+                    json.dump(all_extracted_insights, f, indent=2)
                 
                 i += batch_size
                 batch_num += 1
@@ -103,8 +85,32 @@ def run_real_pipeline():
     with open(backup_path, 'w', encoding='utf-8') as f:
         json.dump(all_extracted_insights, f, indent=2)
     
-    print("\n--- 4. (SKIPPED) PERSISTING TO SQLITE (Already done incrementally) ---")
-    synced = len(all_extracted_insights)
+    print("\n--- 4. PERSISTING TO SQLITE ---")
+    print("Clearing old records from database...")
+    cursor.execute("DELETE FROM insights")
+    cursor.execute("DELETE FROM clusters")
+    conn.commit()
+    
+    synced = 0
+    for ins in all_extracted_insights:
+        cursor.execute('''
+            INSERT INTO insights (
+                source, source_type, author_type, source_url, source_id, timestamp, 
+                original_text, relevance_status, relevance_reason, relevance_confidence, 
+                observed_problem_summary, theme, user_segment_clue, wishlist_intent, 
+                why_saved, conversion_blocker, uncertainty, workaround, external_platform_used, 
+                purchase_status, evidence_strength, duplicate_status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            ins.get('source'), ins.get('source_type'), ins.get('author_type'), ins.get('source_url'),
+            ins.get('original_id_ref') or ins.get('source_id'), ins.get('timestamp'), ins.get('original_text'), ins.get('relevance_status'),
+            ins.get('relevance_reason'), ins.get('relevance_confidence'), ins.get('observed_problem_summary'),
+            ins.get('theme'), ins.get('user_segment_clue'), ins.get('wishlist_intent'), ins.get('why_saved'),
+            ins.get('conversion_blocker'), ins.get('uncertainty'), ins.get('workaround'), ins.get('external_platform_used'),
+            ins.get('purchase_status'), ins.get('evidence_strength'), ins.get('duplicate_status', 'UNIQUE')
+        ))
+        synced += 1
+    conn.commit()
     conn.close()
     print(f"Inserted {synced} fully scored, canonical records to SQLite.")
     
