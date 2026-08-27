@@ -88,12 +88,14 @@ export default function Dashboard() {
     // Stats Section
     doc.setFontSize(14);
     doc.setTextColor(0);
-    doc.text("Platform Trends:", 14, 50);
+    doc.text("Discovery Funnel:", 14, 50);
     doc.setFontSize(11);
-    doc.text(`Total Feedback Processed: ${stats.total_insights_processed}`, 14, 58);
-    doc.text(`Active Problem Clusters: ${stats.total_clusters}`, 14, 64);
+    doc.text(`Raw Records Collected: ${stats.raw_records_collected || 0}`, 14, 58);
+    doc.text(`Unique Observations: ${stats.unique_records || 0}`, 14, 64);
+    doc.text(`Relevant Observations: ${stats.relevant_observations || 0}`, 14, 70);
+    doc.text(`Opportunity Clusters: ${stats.opportunity_clusters || 0}`, 14, 76);
     
-    let yPos = 80;
+    let yPos = 88;
     
     // Search Query Section
     if (searchQuery && searchResult) {
@@ -412,36 +414,42 @@ Status: ${insight.evidence.purchase_status}`;
               </div>
             </header>
 
-            {/* KPI Cards */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {/* Card 1 */}
-          <div className="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-primary-container/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="flex justify-between items-start relative z-10">
-              <h3 className="font-headline-sm text-xl font-semibold text-on-surface">Total Feedback Processed</h3>
-              <span className="material-symbols-outlined text-primary-container bg-primary-container/10 p-2 rounded-lg">group</span>
-            </div>
-            <div className="font-display-lg text-4xl font-bold text-on-surface relative z-10">{stats.total_insights_processed}</div>
+            {/* Discovery Funnel KPI Banner */}
+            <section className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-12">
+          {/* Raw Records */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2">
+            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Raw Records</h3>
+            <div className="font-display-lg text-2xl font-bold text-on-surface">{stats.raw_records_collected || 0}</div>
           </div>
           
-          {/* Card 2 */}
-          <div className="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-tertiary-container/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-tertiary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="flex justify-between items-start relative z-10">
-              <h3 className="font-headline-sm text-xl font-semibold text-on-surface">Active Problem Clusters</h3>
-              <span className="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 p-2 rounded-lg">warning</span>
-            </div>
-            <div className="font-display-lg text-4xl font-bold text-on-surface relative z-10">{stats.total_clusters}</div>
+          {/* Unique Records */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2">
+            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Unique</h3>
+            <div className="font-display-lg text-2xl font-bold text-on-surface">{stats.unique_records || 0}</div>
           </div>
           
-          {/* Card 3 */}
-          <div className="glass-panel p-6 rounded-xl flex flex-col gap-4 group transition-transform duration-300 hover:scale-[1.02] hover:border-secondary-container/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="flex justify-between items-start relative z-10">
-              <h3 className="font-headline-sm text-xl font-semibold text-on-surface">System Status</h3>
-              <span className="material-symbols-outlined text-secondary-container bg-secondary-container/10 p-2 rounded-lg">monitoring</span>
-            </div>
-            <div className="font-display-lg text-4xl font-bold text-secondary-container relative z-10">Online</div>
+          {/* AI Analyzed */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2">
+            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">AI Analyzed</h3>
+            <div className="font-display-lg text-2xl font-bold text-on-surface">{stats.ai_analyzed_records || 0}</div>
+          </div>
+
+          {/* Relevant */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2 border border-primary/20 bg-primary/5">
+            <h3 className="font-headline-sm text-xs font-semibold text-primary uppercase tracking-wider">Relevant</h3>
+            <div className="font-display-lg text-2xl font-bold text-primary">{stats.relevant_observations || 0}</div>
+          </div>
+
+          {/* Possibly Relevant */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2">
+            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Possibly Rel.</h3>
+            <div className="font-display-lg text-2xl font-bold text-on-surface">{stats.possibly_relevant_observations || 0}</div>
+          </div>
+
+          {/* Clusters */}
+          <div className="glass-panel p-4 rounded-xl flex flex-col gap-2 border border-tertiary-container/20 bg-tertiary-container/5">
+            <h3 className="font-headline-sm text-xs font-semibold text-tertiary-container uppercase tracking-wider">Clusters</h3>
+            <div className="font-display-lg text-2xl font-bold text-tertiary-container">{stats.opportunity_clusters || 0}</div>
           </div>
         </section>
 
@@ -516,14 +524,30 @@ Status: ${insight.evidence.purchase_status}`;
            <div className="flex justify-between items-center mb-6">
              <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
              <div className="flex gap-2">
-               <select className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10">
+               <select 
+                 className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10"
+                 onChange={(e) => {
+                   const val = e.target.value;
+                   axios.get(`${API_BASE}/feedback?relevance=${val}`).then(res => setFeedbacks(res.data));
+                 }}
+               >
                  <option>All Relevance</option>
                  <option>Relevant Only</option>
+                 <option>POSSIBLY_RELEVANT</option>
+                 <option>NOT_RELEVANT</option>
                </select>
-               <select className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10">
+               <select 
+                 className="bg-surface-variant text-xs text-on-surface p-2 rounded border border-white/10"
+                 onChange={(e) => {
+                   const val = e.target.value;
+                   axios.get(`${API_BASE}/feedback?source_type=${val}`).then(res => setFeedbacks(res.data));
+                 }}
+               >
                  <option>All Sources</option>
                  <option>Google Play</option>
                  <option>Twitter</option>
+                 <option>App Store</option>
+                 <option>Reddit</option>
                </select>
              </div>
            </div>

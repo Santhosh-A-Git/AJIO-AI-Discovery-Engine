@@ -31,11 +31,25 @@ def run_clustering():
         print("No embeddings found in ChromaDB.")
         return None
         
-    embeddings = np.array(data['embeddings'])
-    documents = data['documents']
-    metadatas = data['metadatas']
+    filtered_embeddings = []
+    filtered_metadatas = []
+    filtered_documents = []
     
-    print(f"Loaded {len(embeddings)} vectors for clustering.")
+    for emb, meta, doc in zip(data['embeddings'], data['metadatas'], data['documents']):
+        if meta.get('relevance_status') == 'RELEVANT':
+            filtered_embeddings.append(emb)
+            filtered_metadatas.append(meta)
+            filtered_documents.append(doc)
+            
+    if not filtered_embeddings:
+        print("No RELEVANT embeddings found for clustering.")
+        return None
+        
+    embeddings = np.array(filtered_embeddings)
+    documents = filtered_documents
+    metadatas = filtered_metadatas
+    
+    print(f"Loaded {len(embeddings)} RELEVANT vectors for clustering.")
     
     if len(embeddings) < 5:
         print("Not enough data to cluster.")

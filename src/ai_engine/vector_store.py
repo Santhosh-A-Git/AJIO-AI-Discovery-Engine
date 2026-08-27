@@ -1,26 +1,35 @@
 import os
-import json
-import glob
+import sqlite3
 # pyrefly: ignore [missing-import]
 from chromadb import PersistentClient
 # pyrefly: ignore [missing-import]
 from sentence_transformers import SentenceTransformer
 
-def get_all_insights():
-    reports_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "reports")
-    files = glob.glob(os.path.join(reports_dir, "ai_insights_FULL_*.json"))
-    all_insights = []
-    for f in files:
-        with open(f, 'r', encoding='utf-8') as file:
-            all_insights.extend(json.load(file))
-    return all_insights
-
 def build_vector_db():
-    print("Finding all AI insights reports...")
-    insights = get_all_insights()
+    print("Finding all AI insights from Canonical SQLite Database...")
+    
+    db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "warehouse", "ajio_warehouse.db")
+    if not os.path.exists(db_path):
+        print("Database not found. Run sync_to_sqlite.py first.")
+        return
         
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    
+    # We only embed records that are UNIQUE (no exact duplicates) 
+    # and that are RELEVANT or POSSIBLY_RELEVANT. NOT_RELEVANT is excluded from semantic search.
+    cursor.execute('''
+        SELECT * FROM insights 
+        WHERE duplicate_status = 'UNIQUE' 
+        AND relevance_status IN ('RELEVANT', 'POSSIBLY_RELEVANT')
+    ''')
+    
+    insights = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    
     if not insights:
-        print("Error: Insights file is empty.")
+        print("Error: No unique relevant insights found in database.")
         return
         
     vector_db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "vector_db")
@@ -32,47 +41,29 @@ def build_vector_db():
     print("Loading HuggingFace embedding model (all-MiniLM-L6-v2)...")
     model = SentenceTransformer('all-MiniLM-L6-v2')
     
-    collection = client.get_or_create_collection(name="ajio_insights")
-    
-    # We clear it to avoid mixing old and new schema
+    # We clear the collection to ensure we only have the strictly valid, unique subset.
     try:
         client.delete_collection("ajio_insights")
-        collection = client.create_collection(name="ajio_insights")
     except Exception:
         pass
+        
+    collection = client.create_collection(name="ajio_insights")
     
     documents = []
     metadatas = []
     ids = []
     
-    seen_hashes = set()
+    print(f"Embedding {len(insights)} verified canonical insights...")
     
-    # Pre-filter irrelevant records from the core clustering engine
-    relevant_insights = [ins for ins in insights if ins.get('relevance_status') in ['RELEVANT', 'POSSIBLY_RELEVANT']]
-    print(f"Embedding {len(relevant_insights)} relevant insights out of {len(insights)} total records...")
-    
-    for i, insight in enumerate(relevant_insights):
+    for i, insight in enumerate(insights):
         # Embed the core observable problem for semantic clustering
         text_to_embed = insight.get('observed_problem_summary') or insight.get('original_text') or "Unknown problem"
         
-        # Deduplication via source + source_id fingerprint
-        fingerprint_key = f"{insight.get('source', '')}_{insight.get('source_id', '')}"
-        if not insight.get('source_id'):
-            import hashlib
-            fingerprint_key = hashlib.sha256(text_to_embed.encode('utf-8')).hexdigest()
-            
-        if fingerprint_key in seen_hashes:
-            continue
-        seen_hashes.add(fingerprint_key)
+        fingerprint_key = insight.get('source_id')
         
         # Safely convert metadata to strings for ChromaDB compatibility
         metadata = {}
-        for key in ["source", "source_type", "source_url", "source_id", "timestamp", "original_text", 
-                    "relevance_status", "relevance_reason", "relevance_confidence",
-                    "observed_problem_summary", "theme", "user_segment_clue", "wishlist_intent",
-                    "why_saved", "conversion_blocker", "uncertainty", "workaround", 
-                    "external_platform_used", "purchase_status", "evidence_strength"]:
-            val = insight.get(key)
+        for key, val in insight.items():
             if val is None:
                 metadata[key] = ""
             elif isinstance(val, (int, float, bool, str)):
@@ -80,12 +71,6 @@ def build_vector_db():
             else:
                 metadata[key] = str(val)
                 
-        # Support fields
-        for key in ["theme_support", "user_segment_clue_support", "wishlist_intent_support", 
-                    "why_saved_support", "conversion_blocker_support", "uncertainty_support",
-                    "workaround_support", "external_platform_used_support", "purchase_status_support"]:
-            metadata[key] = str(insight.get(key, 'unknown'))
-            
         documents.append(text_to_embed)
         metadatas.append(metadata)
         ids.append(f"insight_{fingerprint_key}")

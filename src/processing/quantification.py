@@ -21,57 +21,47 @@ def calc_relevance_norm(insights):
     return score / valid if valid > 0 else 0
 
 def calc_evidence_strength_norm(insights):
-    support_keys = [
-        "theme_support", "user_segment_clue_support", "wishlist_intent_support", 
-        "why_saved_support", "conversion_blocker_support", "uncertainty_support",
-        "workaround_support", "external_platform_used_support", "purchase_status_support"
-    ]
     total_score = 0
     valid = 0
     for ins in insights:
-        sup_count = 0
-        total_eval = 0
-        for k in support_keys:
-            val = ins.get(k, 'unknown').lower()
-            if val == 'supported':
-                sup_count += 1
-                total_eval += 1
-            elif val == 'unsupported':
-                total_eval += 1
-        
-        # Base it off explicit evidence_strength field too
         ev_strength = ins.get('evidence_strength', '').upper()
-        base = 50
         if ev_strength == 'HIGH':
-            base = 100
-        elif ev_strength == 'LOW':
-            base = 20
-            
-        field_acc = (sup_count / total_eval * 100) if total_eval > 0 else 50
-        total_score += (base * 0.5) + (field_acc * 0.5)
+            total_score += 100
+        elif ev_strength == 'MEDIUM':
+            total_score += 60
+        else:
+            total_score += 20
         valid += 1
     return total_score / valid if valid > 0 else 0
 
 def calc_severity_norm(insights):
-    high_sev = ['PRICE_VALUE', 'FIT_SIZE', 'QUALITY', 'TRUST', 'AVAILABILITY', 'BUDGET_TIMING']
-    med_sev = ['DELIVERY', 'RETURNS_EXCHANGE', 'DECISION_OVERLOAD']
+    # Evidence-grounded severity based on observable consequences
+    # e.g., ABANDONED, DELAYED purchase status implies higher severity
+    # or severe conversion blockers
     score = 0
     valid = 0
     for ins in insights:
-        blocker = ins.get('conversion_blocker', '').upper()
-        if blocker in high_sev:
+        status = ins.get('purchase_status', '').upper()
+        if status in ['ABANDONED', 'REMOVED']:
             score += 100
-        elif blocker in med_sev:
+        elif status == 'DELAYED':
             score += 70
         else:
-            score += 40
+            # Fallback to blocker if status isn't severe
+            blocker = ins.get('conversion_blocker', '').upper()
+            high_sev = ['PRICE_VALUE', 'FIT_SIZE', 'QUALITY', 'TRUST', 'AVAILABILITY', 'BUDGET_TIMING']
+            if blocker in high_sev:
+                score += 80
+            else:
+                score += 40
         valid += 1
     return score / valid if valid > 0 else 0
 
 def calc_cross_source_norm(insights):
+    # Unique source categories (e.g., Reddit vs Google Play)
     sources = set()
     for ins in insights:
-        src = ins.get('source', '')
+        src = ins.get('source', '').lower()
         if src:
             sources.add(src)
     count = len(sources)
@@ -85,15 +75,17 @@ def calc_cross_source_norm(insights):
 
 def calc_segment_concentration_norm(insights):
     segments = [ins.get('user_segment_clue', '').strip() for ins in insights]
-    segments = [s for s in segments if s and s.lower() not in ['unknown', 'none', 'n/a']]
-    if not segments:
-        return 30 # Uniform / Unknown
+    segments = [s for s in segments if s and s.lower() not in ['unknown', 'none', 'n/a', '']]
     
+    # If there is insufficient segment evidence, return a neutral score
+    if len(segments) < max(2, len(insights) * 0.1): 
+        return 30
+        
     most_common = collections.Counter(segments).most_common(1)
     if not most_common:
         return 30
     
-    ratio = most_common[0][1] / len(insights)
+    ratio = most_common[0][1] / len(segments)
     if ratio > 0.5:
         return 100
     if ratio > 0.3:
@@ -110,28 +102,33 @@ def score_and_export_clusters():
         
     db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "warehouse", "ajio_warehouse.db")
     if not os.path.exists(db_path):
-        print("Error: Database not initialized. Please run db_setup.py first.")
+        print("Error: Database not initialized. Please run sync_to_sqlite.py first.")
         return
         
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    print("Calculating Weighted Opportunity Scores and syncing to SQLite Warehouse...")
+    # Calculate global max prevalence for normalization
+    # The denominator is total unique relevant user observations
+    cursor.execute("SELECT count(*) FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'RELEVANT' AND source_type = 'USER_GENERATED'")
+    total_relevant_user_obs = cursor.fetchone()[0]
     
-    cursor.execute('DELETE FROM insights')
+    if total_relevant_user_obs == 0:
+        total_relevant_user_obs = 1 # fallback to avoid div by zero
+        
+    print(f"Calculating Weighted Opportunity Scores based on {total_relevant_user_obs} total relevant user observations...")
+    
     cursor.execute('DELETE FROM clusters')
     
     total_insights_synced = 0
     
-    # Calculate global max prevalence for normalization
-    max_prevalence = max([len(c['insights']) for c in clusters]) if clusters else 1
-    
     for cluster in clusters:
         insights = cluster['insights']
         
-        # 1. Prevalence (25%)
-        prevalence = len(insights)
-        prev_norm = (prevalence / max_prevalence) * 100
+        # 1. Prevalence (25%) - Only unique, relevant, user-generated observations
+        user_gen_insights = [ins for ins in insights if ins.get('source_type') == 'USER_GENERATED']
+        prevalence = len(user_gen_insights)
+        prev_norm = (prevalence / total_relevant_user_obs) * 100
         
         # 2. Wishlist-Conversion Relevance (25%)
         rel_norm = calc_relevance_norm(insights)
@@ -162,35 +159,20 @@ def score_and_export_clusters():
             sev_norm, cross_norm, seg_norm, ev_norm, score
         ))
         
+        # Update canonical database with cluster assignments
         for ins in insights:
             cursor.execute('''
-                INSERT INTO insights (
-                    cluster_id, source, source_type, source_url, source_id, timestamp, 
-                    original_text, relevance_status, relevance_reason, relevance_confidence, 
-                    observed_problem_summary, theme, user_segment_clue, wishlist_intent, 
-                    why_saved, conversion_blocker, uncertainty, workaround, external_platform_used, 
-                    purchase_status, evidence_strength, theme_support, user_segment_clue_support, 
-                    wishlist_intent_support, why_saved_support, conversion_blocker_support, 
-                    uncertainty_support, workaround_support, external_platform_used_support, purchase_status_support
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                cluster['cluster_id'], ins.get('source'), ins.get('source_type'), ins.get('source_url'),
-                ins.get('source_id'), ins.get('timestamp'), ins.get('original_text'), ins.get('relevance_status'),
-                ins.get('relevance_reason'), ins.get('relevance_confidence'), ins.get('observed_problem_summary'),
-                ins.get('theme'), ins.get('user_segment_clue'), ins.get('wishlist_intent'), ins.get('why_saved'),
-                ins.get('conversion_blocker'), ins.get('uncertainty'), ins.get('workaround'), ins.get('external_platform_used'),
-                ins.get('purchase_status'), ins.get('evidence_strength'), ins.get('theme_support'),
-                ins.get('user_segment_clue_support'), ins.get('wishlist_intent_support'), ins.get('why_saved_support'),
-                ins.get('conversion_blocker_support'), ins.get('uncertainty_support'), ins.get('workaround_support'),
-                ins.get('external_platform_used_support'), ins.get('purchase_status_support')
-            ))
+                UPDATE insights 
+                SET cluster_id = ? 
+                WHERE source_id = ?
+            ''', (cluster['cluster_id'], ins.get('source_id')))
             total_insights_synced += 1
             
     conn.commit()
     conn.close()
     
     print(f"\n--- Quantification Complete ---")
-    print(f"Successfully processed {len(clusters)} clusters and synced {total_insights_synced} canonical records to the warehouse.")
+    print(f"Successfully processed {len(clusters)} clusters and updated {total_insights_synced} canonical records in the warehouse.")
 
 if __name__ == "__main__":
     score_and_export_clusters()

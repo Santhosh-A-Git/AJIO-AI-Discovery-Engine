@@ -34,41 +34,43 @@ def health_check():
     return {"status": "ok", "message": "AJIO Product Discovery API is running!"}
 
 @app.get("/api/feedback")
-def get_feedback():
-    dataset_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "cleansed", "clean_dataset.json")
-    if not os.path.exists(dataset_path):
-        return []
-    import json
-    import random
-    with open(dataset_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-        
-    valid_reviews = [r for r in data if len(r.get('text', '')) > 20]
+def get_feedback(relevance: Optional[str] = None, source_type: Optional[str] = None):
+    conn = get_db_connection()
+    cursor = conn.cursor()
     
-    by_source = {}
-    for r in valid_reviews:
-        src = r.get("source", "UNKNOWN")
-        if src not in by_source:
-            by_source[src] = []
-        by_source[src].append(r)
+    query = "SELECT * FROM insights WHERE duplicate_status = 'UNIQUE'"
+    params = []
+    
+    if relevance and relevance != "All":
+        query += " AND relevance_status = ?"
+        if relevance == 'Relevant Only':
+            params.append('RELEVANT')
+        else:
+            params.append(relevance.upper())
+            
+    if source_type and source_type != "All Sources":
+        query += " AND source = ?"
+        params.append(source_type)
         
-    final_list = []
-    if not by_source:
-        return []
+    query += " ORDER BY timestamp DESC LIMIT 100"
+    
+    cursor.execute(query, params)
+    rows = cursor.fetchall()
+    conn.close()
+    
+    # Map to frontend expected format
+    feedbacks = []
+    for r in rows:
+        feedbacks.append({
+            "id": r["source_id"],
+            "source": r["source"],
+            "date": r["timestamp"],
+            "text": r["original_text"],
+            "url": r["source_url"],
+            "relevance_status": r["relevance_status"]
+        })
         
-    per_source = 100 // len(by_source)
-    for src, items in by_source.items():
-        random.shuffle(items)
-        final_list.extend(items[:per_source])
-        
-    remaining = 100 - len(final_list)
-    if remaining > 0:
-        all_remaining = [item for src_items in by_source.values() for item in src_items[per_source:]]
-        random.shuffle(all_remaining)
-        final_list.extend(all_remaining[:remaining])
-        
-    random.shuffle(final_list)
-    return final_list
+    return feedbacks
 
 @app.get("/api/stats")
 def get_stats():
@@ -78,14 +80,32 @@ def get_stats():
     cursor.execute("SELECT COUNT(DISTINCT cluster_id) as total_clusters FROM insights")
     total_clusters = cursor.fetchone()['total_clusters']
     
-    cursor.execute("SELECT COUNT(*) as total_insights FROM insights")
-    total_insights = cursor.fetchone()['total_insights']
+    # We can get raw total from DB if we inserted everything. Yes, we did.
+    cursor.execute("SELECT COUNT(*) as raw_records FROM insights")
+    raw_records = cursor.fetchone()['raw_records']
+    
+    cursor.execute("SELECT COUNT(*) as unique_records FROM insights WHERE duplicate_status = 'UNIQUE'")
+    unique_records = cursor.fetchone()['unique_records']
+    
+    cursor.execute("SELECT COUNT(*) as relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'RELEVANT'")
+    relevant = cursor.fetchone()['relevant']
+    
+    cursor.execute("SELECT COUNT(*) as possibly_relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'POSSIBLY_RELEVANT'")
+    possibly_relevant = cursor.fetchone()['possibly_relevant']
+    
+    cursor.execute("SELECT COUNT(*) as not_relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'NOT_RELEVANT'")
+    not_relevant = cursor.fetchone()['not_relevant']
     
     conn.close()
     
     return {
-        "total_clusters": total_clusters,
-        "total_insights_processed": total_insights
+        "raw_records_collected": raw_records,
+        "unique_records": unique_records,
+        "ai_analyzed_records": raw_records,
+        "relevant_observations": relevant,
+        "possibly_relevant_observations": possibly_relevant,
+        "not_relevant_observations": not_relevant,
+        "opportunity_clusters": total_clusters
     }
 
 @app.get("/api/clusters")
@@ -140,8 +160,6 @@ def get_rag_components():
         # pyrefly: ignore [missing-import]
         from sentence_transformers import SentenceTransformer
         # pyrefly: ignore [missing-import]
-        from langchain_groq import ChatGroq
-        # pyrefly: ignore [missing-import]
         from dotenv import load_dotenv
         
         load_dotenv()
@@ -154,7 +172,6 @@ def get_rag_components():
         if not api_key:
             raise HTTPException(status_code=500, detail="GROQ_API_KEY is missing for semantic search.")
         
-        # LLM is now dynamically instantiated per request for fallback support
         llm = None
         
     return vector_db_client, embedding_model, llm
@@ -188,10 +205,22 @@ def query_insights(req: QueryRequest):
     for idx, (doc, meta) in enumerate(zip(docs, metas)):
         sources.append({
             "problem_statement": doc,
-            "topic": meta.get("theme", ""),
-            "intent": meta.get("wishlist_intent", "")
+            "original_text": meta.get("original_text", ""),
+            "source": meta.get("source", ""),
+            "source_type": meta.get("source_type", ""),
+            "source_url": meta.get("source_url", ""),
+            "source_id": meta.get("source_id", ""),
+            "relevance_status": meta.get("relevance_status", ""),
+            "wishlist_intent": meta.get("wishlist_intent", ""),
+            "conversion_blocker": meta.get("conversion_blocker", ""),
+            "uncertainty": meta.get("uncertainty", ""),
+            "workaround": meta.get("workaround", ""),
+            "purchase_status": meta.get("purchase_status", ""),
+            "evidence_strength": meta.get("evidence_strength", ""),
+            "theme": meta.get("theme", ""),
+            "user_segment_clue": meta.get("user_segment_clue", "")
         })
-        context_text += f"- {doc}\n"
+        context_text += f"- Document: {doc}\n  Context: Source={meta.get('source')}, Intent={meta.get('wishlist_intent')}, Blocker={meta.get('conversion_blocker')}, Uncertainty={meta.get('uncertainty')}, Workaround={meta.get('workaround')}, Purchase Status={meta.get('purchase_status')}\n\n"
         
     # 3. Generate Answer using the LLM
     prompt = f"""You are an elite Product Management AI for AJIO.
