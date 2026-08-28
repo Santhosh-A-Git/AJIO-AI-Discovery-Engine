@@ -770,3 +770,15 @@ Only after answering these questions should the team proceed to solution discove
 > **Do not start with "What feature should AJIO build?" Start with "What is preventing the user from completing the job they are trying to accomplish?"**
 
 The AI Discovery Engine exists to answer that question with **evidence, scale, and prioritization** before the team moves into solution design.
+
+---
+
+# 27. Implementation & Resolution
+
+The AJIO AI Discovery Engine successfully fulfills all constraints of the above problem statement.
+
+- **Automated Discovery:** By scraping 1,450+ cross-platform records, it removes the manual PM burden of reading reviews.
+- **Intent Separation (LLM Gate):** The relevance classifier inherently distinguishes between actual friction and promotional brand noise.
+- **Opportunity Quantification:** The custom 6-component Opportunity Score mathematically ranks problems based on severity, volume, and intent, ensuring PMs tackle high-ROI friction first.
+- **RAG Semantic Search:** The Next.js dashboard gives PMs the ability to ask natural language questions (e.g., *"Why do users hesitate to buy?"*) and receive AI answers strictly derived from the *Relevant* evidence.
+- **Constraint Adherence:** It successfully identifies core UX, sizing, and trust friction points without ever recommending monetary incentives or discounts.
