@@ -528,7 +528,7 @@ Status: ${insight.evidence.purchase_status}`;
              <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
              <div className="flex gap-2">
                <select 
-                 className="bg-surface-variant text-xs text-blue-300 font-semibold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-blue-900 font-extrabold p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?relevance=${val}`).then(res => setFeedbacks(res.data));
@@ -540,7 +540,7 @@ Status: ${insight.evidence.purchase_status}`;
                  <option>NOT_RELEVANT</option>
                </select>
                <select 
-                 className="bg-surface-variant text-xs text-blue-300 font-semibold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-blue-900 font-extrabold p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?source_type=${val}`).then(res => setFeedbacks(res.data));
