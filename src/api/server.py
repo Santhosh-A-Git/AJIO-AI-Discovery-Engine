@@ -274,7 +274,7 @@ RAW COMPLAINTS FOUND:
         # pyrefly: ignore [missing-import]
         from langchain_groq import ChatGroq
         
-        fallback_models = ["llama-3.1-8b-instant", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"]
+        fallback_models = ["qwen/qwen3.8-27b", "openai/gpt-oss-20b", "allam-2-7b"]
         answer = None
         
         for model_name in fallback_models:
