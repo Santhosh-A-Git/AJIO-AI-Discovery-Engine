@@ -93,28 +93,44 @@ def get_stats():
     cursor.execute("SELECT COUNT(DISTINCT cluster_id) as total_clusters FROM insights")
     total_clusters = cursor.fetchone()['total_clusters']
     
-    # We can get raw total from DB if we inserted everything. Yes, we did.
-    cursor.execute("SELECT COUNT(*) as raw_records FROM insights")
-    raw_records = cursor.fetchone()['raw_records']
+    # Calculate TRUE raw records directly from the scraper output directory
+    raw_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "raw")
+    raw_total = 0
+    import glob, json
+    if os.path.exists(raw_dir):
+        for fpath in glob.glob(os.path.join(raw_dir, "*.json")):
+            try:
+                with open(fpath, 'r', encoding='utf-8') as f:
+                    raw_total += len(json.load(f))
+            except: pass
+            
+    # Calculate TRUE unique records after deduplication
+    clean_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "cleansed", "clean_dataset.json")
+    unique_total = 0
+    if os.path.exists(clean_path):
+        try:
+            with open(clean_path, 'r', encoding='utf-8') as f:
+                unique_total = len(json.load(f))
+        except: pass
     
-    cursor.execute("SELECT COUNT(*) as unique_records FROM insights WHERE duplicate_status = 'UNIQUE'")
-    unique_records = cursor.fetchone()['unique_records']
+    cursor.execute("SELECT COUNT(*) as ai_analyzed FROM insights")
+    ai_analyzed_records = cursor.fetchone()['ai_analyzed']
     
-    cursor.execute("SELECT COUNT(*) as relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'RELEVANT'")
+    cursor.execute("SELECT COUNT(*) as relevant FROM insights WHERE relevance_status = 'RELEVANT'")
     relevant = cursor.fetchone()['relevant']
     
-    cursor.execute("SELECT COUNT(*) as possibly_relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'POSSIBLY_RELEVANT'")
+    cursor.execute("SELECT COUNT(*) as possibly_relevant FROM insights WHERE relevance_status = 'POSSIBLY_RELEVANT'")
     possibly_relevant = cursor.fetchone()['possibly_relevant']
     
-    cursor.execute("SELECT COUNT(*) as not_relevant FROM insights WHERE duplicate_status = 'UNIQUE' AND relevance_status = 'NOT_RELEVANT'")
+    cursor.execute("SELECT COUNT(*) as not_relevant FROM insights WHERE relevance_status = 'NOT_RELEVANT'")
     not_relevant = cursor.fetchone()['not_relevant']
     
     conn.close()
     
     return {
-        "raw_records_collected": raw_records,
-        "unique_records": unique_records,
-        "ai_analyzed_records": raw_records,
+        "raw_records_collected": max(raw_total, ai_analyzed_records),
+        "unique_records": max(unique_total, ai_analyzed_records),
+        "ai_analyzed_records": ai_analyzed_records,
         "relevant_observations": relevant,
         "possibly_relevant_observations": possibly_relevant,
         "not_relevant_observations": not_relevant,
