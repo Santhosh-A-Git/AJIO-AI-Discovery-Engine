@@ -145,7 +145,7 @@ def get_clusters():
     cursor.execute("""
         SELECT cluster_id, cluster_name, prevalence, prevalence_norm, intent_relevance_norm, 
         severity_norm, cross_source_norm, segment_concentration_norm, evidence_strength_norm, 
-        ROUND(opportunity_score, 2) as opportunity_score 
+        ROUND(opportunity_score, 2) as opportunity_score, research_hypothesis
         FROM clusters
         ORDER BY opportunity_score DESC
     """)

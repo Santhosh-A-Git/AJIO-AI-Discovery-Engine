@@ -511,6 +511,15 @@ Status: ${insight.evidence.purchase_status}`;
                       <span>Seg: <b className="text-on-surface">{cluster.segment_concentration_norm?.toFixed(0)}</b></span>
                       <span className="ml-auto">Score: <b className="text-primary text-sm">{(cluster.opportunity_score || 0).toFixed(1)}</b></span>
                     </div>
+                    {cluster.research_hypothesis && (
+                      <div className="mt-4 p-3 rounded bg-primary/5 border border-primary/10 text-on-surface-variant text-sm leading-relaxed">
+                        <span className="font-bold text-primary block mb-1 uppercase tracking-widest text-[10px] flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[12px]">science</span>
+                          AI Research Hypothesis
+                        </span>
+                        <span className="italic text-on-surface">"{cluster.research_hypothesis}"</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
