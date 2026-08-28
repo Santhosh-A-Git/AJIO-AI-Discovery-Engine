@@ -528,7 +528,7 @@ Status: ${insight.evidence.purchase_status}`;
              <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
              <div className="flex gap-2">
                <select 
-                 className="bg-surface-variant text-xs text-blue-900 font-extrabold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?relevance=${val}`).then(res => setFeedbacks(res.data));
@@ -540,7 +540,7 @@ Status: ${insight.evidence.purchase_status}`;
                  <option>NOT_RELEVANT</option>
                </select>
                <select 
-                 className="bg-surface-variant text-xs text-blue-900 font-extrabold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?source_type=${val}`).then(res => setFeedbacks(res.data));
@@ -554,7 +554,20 @@ Status: ${insight.evidence.purchase_status}`;
              </div>
            </div>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-             {feedbacks.map((f, i) => (
+             {[...feedbacks].sort((a, b) => {
+               const getIndex = (src: string) => {
+                 if (!src) return 999;
+                 const s = src.toLowerCase();
+                 if (s.includes('play')) return 0;
+                 if (s.includes('app')) return 1;
+                 if (s.includes('youtube')) return 2;
+                 if (s.includes('twitter')) return 3;
+                 if (s.includes('web') || s.includes('search')) return 4;
+                 if (s.includes('news')) return 5;
+                 return 999;
+               };
+               return getIndex(a.source) - getIndex(b.source);
+             }).map((f, i) => (
                <div key={i} className="glass-panel p-5 rounded-xl border border-white/5 hover:border-white/10 transition-colors flex flex-col justify-between">
                  <div>
                    <div className="flex justify-between items-start mb-3">
