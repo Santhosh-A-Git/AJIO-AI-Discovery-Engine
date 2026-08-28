@@ -409,10 +409,10 @@ Status: ${insight.evidence.purchase_status}`;
             <header className="mb-12 flex flex-col gap-6">
               <div>
                 <h1 className="font-display-lg text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent w-fit">
-                  Platform Trends
+                  AI Opportunity Matrix
                 </h1>
                 <p className="font-body-lg text-lg text-on-surface-variant mt-2">
-                  High-level performance and opportunity metrics.
+                  Algorithmic prioritization of user friction to maximize conversion velocity.
                 </p>
               </div>
             </header>
