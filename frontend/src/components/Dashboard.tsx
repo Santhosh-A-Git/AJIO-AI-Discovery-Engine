@@ -96,9 +96,10 @@ export default function Dashboard() {
     doc.text(`Raw Records Collected: ${stats.raw_records_collected || 0}`, 14, 58);
     doc.text(`Unique Observations: ${stats.unique_records || 0}`, 14, 64);
     doc.text(`Relevant Observations: ${stats.relevant_observations || 0}`, 14, 70);
-    doc.text(`Opportunity Clusters: ${stats.opportunity_clusters || 0}`, 14, 76);
+    doc.text(`Possibly Relevant: ${stats.possibly_relevant_observations || 0}`, 14, 76);
+    doc.text(`Opportunity Clusters: ${stats.opportunity_clusters || 0}`, 14, 82);
     
-    let yPos = 88;
+    let yPos = 94;
     
     // Search Query Section
     if (searchQuery && searchResult) {
