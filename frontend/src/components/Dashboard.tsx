@@ -274,7 +274,7 @@ Status: ${insight.evidence.purchase_status}`;
                 "What information do users seek outside AJIO before purchasing?",
                 "What role do fit, size, styling, price, reviews, occasion and social validation play?",
                 "When do users use the wishlist as genuine purchase intent versus simply as a bookmarking mechanism?",
-                "How do these behaviors differ across user segments?",
+                "How do user behaviors differ across user segments?",
                 "What unmet needs emerge consistently across user conversations?"
               ].map((query, idx) => (
                 <button
