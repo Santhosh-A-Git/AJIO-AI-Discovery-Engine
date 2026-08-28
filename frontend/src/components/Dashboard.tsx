@@ -21,7 +21,7 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState("Dashboard");
+  const [activeTab, setActiveTab] = useState("Discover");
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
@@ -202,17 +202,17 @@ Status: ${insight.evidence.purchase_status}`;
           <p className="font-body-sm text-sm text-on-surface-variant mt-1">Premium Curator v2.1</p>
         </div>
         <nav className="flex-1 px-2 space-y-2">
-          <a onClick={(e) => { e.preventDefault(); setActiveTab("Dashboard"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Dashboard" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Discover"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Discover" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">dashboard</span>
-            Dashboard
+            Discover
           </a>
-          <a onClick={(e) => { e.preventDefault(); setActiveTab("Trends"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Trends" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Opportunity Landscape"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Opportunity Landscape" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
             <span className="material-symbols-outlined">trending_up</span>
-            Trends
+            Opportunity Landscape
           </a>
-          <a onClick={(e) => { e.preventDefault(); setActiveTab("Feedback"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Feedback" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
-            <span className="material-symbols-outlined">comment</span>
-            Feedback
+          <a onClick={(e) => { e.preventDefault(); setActiveTab("Evidence Explorer"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Evidence Explorer" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
+            <span className="material-symbols-outlined">forum</span>
+            Evidence Explorer
           </a>
           <div className="pt-4 px-2">
             <button onClick={generatePDFReport} className="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-label-bold text-sm hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 shadow-sm">
@@ -226,7 +226,7 @@ Status: ${insight.evidence.purchase_status}`;
       {/* Main Content */}
       <main className="flex-1 md:ml-80 p-6 md:p-10 w-full max-w-container-max-width mx-auto">
         
-        {activeTab === "Dashboard" && (
+        {activeTab === "Discover" && (
           <>
             {/* Header & Semantic Search */}
             <header className="mb-12 flex flex-col gap-6">
@@ -404,7 +404,7 @@ Status: ${insight.evidence.purchase_status}`;
           </>
         )}
         
-        {activeTab === "Trends" && (
+        {activeTab === "Opportunity Landscape" && (
           <>
             <header className="mb-12 flex flex-col gap-6">
               <div>
@@ -531,7 +531,7 @@ Status: ${insight.evidence.purchase_status}`;
 
 
 
-      {activeTab === "Feedback" && (
+      {activeTab === "Evidence Explorer" && (
         <div className="animate-fade-in-up">
            <div className="flex justify-between items-center mb-6">
              <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
