@@ -203,15 +203,15 @@ Status: ${insight.evidence.purchase_status}`;
         </div>
         <nav className="flex-1 px-2 space-y-2">
           <a onClick={(e) => { e.preventDefault(); setActiveTab("Discover"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Discover" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
-            <span className="material-symbols-outlined">dashboard</span>
+            <span className="material-symbols-outlined">explore</span>
             Discover
           </a>
           <a onClick={(e) => { e.preventDefault(); setActiveTab("Opportunity Landscape"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Opportunity Landscape" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
-            <span className="material-symbols-outlined">trending_up</span>
+            <span className="material-symbols-outlined">insights</span>
             Opportunity Landscape
           </a>
           <a onClick={(e) => { e.preventDefault(); setActiveTab("Evidence Explorer"); }} className={`cursor-pointer px-4 py-3 flex items-center gap-3 transition-all duration-200 ease-in-out font-label-bold text-xs uppercase font-bold ${activeTab === "Evidence Explorer" ? "bg-white/10 text-primary border-r-4 border-primary" : "text-on-surface-variant hover:backdrop-blur-xl hover:bg-white/10"}`} href="#">
-            <span className="material-symbols-outlined">forum</span>
+            <span className="material-symbols-outlined">manage_search</span>
             Evidence Explorer
           </a>
           <div className="pt-4 px-2">
