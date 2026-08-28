@@ -219,7 +219,8 @@ def query_insights(req: QueryRequest):
     collection = client.get_collection("ajio_insights")
     results = collection.query(
         query_embeddings=[query_vector],
-        n_results=15
+        n_results=15,
+        where={"relevance_status": {"$in": ["RELEVANT", "POSSIBLY_RELEVANT"]}}
     )
     
     if not results['documents'] or len(results['documents'][0]) == 0:
@@ -253,9 +254,10 @@ def query_insights(req: QueryRequest):
         
     # 3. Generate Answer using the LLM
     prompt = f"""You are an elite Product Management AI for AJIO.
-Analyze the following exact user complaints and synthesize a highly actionable summary of user behavior regarding wishlist to purchase friction.
+Your goal is to DIRECTLY ANSWER the user's specific query based on the AI Processed Relevant and Possibly Relevant data only.
 
-Extract exactly 1 to 2 distinct insights.
+Do not provide generic summaries. You must directly address the nuance of the USER QUERY.
+Extract exactly 1 to 2 distinct insights that answer the query.
 You must respond STRICTLY in JSON format matching this exact schema:
 {{
   "insights": [
