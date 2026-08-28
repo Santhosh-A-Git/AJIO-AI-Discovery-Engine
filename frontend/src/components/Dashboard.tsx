@@ -155,18 +155,57 @@ Status: ${insight.evidence.purchase_status}`;
     doc.text("Opportunity Score Ranking (Cluster Breakdown):", 14, yPos);
     
     const tableData = clusters.map(c => [
-      c.cluster_name,
+      c.cluster_name + (c.research_hypothesis ? `\n\nAI Hypothesis:\n${c.research_hypothesis}` : ''),
       c.prevalence.toString(),
       (c.opportunity_score || 0).toFixed(1)
     ]);
     
     autoTable(doc, {
       startY: yPos + 6,
-      head: [['Cluster Name', 'Volume', 'Opportunity Score']],
+      head: [['Cluster Name & Hypothesis', 'Vol', 'Score']],
       body: tableData,
       theme: 'grid',
-      headStyles: { fillColor: [20, 184, 166] }
+      headStyles: { fillColor: [20, 184, 166] },
+      styles: { cellWidth: 'wrap' },
+      columnStyles: { 0: { cellWidth: 130 } }
     });
+    
+    // Supporting Evidence Section
+    const finalY = (doc as any).lastAutoTable.finalY || yPos + 20;
+    let evY = finalY + 15;
+    
+    if (searchQuery && searchResult && searchResult.sources && searchResult.sources.length > 0) {
+      if (evY > 250) {
+        doc.addPage();
+        evY = 20;
+      }
+      doc.setFontSize(14);
+      doc.setTextColor(20, 184, 166);
+      doc.text("Supporting Evidence (AI Processed Relevant Data):", 14, evY);
+      evY += 8;
+      
+      searchResult.sources.forEach((src: any, idx: number) => {
+        if (evY > 270) {
+          doc.addPage();
+          evY = 20;
+        }
+        doc.setFontSize(10);
+        doc.setTextColor(0);
+        const sourceText = `[${idx+1}] Source: ${src.source} | Strength: ${src.evidence_strength} | Segment: ${src.user_segment_clue}`;
+        doc.text(sourceText, 14, evY);
+        evY += 5;
+        
+        doc.setFontSize(9);
+        doc.setTextColor(80);
+        // Clean up text
+        let cleanText = src.original_text || src.problem_statement;
+        if (cleanText) {
+            const splitEvText = doc.splitTextToSize(`"${cleanText}"`, 180);
+            doc.text(splitEvText, 14, evY);
+            evY += (splitEvText.length * 4) + 6;
+        }
+      });
+    }
     
     doc.save("AJIO_Discovery_Report.pdf");
   };
