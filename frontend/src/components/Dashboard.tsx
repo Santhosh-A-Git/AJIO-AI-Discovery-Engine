@@ -537,25 +537,25 @@ Status: ${insight.evidence.purchase_status}`;
              <h2 className="font-headline-md text-2xl font-bold text-on-surface">User Feedback Evidence</h2>
              <div className="flex gap-2">
                <select 
-                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold uppercase p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?relevance=${val}`).then(res => setFeedbacks(res.data));
                  }}
                >
-                 <option>All Relevance</option>
-                 <option>Relevant Only</option>
-                 <option>POSSIBLY_RELEVANT</option>
-                 <option>NOT_RELEVANT</option>
+                 <option value="">ALL RELEVANCE</option>
+                 <option value="RELEVANT">RELEVANT ONLY</option>
+                 <option value="POSSIBLY_RELEVANT">POSSIBLY_RELEVANT</option>
+                 <option value="NOT_RELEVANT">NOT_RELEVANT</option>
                </select>
                <select 
-                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold p-2 rounded border border-white/10"
+                 className="bg-surface-variant text-xs text-fuchsia-500 font-bold uppercase p-2 rounded border border-white/10"
                  onChange={(e) => {
                    const val = e.target.value;
                    axios.get(`${API_BASE}/feedback?source_type=${val}`).then(res => setFeedbacks(res.data));
                  }}
                >
-                 <option>All Sources</option>
+                 <option value="">ALL SOURCES</option>
                  {sourcesList.map(src => (
                    <option key={src} value={src}>{src}</option>
                  ))}
