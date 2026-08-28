@@ -445,7 +445,7 @@ Status: ${insight.evidence.purchase_status}`;
 
           {/* Possibly Relevant */}
           <div className="glass-panel p-4 rounded-xl flex flex-col gap-2">
-            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Possibly Rel.</h3>
+            <h3 className="font-headline-sm text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Possibly Relevant</h3>
             <div className="font-display-lg text-2xl font-bold text-on-surface">{stats.possibly_relevant_observations || 0}</div>
           </div>
 
