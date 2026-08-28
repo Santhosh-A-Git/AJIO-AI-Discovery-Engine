@@ -32,17 +32,43 @@ def run_real_pipeline():
     
     print("\n--- 3. RUNNING REAL AI EXTRACTION (Handling rate limits robustly) ---")
     all_extracted_insights = []
+    
+    backup_path = os.path.join("data", "reports", "ai_insights_canonical.json")
+    processed_ids = set()
+    
+    if os.path.exists(backup_path):
+        try:
+            with open(backup_path, 'r', encoding='utf-8') as f:
+                existing = json.load(f)
+                all_extracted_insights.extend(existing)
+                for ins in existing:
+                    r_id = ins.get('original_id_ref') or ins.get('source_id')
+                    if r_id:
+                        processed_ids.add(r_id)
+            print(f"Loaded {len(existing)} already processed insights from canonical JSON. Resuming...")
+        except Exception as e:
+            print(f"Error loading canonical backup, starting fresh. {e}")
+            
+    filtered_raw_records = []
+    for i, r in enumerate(raw_records):
+        r_id = r.get('source_id') or r.get('id') or f"ref_{i}"
+        if r_id not in processed_ids:
+            filtered_raw_records.append(r)
+            
+    print(f"Total raw queue to process: {len(filtered_raw_records)} (Skipped {len(raw_records) - len(filtered_raw_records)})")
+    
     batch_size = 5
-    total_batches = (len(raw_records) + batch_size - 1) // batch_size
+    total_batches = (len(filtered_raw_records) + batch_size - 1) // batch_size
     
     i = 0
     batch_num = 1
-    while i < len(raw_records):
-        batch = raw_records[i:i+batch_size]
+    while i < len(filtered_raw_records):
+        batch = filtered_raw_records[i:i+batch_size]
         
         meta_map = {}
         for idx, r in enumerate(batch):
-            r_id = r.get('source_id') or r.get('id') or f"ref_{i+idx}"
+            original_i = raw_records.index(r) if r in raw_records else i+idx
+            r_id = r.get('source_id') or r.get('id') or f"ref_{original_i}"
             meta_map[r_id] = {
                 'source': r.get('source', 'unknown'),
                 'author_type': r.get('author_type', 'USER'),
